@@ -1,11 +1,13 @@
-CREATE DATABASE IF NOT EXISTS `librand`;
-USE `librand`;
+CREATE DATABASE IF NOT EXISTS librand;
+USE librand;
 
 CREATE TABLE IF NOT EXISTS usuario ( 
  id_usuario INT PRIMARY KEY NOT NULL AUTO_INCREMENT,  
  usuario VARCHAR(255),  
- senha VARCHAR(255),  
- email VARCHAR(255)
+ senha VARCHAR(255), 
+ email VARCHAR(255),
+ termos int,
+ receber_email int
 ); 
 
 CREATE TABLE IF NOT EXISTS dados_pessoais ( 
@@ -121,4 +123,3 @@ ALTER TABLE idioma ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario);
 ALTER TABLE vaga ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa);
 ALTER TABLE vaga ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario);
 ALTER TABLE sobre_empresa ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa);
-usuario
