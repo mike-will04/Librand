@@ -32,6 +32,23 @@
             color: black;
         }
 
+        .btn-submit{
+            background-color: #2259BC;
+            border: none;
+            color: white;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1rem;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .btn-submit:hover{
+            background-color: #132d5f;
+        }
     </style>
 </head>
 
@@ -106,11 +123,15 @@
                         </div>
 
                         <div class="row justify-content-center">
-                            <button type="submit" class="btn btn-primary">Cadastrar-se</button>
+                            <input type="submit" value="Cadastrar-se" class="btn-submit" style="margin: 0px 10px 0px 10px;">
                         </div>
 
                         <div class="row justify-content-center pt-2">
                             <span>Você é um(a) candidato(a)? <a href="cadastro_usuario.html">Cadastre-se grátis aqui.</a></span>
+                        </div>
+
+                        <div class="row justify-content-center pt-2">
+                            <span>Sua empresa já tem uma conta? <a href="login_empresa.html">Login</a></span>
                         </div>
                     </form>
                 </div>
