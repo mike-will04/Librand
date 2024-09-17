@@ -32,6 +32,23 @@
             color: black;
         }
 
+        .btn-submit{
+            background-color: #2259BC;
+            border: none;
+            color: white;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1rem;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .btn-submit:hover{
+            background-color: #132d5f;
+        }
     </style>
 </head>
 
@@ -65,43 +82,38 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nome" required>
+                            <input type="text" class="form-control" placeholder="Nome" name="usuario" required>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="email" class="form-control" placeholder="Email" required>
+                                <input type="email" class="form-control" placeholder="Email" name="email" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control" placeholder="Senha" required>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="CEP" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Cargo" required>
+                                <input type="password" class="form-control" placeholder="Senha" name="senha" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="checkbox" name="termos" required>
+                                <input type="checkbox" name="termos" value="1" required>
                                 <label for="termos">Aceito os termos e condições</label>
                                 <br>
-                                <input type="checkbox" name="receber_email">
+                                <input type="checkbox" name="receber_email" value="2">
                                 <label for="receber_email">Desejo receber emails</label>
                             </div>
                         </div>
 
                         <div class="row justify-content-center">
-                            <button type="submit" class="btn btn-primary">Cadastrar-se</button>
+                            <input type="submit" value="Cadastrar-se" class="btn-submit" style="margin: 0px 10px 0px 10px;">
                         </div>
 
                         <div class="row justify-content-center pt-2">
                             <span>Você é uma empresa? <a href="cadastro_empresa.html">Cadastre-se grátis aqui.</a></span>
+                        </div>
+
+                        <div class="row justify-content-center pt-2">
+                            <span>Você já tem uma conta? <a href="login_usuario.html">Login</a></span>
                         </div>
                     </form>
                 </div>

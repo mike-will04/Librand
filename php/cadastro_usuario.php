@@ -4,6 +4,8 @@ include "conexao.php";
 $usuario = $_POST["usuario"];
 $email = $_POST["email"];
 $senha = $_POST["senha"];
+$termos = $_POST["termos"];
+$receber_email = $_POST["receber_email"];
 
 $check = $conn->prepare(
     'SELECT count(*) as count FROM usuario WHERE usuario = :usuario or email = :email'
@@ -15,7 +17,7 @@ $check -> execute(array(
 
 $senhahash = password_hash($senha,PASSWORD_DEFAULT);
 
-if (($usuario == "") || ($email == "") || ($senha == "")) {
+if (($usuario == "") || ($email == "") || ($senha == "") || ($termos == "")) {
     echo "<script>alert('Campos nao podem ser vazios!!!');history.go(-1);</script>";
 } else {
     foreach ($check as $linha) {
@@ -24,17 +26,19 @@ if (($usuario == "") || ($email == "") || ($senha == "")) {
                 echo "<script>alert('Nome de usuário ou email já cadastrado');history.go(-1)</script>";                
             }
             else {
-                $cadastro = $conn->prepare('INSERT INTO usuario (usuario, senha, email) VALUES 
-                (:usuario, :senha, :email)');
+                $cadastro = $conn->prepare('INSERT INTO usuario (usuario, senha, email, termos, receber_email) VALUES 
+                (:usuario, :senha, :email, :termos, :receber_email)');
     
                 $cadastro->execute(array(
                     ':usuario' => $usuario,
                     ':senha' => $senhahash,
-                    ':email' => $email
+                    ':email' => $email,
+                    ':termos' => $termos,
+                    ':receber_email' => $receber_email
                 ));
     
                 if ($cadastro->rowCount() == 1) {
-                    echo "<script>alert('Cadastro realizado com sucesso!!!');location = '../html/login.html' </script>";
+                    echo "<script>alert('Cadastro realizado com sucesso!!!');location = '../login_usuario.html' </script>";
                 } else {
                     echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
                 }     

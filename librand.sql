@@ -1,11 +1,13 @@
-CREATE DATABASE IF NOT EXISTS `librand`;
-USE `librand`;
+CREATE DATABASE IF NOT EXISTS librand;
+USE librand;
 
 CREATE TABLE IF NOT EXISTS usuario ( 
  id_usuario INT PRIMARY KEY NOT NULL AUTO_INCREMENT,  
  usuario VARCHAR(255),  
- senha VARCHAR(255),  
- email VARCHAR(255)
+ senha VARCHAR(255), 
+ email VARCHAR(255),
+ termos int,
+ receber_email int
 ); 
 
 CREATE TABLE IF NOT EXISTS dados_pessoais ( 
@@ -25,7 +27,7 @@ CREATE TABLE IF NOT EXISTS dados_pessoais (
  suporte VARCHAR(255),  
  renda_pessoal VARCHAR(255),  
  renda_familiar VARCHAR(255),  
- cep CHAR(255),  
+ cep VARCHAR(255),  
  rua VARCHAR(255),  
  numero INT,  
  complemento VARCHAR(255),  
@@ -83,7 +85,9 @@ CREATE TABLE IF NOT EXISTS empresa (
  nome_e_sobrenome VARCHAR(255),  
  email VARCHAR(255),  
  cnpj VARCHAR(255),  
- cep CHAR(255),  
+ cep VARCHAR(255),
+ telefone VARCHAR(255),
+ celular VARCHAR(255),
  senha VARCHAR(255)
 ); 
 
