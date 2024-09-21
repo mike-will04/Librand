@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS usuario (
  usuario VARCHAR(255),  
  senha VARCHAR(255), 
  email VARCHAR(255),
+ foto_perfil VARCHAR(255),
  termos int,
  receber_email int
 ); 

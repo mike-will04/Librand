@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    <?php
+        include "conexao.php";
+        session_start();
+
+        if (isset($_SESSION['iduser'])) {
+            $id = $_SESSION['iduser'];
+
+            $check = $conn->prepare(
+            'SELECT * FROM usuario WHERE id_usuario = :id'
+            );
+            $check->execute(array(
+            ':id' => $id
+            ));
+        } else {
+            $_SESSION['logado'] = false;
+        }
+    ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,20 +105,47 @@
             background-color: #132d5f;
             color: white;
         }
+
+        .card {
+            background-color: white;
+            width: 120px;
+            position: absolute;
+            border-radius: 0px 0px 10px 10px;
+            text-align: center;
+            margin-top: 8px;
+            z-index: 1;
+            margin-left: 30px;
+        }
+
+        .card a {
+            color: black;
+            text-decoration: none;  
+        }
+
+        .card a:hover {
+            color: white;
+            background-color: rgb(192, 191, 191);
+        }
+
+        .card1:hover {
+            color: white;
+            background-color: rgb(192, 191, 191);
+            border-radius: 0px 0px 10px 10px;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm" style="background-color: #2259BC;">
         <div class="container-fluid">
-            <a href="index.html" class="navbar-brand d-flex">
-                <img src="img/Logotipo Librand.png" alt="Logo Librand" style="width: 100px;">
+            <a href="index.php" class="navbar-brand d-flex">
+                <img src="../img/Logotipo Librand.png" alt="Logo Librand" style="width: 100px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="menuNavbar">
-                <div class="navbar-nav ms-auto">
+                <div class="navbar-nav ms-auto align-items-center" style='text-align: center;'>
                     <a href="" class="nav-link ">
                         Vagas
                     </a>
@@ -110,14 +155,43 @@
                     <a href="" class="nav-link">
                         Empresas
                     </a>
-                    <a href="login_usuario.html" class="nav-link">
-                        Login
-                    </a>
-                    <a href="cadastro_usuario.html">
-                        <button class="btn-header" style="margin: 0px 10px 0px 10px;">
-                            Cadastrar-se
-                        </button>
-                    </a>
+                    <?php
+                        if (isset($_SESSION['logado']) and $_SESSION['logado'] == true) {
+                            foreach ($check as $linha) {
+                                if ($linha['foto_perfil'] == null) {
+                                    echo "
+                                    <div >
+                                    <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
+                                    <img src='../img/user.png' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
+                                    echo "<div class='card' id='carde' style='display: none;'>
+                                    <a href='perfil.php' style='display: block;'>Perfil</a>
+                                    <a href='sair.php' style='display: block;' class='card1'>Sair</a>
+                                    </div>
+                                    </div>"; 
+                                } else {
+                                    echo "
+                                    <div class='col-4'>
+                                    <img src='../img/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' onclick='perfil()' id='btn-perfil' style='width: 50px; height: 50px;' /> "
+                                    . $linha['usuario'] . "<i class='bi bi-chevron-down'></i></div>";
+                                    echo "<div class='card' id='carde' style='display: none;'>
+                                    <a href='perfil.php' style='display: block;' class='card1'>Perfil</a>
+                                    <a href='sair.php' style='display: block;'>Sair</a>
+                                    </div>"; 
+                                }
+                            }
+                        } else {
+                            echo "
+                                <a href='../login_usuario.html' class='nav-link'>
+                                    Login
+                                </a>
+                                <a href='../cadastro_usuario.html'>
+                                    <button class='btn-header' style='margin: 0px 10px 0px 10px;'>
+                                        Cadastrar-se
+                                    </button>
+                                </a>
+                            ";
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -144,7 +218,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                <img src="img/objetivo librand.png" alt="Objetivo" class="img-fluid">
+                <img src="../img/objetivo librand.png" alt="Objetivo" class="img-fluid">
             </div>
             <div class="col-8 mx-auto">
                 <h2 style="color: #2259BC; font-weight: bold;">
@@ -178,7 +252,7 @@
                 
             </div>
             <div class="col-3 mx-auto">
-                <img src="img/vaga.png" alt="Vaga" class="img-fluid">
+                <img src="../img/vaga.png" alt="Vaga" class="img-fluid">
             </div>
         </div>
     </div>
@@ -194,3 +268,5 @@
 
 </body>
 </html>
+
+<script src="../js/btnPerfil.js"></script>
