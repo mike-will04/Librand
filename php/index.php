@@ -105,6 +105,33 @@
             background-color: #132d5f;
             color: white;
         }
+
+        .card {
+            background-color: white;
+            width: 120px;
+            position: absolute;
+            border-radius: 0px 0px 10px 10px;
+            text-align: center;
+            margin-top: 8px;
+            z-index: 1;
+            margin-left: 30px;
+        }
+
+        .card a {
+            color: black;
+            text-decoration: none;  
+        }
+
+        .card a:hover {
+            color: white;
+            background-color: rgb(192, 191, 191);
+        }
+
+        .card1:hover {
+            color: white;
+            background-color: rgb(192, 191, 191);
+            border-radius: 0px 0px 10px 10px;
+        }
     </style>
 </head>
 <body>
@@ -118,8 +145,7 @@
             </button>
             
             <div class="collapse navbar-collapse" id="menuNavbar">
-                <div class="navbar-nav ms-auto align-items-center">
-                    <a href="sair.php">sair</a>
+                <div class="navbar-nav ms-auto align-items-center" style='text-align: center;'>
                     <a href="" class="nav-link ">
                         Vagas
                     </a>
@@ -134,15 +160,23 @@
                             foreach ($check as $linha) {
                                 if ($linha['foto_perfil'] == null) {
                                     echo "
-                                    <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'>
-                                    <img src='../img/user.png' alt='Foto Perfil' onclick='perfil()' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";    
-                                    echo "<script> var logado = true; </script>";
+                                    <div >
+                                    <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
+                                    <img src='../img/user.png' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
+                                    echo "<div class='card' id='carde' style='display: none;'>
+                                    <a href='perfil.php' style='display: block;'>Perfil</a>
+                                    <a href='sair.php' style='display: block;' class='card1'>Sair</a>
+                                    </div>
+                                    </div>"; 
                                 } else {
                                     echo "
                                     <div class='col-4'>
                                     <img src='../img/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' onclick='perfil()' id='btn-perfil' style='width: 50px; height: 50px;' /> "
                                     . $linha['usuario'] . "<i class='bi bi-chevron-down'></i></div>";
-                                    echo "<script> var logado = true; </script>";
+                                    echo "<div class='card' id='carde' style='display: none;'>
+                                    <a href='perfil.php' style='display: block;' class='card1'>Perfil</a>
+                                    <a href='sair.php' style='display: block;'>Sair</a>
+                                    </div>"; 
                                 }
                             }
                         } else {
@@ -156,8 +190,6 @@
                                     </button>
                                 </a>
                             ";
-                        
-                            echo "<script> var logado = false; </script>";
                         }
                     ?>
                 </div>
@@ -236,3 +268,5 @@
 
 </body>
 </html>
+
+<script src="../js/btnPerfil.js"></script>
