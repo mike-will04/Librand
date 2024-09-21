@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" type="imagex/png" href="img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
     <style>
+        
         .btn-header{
             border: none;
             color: #2259BC;
@@ -226,7 +227,7 @@
     <footer class="p-5 fixed-botton text-center text-light" style="background-color: #2259BC;">
         Site desenvolvido por:
         <br>
-        Enzo Jezael Cardeal Ortiz, Felipe de Assis Vieira e Mike Will Bento do Rego
+        Enzo Jesael Cardeal Ortiz, Felipe de Assis Vieira e Mike Will Bento do Rego
         <br>
         3B
         <br>
