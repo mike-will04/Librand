@@ -49,13 +49,57 @@
         .btn-submit:hover{
             background-color: #132d5f;
         }
+
+        .header2{
+            display: none;
+        }
+
+        .voltar2{
+            visibility: hidden;
+        }
+
+        @media only screen and (max-width: 767px){
+            .header{
+                display: none;
+            }
+
+            .header2{
+                display: block;
+                width: 100%;
+            }
+
+        }
+
+        @media only screen and (max-width: 425px){
+            .voltar2{
+                visibility: visible;
+            }
+            .voltar2 {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .voltar2 a:hover{
+                color:rgb(150, 150, 150)
+            }
+
+            .voltar2 a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .voltar{
+                visibility: hidden;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4" style="background-color: #2259BC; height: 100vh;">
+            <div class="col-md-4 header" style="background-color: #2259BC; height: 100vh;">
                 <div class="col-10 mx-auto">
                     <img src="img/Logotipo Librand.png" alt="Logo librand" class="img-fluid">
                 </div>
@@ -63,6 +107,12 @@
                     <img src="img/img_lateral-removebg-preview.png" alt="Imagem lateral" style="margin-top: 15%;" class="img-fluid">
                 </div>
             </div>
+
+            <nav class="navbar navbar-expand-sm header2" style="background-color: #2259BC;">
+                <div class="container-fluid justify-content-center">
+                    <img src="img/Logotipo Librand.png" alt="Logo Librand" style="width: 100px;">
+                </div>
+            </nav>
 
             <div class="col-md-8 d-flex align-items-center justify-content-center formulario">
                 <div>
@@ -74,6 +124,12 @@
                     </div>
                     <form action="php/login_usuario.php" method="post" enctype="multipart/form-data">
                         <h2 class="text-center">Faça o seu login</h2>
+                        <div class="voltar2">
+                            <a href="php/index.php">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Voltar</span>
+                            </a>
+                        </div>
                         <br>
                         <div class="form-group text-center">
                             <button type="button" class="btn btn-md btn-light"><img src="img/google.png" alt="Icone google" height="20px"> Google</button>
@@ -103,7 +159,7 @@
                             <input type="submit" value="Logar" value="Logar" class="btn-submit" style="margin: 0px 10px 0px 10px;">
                         </div>
 
-                        <div class="row justify-content-center pt-2">
+                        <div class="row justify-content-center text-center pt-2">
                             <span>Cadastrar-se como <a href="cadastro_usuario.html">Candidato</a> ou <a href="cadastro_empresa.html">Empresa</a></span>
                         </div>
                     </form>
