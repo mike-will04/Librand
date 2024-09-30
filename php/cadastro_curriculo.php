@@ -139,21 +139,17 @@ if (isset($_SESSION['iduser'])) {
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <!-- Nome, Sobrenome, Nome Social, Email -->
                                     <div class="row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="nome" class="form-label">Nome:</label>
                                             <input type="text" class="form-control" placeholder="Nome" name="Nome" required>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="sobrenome" class="form-label">Sobrenome:</label>
                                             <input type="text" class="form-control" placeholder="Sobrenome" name="Sobrenome" required>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="nomesocial" class="form-label">Nome Social:</label>
                                             <input type="text" class="form-control" placeholder="Nome Social" name="NomeSocial">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="email" class="form-label">Email:</label>
-                                            <input type="email" class="form-control" placeholder="Email" name="Email" required>
                                         </div>
                                     </div>
                                     <!-- País, CPF, Celular, Data de Nascimento -->
@@ -322,7 +318,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label for="Caracteristica">Digite aqui algum suporte especial que sua característica como PcD demande durante a participação no recrutamento (ex.: descrição de texto em áudios, aumento de tamanho dos textos, etc.):</label>
-                                                <textarea class="form-control" rows="5" id="caracteristica" name="Caracteristica"></textarea>
+                                                <textarea class="form-control" rows="5" id="caracteristica" name="Caracteristica" maxlength="255"></textarea>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -370,7 +366,7 @@ if (isset($_SESSION['iduser'])) {
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <label for="Sobre">Tem algo mais que você considera importante contar sobre você?</label>
-                                            <textarea class="form-control" rows="5" id="Sobre" name="Sobre"></textarea>
+                                            <textarea class="form-control" rows="5" id="Sobre" name="Sobre" maxlength="255"></textarea>
                                         </div>
                                     </div>
                                     <!-- Vídeo Currículo -->
@@ -482,7 +478,7 @@ if (isset($_SESSION['iduser'])) {
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
                                             <label for="Responsabilidades" class="form-label">Responsabilidades:</label>
-                                            <textarea class="form-control" rows="5" id="Responsabilidades" name="Responsabilidades"></textarea>
+                                            <textarea class="form-control" rows="5" id="Responsabilidades" name="Responsabilidades" maxlength="255"></textarea>
                                         </div>
                                     </div>
                                     <!-- Cargo, Nível, Área -->
@@ -771,7 +767,7 @@ if (isset($_SESSION['iduser'])) {
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
                                             <label for="ResponsabilidadesExperiencia" class="form-label">Responsabilidades:</label>
-                                            <textarea class="form-control" rows="5" id="ResponsabilidadesExperiencia" name="ResponsabilidadesExperiencia"></textarea>
+                                            <textarea class="form-control" rows="5" id="ResponsabilidadesExperiencia" name="ResponsabilidadesExperiencia" maxlength="255"></textarea>
                                         </div>
                                     </div>
                                 </form>
