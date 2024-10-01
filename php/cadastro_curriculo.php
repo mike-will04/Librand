@@ -15,6 +15,7 @@ if (isset($_SESSION['iduser'])) {
     ));
 } else {
     $_SESSION['logado'] = false;
+    echo "<script>location = 'index.php' </script>";
 }
 ?>
 
@@ -407,7 +408,7 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="cadastro_objetivo.php" method="post" enctype="multipart/form-data">
                                     <!-- Cargo de Interesse, Pretenção Salarial -->
                                     <div class="row">
                                         <div class="form-group col-md-6">
@@ -431,14 +432,14 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
-
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
+                                
+                            </form>
                         </div>
                     </div>
                 </div>
