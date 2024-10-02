@@ -16,9 +16,3 @@ document.addEventListener('mouseup', function(e) {
         container.style.display = 'none';
     }
 });
-document.addEventListener('mouseup', function(e) {
-    var container = document.getElementById('myNav');
-    if (!container.contains(e.target)) {
-        document.getElementById("myNav").style.width = "0";
-    }
-});

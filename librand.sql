@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS experiencia (
  area VARCHAR(255),  
  inicio_emprego DATE,  
  fim_emprego DATE,
- atual VARCHAR(255),  
+ atual int,  
  id_experiencia INT PRIMARY KEY NOT NULL AUTO_INCREMENT  
 ); 
 

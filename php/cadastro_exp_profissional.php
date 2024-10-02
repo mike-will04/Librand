@@ -1,50 +1,46 @@
 <?php
 include "conexao.php";
 
-$usuario = $_POST["usuario"];
-$email = $_POST["email"];
-$senha = $_POST["senha"];
-$termos = $_POST["termos"];
-$receber_email = $_POST["receber_email"];
+session_start();
+
+$Empresa = $_POST["Empresa"];
+$Responsabilidades = $_POST["Responsabilidades"];
+$Cargo = isset($_POST["Cargo"]) ? $_POST["Cargo"] : null;
+$Nivel = $_POST["Nivel"];
+$Area = isset($_POST["Area"]) ? $_POST["Area"] : null;
+$InicioEmprego = $_POST["InicioEmprego"];
+$FimEmprego = isset($_POST["FimEmprego"]) ? $_POST["FimEmprego"] : null;
+$Atual = isset($_POST["Atual"]) ? 1 : 0;
+$id_usuario = $_SESSION['iduser'];
 
 $check = $conn->prepare(
-    'SELECT count(*) as count FROM usuario WHERE usuario = :usuario or email = :email'
+    'SELECT count(*) as count FROM experiencia WHERE id_usuario = :id_usuario'
 );
 $check -> execute(array(
-    ':usuario' => $usuario,
-    ':email' => $email
+    ':id_usuario' => $id_usuario,
 ));
 
-$senhahash = password_hash($senha,PASSWORD_DEFAULT);
-
-if (($usuario == "") || ($email == "") || ($senha == "") || ($termos == "")) {
-    echo "<script>alert('Campos nao podem ser vazios!!!');history.go(-1);</script>";
-} else {
-    foreach ($check as $linha) {
-        try {
-            if ($linha['count'] >= 1) {
-                echo "<script>alert('Nome de usuário ou email já cadastrado');history.go(-1)</script>";                
-            }
-            else {
-                $cadastro = $conn->prepare('INSERT INTO usuario (usuario, senha, email, termos, receber_email) VALUES 
-                (:usuario, :senha, :email, :termos, :receber_email)');
-    
-                $cadastro->execute(array(
-                    ':usuario' => $usuario,
-                    ':senha' => $senhahash,
-                    ':email' => $email,
-                    ':termos' => $termos,
-                    ':receber_email' => $receber_email
-                ));
-    
-                if ($cadastro->rowCount() == 1) {
-                    echo "<script>alert('Cadastro realizado com sucesso!!!');location = '../login_usuario.html' </script>";
-                } else {
-                    echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
-                }     
-            }
-        } catch (PDOException $e) {
-            echo 'ERROR: ' . $e->getMessage();
-        }
+foreach ($check as $linha) {
+    try {
+        $cadastro = $conn->prepare('INSERT INTO experiencia (empresa, responsabilidades, cargo, nivel, area, inicio_emprego, fim_emprego, atual, id_usuario) VALUES 
+        (:empresa, :responsabilidades, :cargo, :nivel, :area, :inicio_emprego, :fim_emprego, :atual, :id_usuario)');
+        $cadastro->execute(array(
+            ':empresa' => $Empresa,
+            ':responsabilidades' => $Responsabilidades,
+            ':cargo' => $Cargo,
+            ':nivel' => $Nivel,
+            ':area' => $Area,
+            ':inicio_emprego' => $InicioEmprego,
+            ':fim_emprego' => $FimEmprego,
+            ':atual' => $Atual,
+            ':id_usuario' => $id_usuario
+        ));
+        if ($cadastro->rowCount() == 1) {
+            echo "<script>alert('Cadastro realizado com sucesso!!!');history.go(-1)</script>";
+        } else {
+            echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
+        }     
+    } catch (PDOException $e) {
+        echo 'ERROR: ' . $e->getMessage();
     }
 }
