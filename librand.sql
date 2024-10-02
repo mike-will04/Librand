@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS dados_pessoais (
  nome VARCHAR(255),  
  sobrenome VARCHAR(255),  
  nome_social VARCHAR(255),  
- país VARCHAR(255),  
+ pais VARCHAR(255),  
  cpf VARCHAR(255),  
  celular VARCHAR(255),  
  data DATE,  
@@ -29,11 +29,7 @@ CREATE TABLE IF NOT EXISTS dados_pessoais (
  renda_pessoal VARCHAR(255),  
  renda_familiar VARCHAR(255),  
  cep VARCHAR(255),  
- rua VARCHAR(255),  
- numero INT,  
- complemento VARCHAR(255),  
- bairro VARCHAR(255),  
- estado VARCHAR(255),  
+ rua VARCHAR(255), 
  comentario VARCHAR(255),  
  video VARCHAR(255),  
  id_dados INT PRIMARY KEY NOT NULL AUTO_INCREMENT
@@ -47,13 +43,14 @@ CREATE TABLE IF NOT EXISTS experiencia (
  nivel VARCHAR(255),  
  area VARCHAR(255),  
  inicio_emprego DATE,  
- fim_emprego DATE,  
+ fim_emprego DATE,
+ atual int,  
  id_experiencia INT PRIMARY KEY NOT NULL AUTO_INCREMENT  
 ); 
 
 CREATE TABLE IF NOT EXISTS formacao ( 
  id_usuario INT,  
- país VARCHAR(255),  
+ pais VARCHAR(255),  
  estado VARCHAR(255),  
  nivel VARCHAR(255),  
  instituicao VARCHAR(255),  
@@ -78,6 +75,17 @@ CREATE TABLE IF NOT EXISTS idioma (
  idioma VARCHAR(255),  
  proficiencia VARCHAR(255),  
  id_idioma INT PRIMARY KEY NOT NULL AUTO_INCREMENT
+);
+
+CREATE TABLE IF NOT EXISTS especializacoes ( 
+ id_usuario INT,  
+ pais VARCHAR(255),  
+ categoria VARCHAR(255),
+ organizacao VARCHAR(255),
+ inicio DATE,
+ final DATE, 
+ responsabilidades VARCHAR(255), 
+ id_especializacoes INT PRIMARY KEY NOT NULL AUTO_INCREMENT
 ); 
 
 CREATE TABLE IF NOT EXISTS empresa ( 

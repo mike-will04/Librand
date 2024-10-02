@@ -15,6 +15,7 @@ if (isset($_SESSION['iduser'])) {
     ));
 } else {
     $_SESSION['logado'] = false;
+    echo "<script>location = 'index.php' </script>";
 }
 ?>
 
@@ -136,24 +137,20 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="cadastro_dados_pessoais.php" method="post" enctype="multipart/form-data">
                                     <!-- Nome, Sobrenome, Nome Social, Email -->
                                     <div class="row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="nome" class="form-label">Nome:</label>
                                             <input type="text" class="form-control" placeholder="Nome" name="Nome" required>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="sobrenome" class="form-label">Sobrenome:</label>
                                             <input type="text" class="form-control" placeholder="Sobrenome" name="Sobrenome" required>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="nomesocial" class="form-label">Nome Social:</label>
                                             <input type="text" class="form-control" placeholder="Nome Social" name="NomeSocial">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="email" class="form-label">Email:</label>
-                                            <input type="email" class="form-control" placeholder="Email" name="Email" required>
                                         </div>
                                     </div>
                                     <!-- País, CPF, Celular, Data de Nascimento -->
@@ -180,7 +177,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="form-group col-md-6">
                                             <label for="Raca" class="form-label">Raça/Etnia:</label>
                                             <select name="Raca" id="Raca" class="form-select" required>
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Preta">Preta</option>
                                                 <option value="Parda">Parda</option>
                                                 <option value="Indígena">Indígena</option>
@@ -192,8 +189,8 @@ if (isset($_SESSION['iduser'])) {
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="EstadoCivil" class="form-label">Estado Civil:</label>
-                                            <select name="EstadoCivil" id="EstadoCivil" class="form-select">
-                                                <option>Selecione</option>
+                                            <select name="EstadoCivil" id="EstadoCivil" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Solteiro(a)">Solteiro(a)</option>
                                                 <option value="Casado(a)">Casado(a)</option>
                                                 <option value="Divorciado(a)">Divorciado(a)</option>
@@ -222,17 +219,17 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Possui Deficiência -->
                                     <div class="row mt-3">
                                         <div class="col-md-3">
-                                            <label for="Deficiencia">Possui alguma deficiência?</label>
+                                            <label for="PossuiDeficiencia">Possui alguma deficiência?</label>
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="estrangeiro" name="Deficiencia" value="Sim" onclick="habilitar(true)">
+                                                <input type="radio" class="form-check-input" id="PossuiDeficiencia" name="PossuiDeficiencia" value="Sim" onclick="habilitar(true)">
                                                 <label class="form-check-label" for="Deficiencia">Sim</label>
                                             </div>
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="Deficiencia" name="Deficiencia" value="Não" onclick="habilitar(false)">
+                                                <input type="radio" class="form-check-input" id="PossuiDeficiencia" name="PossuiDeficiencia" value="Não" onclick="habilitar(false)">
                                                 <label class="form-check-label" for="Deficiencia">Não</label>
                                             </div>
                                         </div>
@@ -322,7 +319,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label for="Caracteristica">Digite aqui algum suporte especial que sua característica como PcD demande durante a participação no recrutamento (ex.: descrição de texto em áudios, aumento de tamanho dos textos, etc.):</label>
-                                                <textarea class="form-control" rows="5" id="caracteristica" name="Caracteristica"></textarea>
+                                                <textarea class="form-control" rows="5" id="caracteristica" name="Caracteristica" maxlength="255" required></textarea>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -331,7 +328,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="form-group col-md-6">
                                             <label for="RendaMensal" class="form-label">Qual a sua renda mensal, aproximadamente?</label>
                                             <select name="RendaMensal" id="RendaMensal" class="form-select" required>
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Nenhuma Renda">Nenhuma Renda</option>
                                                 <option value="Até 2 salários-mínimos">Até 2 salários-mínimos</option>
                                                 <option value="De 2 a 4 sálarios-mínimos">De 2 a 4 sálarios-mínimos</option>
@@ -344,7 +341,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="form-group col-md-6">
                                             <label for="RendaFamiliar" class="form-label">Qual a sua renda familiar, aproximadamente?</label>
                                             <select name="RendaFamiliar" id="RendaFamiliar" class="form-select" required>
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Nenhuma Renda">Nenhuma Renda</option>
                                                 <option value="Até 2 salários-mínimos">Até 2 salários-mínimos</option>
                                                 <option value="De 2 a 4 sálarios-mínimos">De 2 a 4 sálarios-mínimos</option>
@@ -370,7 +367,7 @@ if (isset($_SESSION['iduser'])) {
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <label for="Sobre">Tem algo mais que você considera importante contar sobre você?</label>
-                                            <textarea class="form-control" rows="5" id="Sobre" name="Sobre"></textarea>
+                                            <textarea class="form-control" rows="5" id="Sobre" name="Sobre" maxlength="255"></textarea>
                                         </div>
                                     </div>
                                     <!-- Vídeo Currículo -->
@@ -380,13 +377,13 @@ if (isset($_SESSION['iduser'])) {
                                             <input type="text" class="form-control" placeholder="Video" name="Video">
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -411,7 +408,7 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="cadastro_objetivo.php" method="post" enctype="multipart/form-data">
                                     <!-- Cargo de Interesse, Pretenção Salarial -->
                                     <div class="row">
                                         <div class="form-group col-md-6">
@@ -421,7 +418,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="form-group col-md-6">
                                             <label for="PretencaoSalarial" class="form-label">Pretenção Salarial:</label>
                                             <select name="PretencaoSalarial" id="PretencaoSalarial" class="form-select" required>
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="A partir de R$1.000">A partir de R$1.000</option>
                                                 <option value="A partir de R$2.000">A partir de R$2.000</option>
                                                 <option value="A partir de R$3.000">A partir de R$3.000</option>
@@ -435,14 +432,14 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
-
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
+                                
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -470,19 +467,19 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="cadastro_exp_profissional.php" method="post" enctype="multipart/form-data">
                                     <!-- Empresa -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
-                                            <label for="Cargo de Interesse" class="form-label">Empresa:</label>
-                                            <input type="text" class="form-control" placeholder="Cargo de Interesse" name="CargoDeInteresse" required>
+                                            <label for="Empresa" class="form-label">Empresa:</label>
+                                            <input type="text" class="form-control" placeholder="Empresa" name="Empresa" required>
                                         </div>
                                     </div>
                                     <!-- Responsabilidades -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
                                             <label for="Responsabilidades" class="form-label">Responsabilidades:</label>
-                                            <textarea class="form-control" rows="5" id="Responsabilidades" name="Responsabilidades"></textarea>
+                                            <textarea class="form-control" rows="5" id="Responsabilidades" name="Responsabilidades" maxlength="255" required></textarea>
                                         </div>
                                     </div>
                                     <!-- Cargo, Nível, Área -->
@@ -492,9 +489,9 @@ if (isset($_SESSION['iduser'])) {
                                             <input type="text" class="form-control" placeholder="Cargo" name="Cargo" required>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="Cargo de Interesse" class="form-label">Nível:</label>
-                                            <select name="CargoDeInteresse" id="CargoDeInteresse" class="form-select">
-                                                <option>Selecione</option>
+                                            <label for="Nivel" class="form-label">Nível:</label>
+                                            <select name="Nivel" id="Nivel" class="form-select">
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Estagiário">Estagiário</option>
                                                 <option value="Operacional">Operacional</option>
                                                 <option value="Auxiliar">Auxiliar</option>
@@ -512,8 +509,8 @@ if (isset($_SESSION['iduser'])) {
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="Area" class="form-label">Área:</label>
-                                            <select name="Area" id="Area" class="form-select">
-                                                <option>Selecione</option>
+                                            <select name="Area" id="Area" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Administração">Administração</option>
                                                 <option value="Agricultura, Pecuária, Veterinária">Agricultura</option>
                                                 <option value="Alimentação / Gastronomia">Alimentação</option>
@@ -560,13 +557,13 @@ if (isset($_SESSION['iduser'])) {
                                             <input type="checkbox" class="form-check-input" placeholder="Atual" name="Atual" onclick="habilitar2(this)">
                                         </div>
                                     </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
                                 </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
 
                         </div>
                     </div>
@@ -592,7 +589,7 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="cadastro_formacao.php" method="post" enctype="multipart/form-data">
                                     <!-- Cargo de País, Estado -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6">
@@ -602,7 +599,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="form-group col-md-6">
                                             <label for="Estado" class="form-label">Estado:</label>
                                             <select name="Estado" id="Estado" class="form-select" required>
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Acre">Acre</option>
                                                 <option value="Alagoas">Alagoas</option>
                                                 <option value="Amapá">Amapá</option>
@@ -638,7 +635,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="form-group col-md-4">
                                             <label for="Nivel" class="form-label">Nível:</label>
                                             <select name="Nivel" id="Nivel" class="form-select" required onchange="habilitar3(this)">
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Ensino Fundamental">Ensino Fundamental</option>
                                                 <option value="Ensino Médio">Ensino Médio</option>
                                                 <option value="Técnico">Técnico</option>
@@ -662,7 +659,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="form-group col-md-6">
                                             <label for="Status" class="form-label">Status:</label>
                                             <select name="Status" id="Status" class="form-select" required  onchange="habilitar4(this)">
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Cursando">Cursando</option>
                                                 <option value="Trancado">Trancado</option>
                                                 <option value="Concluído">Concluído</option>
@@ -670,23 +667,23 @@ if (isset($_SESSION['iduser'])) {
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="Campus" class="form-label">Campus:</label>
-                                            <input type="text" class="form-control" placeholder="Campus" name="Campus" id="Campus">
+                                            <input type="text" class="form-control" placeholder="Campus" name="Campus" id="Campus" required>
                                         </div>
                                     </div>
                                     <!-- Inicio Formação, Fim Formação, Turno -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-4">
                                             <label for="InicioFormacao" class="form-label">Início:</label>
-                                            <input type="data" class="form-control" placeholder="Inicio Formação" name="InicioFormacao" required>
+                                            <input type="date" class="form-control" placeholder="Inicio Formação" name="InicioFormacao" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="FimFormacao" class="form-label">Previsão/Data de Conclusão:</label>
-                                            <input type="data" class="form-control" placeholder="Fim Formação" name="FimFormacao" required>
+                                            <input type="date" class="form-control" placeholder="Fim Formação" name="FimFormacao" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="Turno" class="form-label">Turno:</label>
                                             <select name="Turno" id="Turno" class="form-select" required>
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Matutino">Matutino</option>
                                                 <option value="Vespertino">Vespertino</option>
                                                 <option value="Noturno">Noturno</option>
@@ -695,14 +692,14 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
                                 </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
-
+                                
                         </div>
                     </div>
                 </div>
@@ -730,7 +727,7 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="cadastro_especializacoes.php" method="post" enctype="multipart/form-data">
                                     <!-- País, Categoria, Organização -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-4">
@@ -740,7 +737,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="form-group col-md-4">
                                             <label for="Categoria" class="form-label">Categoria:</label>
                                             <select name="Categoria" id="Categoria" class="form-select" required>
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Cursos">Cursos</option>
                                                 <option value="Entidade Estudantil">Entidade Estudantil</option>
                                                 <option value="Monitoria">Monitoria</option>
@@ -771,16 +768,16 @@ if (isset($_SESSION['iduser'])) {
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
                                             <label for="ResponsabilidadesExperiencia" class="form-label">Responsabilidades:</label>
-                                            <textarea class="form-control" rows="5" id="ResponsabilidadesExperiencia" name="ResponsabilidadesExperiencia"></textarea>
+                                            <textarea class="form-control" rows="5" id="ResponsabilidadesExperiencia" name="ResponsabilidadesExperiencia" maxlength="255" required></textarea>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
+                            </form>
 
                         </div>
                     </div>
@@ -806,13 +803,13 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="cadastro_idioma.php" method="post" enctype="multipart/form-data">
                                     <!-- Idioma, Proeficiênia -->
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="Idioma" class="form-label">Idioma:</label>
                                             <select name="Idioma" id="Idioma" class="form-select" required>
-                                                <option>Selecione</option>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Alemão">Alemão</option>
                                                 <option value="Árabe">Árabe</option>
                                                 <option value="Bengali">Bengali</option>
@@ -836,9 +833,9 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="Proeficiência" class="form-label">Proeficiência:</label>
-                                            <select name="Proeficiencia" id="Proeficiencia" class="form-select" required>
-                                                <option>Selecione</option>
+                                            <label for="Proficiencia" class="form-label">Proeficiência:</label>
+                                            <select name="Proficiencia" id="Proficiencia" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
                                                 <option value="Básico">Básico</option>
                                                 <option value="Intermediário">Intermediário</option>
                                                 <option value="Avançado">Avançado</option>
@@ -846,13 +843,13 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
+                            </form>
 
                         </div>
                     </div>
