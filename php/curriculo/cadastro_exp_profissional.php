@@ -1,15 +1,15 @@
 <?php
-include "conexao.php";
+include "../conexao.php";
 
 session_start();
 
 $Empresa = $_POST["Empresa"];
 $Responsabilidades = $_POST["Responsabilidades"];
-$Cargo = isset($_POST["Cargo"]) ? $_POST["Cargo"] : null;
-$Nivel = $_POST["Nivel"];
-$Area = isset($_POST["Area"]) ? $_POST["Area"] : null;
+$Cargo = $_POST["Cargo"];
+$Nivel = isset($_POST["Nivel"]) ? $_POST["Nivel"] : null;
+$Area = $_POST["Area"];
 $InicioEmprego = $_POST["InicioEmprego"];
-$FimEmprego = isset($_POST["FimEmprego"]) ? $_POST["FimEmprego"] : null;
+$FimEmprego = $_POST["FimEmprego"];
 $Atual = isset($_POST["Atual"]) ? 1 : 0;
 $id_usuario = $_SESSION['iduser'];
 

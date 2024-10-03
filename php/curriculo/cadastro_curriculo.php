@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-include "conexao.php";
+include "../conexao.php";
 session_start();
 
 if (isset($_SESSION['iduser'])) {
@@ -15,7 +15,7 @@ if (isset($_SESSION['iduser'])) {
     ));
 } else {
     $_SESSION['logado'] = false;
-    echo "<script>location = 'index.php' </script>";
+    echo "<script>location = '../index.php' </script>";
 }
 ?>
 
@@ -26,7 +26,7 @@ if (isset($_SESSION['iduser'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="shortcut icon" type="imagex/png" href="../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
+    <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
     <style>
         .div_curriculo {
             height: 125px;
@@ -102,8 +102,8 @@ if (isset($_SESSION['iduser'])) {
 <body>
     <nav class="navbar navbar-expand-sm " style="background-color: #2259BC;">
         <div class="container-fluid justify-content-center">
-            <a href="index.php" class="navbar-brand d-flex">
-                <img src="../img/Logotipo Librand.png" alt="Logo Librand" style="width: 100px;">
+            <a href="../index.php" class="navbar-brand d-flex">
+                <img src="../../img/Logotipo Librand.png" alt="Logo Librand" style="width: 100px;">
             </a>
         </div>
     </nav>
@@ -141,11 +141,11 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Nome, Sobrenome, Nome Social, Email -->
                                     <div class="row">
                                         <div class="form-group col-md-4">
-                                            <label for="nome" class="form-label">Nome:</label>
+                                            <label for="nome" class="form-label">* Nome:</label>
                                             <input type="text" class="form-control" placeholder="Nome" name="Nome" required>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="sobrenome" class="form-label">Sobrenome:</label>
+                                            <label for="sobrenome" class="form-label">* Sobrenome:</label>
                                             <input type="text" class="form-control" placeholder="Sobrenome" name="Sobrenome" required>
                                         </div>
                                         <div class="form-group col-md-4">
@@ -156,26 +156,26 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- País, CPF, Celular, Data de Nascimento -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-3">
-                                            <label for="origem" class="form-label">País de Origem:</label>
+                                            <label for="origem" class="form-label">* País de Origem:</label>
                                             <input type="text" class="form-control" placeholder="País de Origem" name="Origem" required>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="cpf" class="form-label">CPF:</label>
+                                            <label for="cpf" class="form-label">* CPF:</label>
                                             <input type="text" class="form-control" placeholder="CPF" name="CPF" required>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="celular" class="form-label">Celular:</label>
+                                            <label for="celular" class="form-label">* Celular:</label>
                                             <input type="text" class="form-control" placeholder="Celular" name="Celular" required>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="nascimemnto" class="form-label">Data de Nascimento:</label>
+                                            <label for="nascimemnto" class="form-label">* Data de Nascimento:</label>
                                             <input type="date" class="form-control" placeholder="Data de Nascimento" name="Nascimemnto" required>
                                         </div>
                                     </div>
                                     <!-- Raç, Estado Civil -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6">
-                                            <label for="Raca" class="form-label">Raça/Etnia:</label>
+                                            <label for="Raca" class="form-label">* Raça/Etnia:</label>
                                             <select name="Raca" id="Raca" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Preta">Preta</option>
@@ -188,8 +188,8 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="EstadoCivil" class="form-label">Estado Civil:</label>
-                                            <select name="EstadoCivil" id="EstadoCivil" class="form-select" required>
+                                            <label for="EstadoCivil" class="form-label">* Estado Civil:</label>
+                                            <select name="EstadoCivil" id="EstadoCivil" class="form-select">
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Solteiro(a)">Solteiro(a)</option>
                                                 <option value="Casado(a)">Casado(a)</option>
@@ -211,7 +211,7 @@ if (isset($_SESSION['iduser'])) {
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="Estrangeiro" name="Estrangeiro" value="Não">
+                                                <input type="radio" class="form-check-input" id="Estrangeiro" name="Estrangeiro" value="Não" checked>
                                                 <label class="form-check-label" for="Estrangeiro">Não</label>
                                             </div>
                                         </div>
@@ -229,96 +229,32 @@ if (isset($_SESSION['iduser'])) {
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="PossuiDeficiencia" name="PossuiDeficiencia" value="Não" onclick="habilitar(false)">
+                                                <input type="radio" class="form-check-input" id="PossuiDeficiencia" name="PossuiDeficiencia" value="Não" onclick="habilitar(false)" checked>
                                                 <label class="form-check-label" for="Deficiencia">Não</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <fieldset id="fieldset1" disabled>
+                                    <fieldset id="fieldset1" hidden>
                                         <!-- Tipo Deficiência -->
                                         <div class="row mt-3">
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="Auditiva" name="Auditiva" value="Auditiva">
-                                                    <label class="form-check-label" for="Auditiva">Auditiva</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="AuditivaTotal" name="AuditivaTotal" value="Auditiva Total">
-                                                    <label class="form-check-label" for="AuditivaTotal">Auditiva Total</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="Outros" name="Outros" value="Outros">
-                                                    <label class="form-check-label" for="Outros">Outros</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="VisualBaixaVisão" name="VisualBaixaVisão" value="Visual - Baixa Visão">
-                                                    <label class="form-check-label" for="VisualBaixaVisão">Visual - Baixa Visão</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="AuditivaFalaLibras" name="AuditivaFalaLibras" value="Auditiva (fala libras)">
-                                                    <label class="form-check-label" for="AuditivaFalaLibras">Auditiva (fala libras)</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="DaFala" name="DaFala" value="Da Fala">
-                                                    <label class="form-check-label" for="DaFala">Da Fala</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="Psicossocial" name="Psicossocial" value="Psicossocial">
-                                                    <label class="form-check-label" for="Psicossocial">Psicossocial</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="VisualCegoTotal" name="VisualCegoTotal" value="Visual - Cego Total">
-                                                    <label class="form-check-label" for="VisualCegoTotal">Visual - Cego Total</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="AuditivaOralizado" name="AuditivaOralizado" value="Auditiva (oralizado)">
-                                                    <label class="form-check-label" for="AuditivaOralizado">Auditiva (oralizado)</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="Física" name="Fisica" value="Física">
-                                                    <label class="form-check-label" for="Fisica">Física</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="tea" name="tea" value="Transtorno do espectro autista">
-                                                    <label class="form-check-label" for="tea">Transtorno do espectro autista</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="VisualMonocular" name="VisualMonocular" value="Visual - Monocular">
-                                                    <label class="form-check-label" for="VisualMonocular">Visual - Monocular</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="Auditiva Parcial" name="AuditivaParcial" value="Auditiva Parcial">
-                                                    <label class="form-check-label" for="Auditiva Parcial">Auditiva Parcial</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="IntelectualLeve" name="IntelectualLeve" value="Intelectual Leve">
-                                                    <label class="form-check-label" for="IntelectualLeve">Intelectual Leve</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="visual" name="visual" value="Visual">
-                                                    <label class="form-check-label" for="visual">Visual</label>
-                                                </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="celular" class="form-label">* Qual Deficiência:</label>
+                                                <input type="text" class="form-control" placeholder="Deficiência" name="Deficiencia" required>
                                             </div>
                                         </div>
                                         <!-- Laudo Médico -->
                                         <div class="row mt-3">
                                             <div class="col-md-5">
                                                 <div class="form-group">
-                                                    <label for="Laudo">Anexar laudo Médico:</label>
-                                                    <input type="file" class="form-control" name="Laudo">
+                                                    <label for="Laudo">* Anexar laudo Médico:</label>
+                                                    <input type="file" class="form-control" name="Laudo" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Caracterísica PcD -->
                                         <div class="row mt-3">
                                             <div class="col-md-12">
-                                                <label for="Caracteristica">Digite aqui algum suporte especial que sua característica como PcD demande durante a participação no recrutamento (ex.: descrição de texto em áudios, aumento de tamanho dos textos, etc.):</label>
+                                                <label for="Caracteristica">* Digite aqui algum suporte especial que sua característica como PcD demande durante a participação no recrutamento (ex.: descrição de texto em áudios, aumento de tamanho dos textos, etc.):</label>
                                                 <textarea class="form-control" rows="5" id="caracteristica" name="Caracteristica" maxlength="255" required></textarea>
                                             </div>
                                         </div>
@@ -326,7 +262,7 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Renda Mensal, Renda Familiar -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6">
-                                            <label for="RendaMensal" class="form-label">Qual a sua renda mensal, aproximadamente?</label>
+                                            <label for="RendaMensal" class="form-label">* Qual a sua renda mensal, aproximadamente?</label>
                                             <select name="RendaMensal" id="RendaMensal" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Nenhuma Renda">Nenhuma Renda</option>
@@ -339,7 +275,7 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="RendaFamiliar" class="form-label">Qual a sua renda familiar, aproximadamente?</label>
+                                            <label for="RendaFamiliar" class="form-label">* Qual a sua renda familiar, aproximadamente?</label>
                                             <select name="RendaFamiliar" id="RendaFamiliar" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Nenhuma Renda">Nenhuma Renda</option>
@@ -355,12 +291,67 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- CEP, Rua -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6">
-                                            <label for="CEP" class="form-label">CEP:</label>
+                                            <label for="CEP" class="form-label">* CEP:</label>
                                             <input type="text" class="form-control" placeholder="CEP" name="CEP" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="Rua" class="form-label">Rua:</label>
+                                            <label for="Rua" class="form-label">* Rua:</label>
                                             <input type="text" class="form-control" placeholder="Rua" name="Rua" required>
+                                        </div>
+                                    </div>
+                                    <!-- Número, Complemento, Bairro -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-4">
+                                            <label for="Numero" class="form-label">Número:</label>
+                                            <input type="text" class="form-control" placeholder="Numero" name="Numero">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="Complemento" class="form-label">Complemento:</label>
+                                            <input type="text" class="form-control" placeholder="Complemento" name="Complemento">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="Bairro" class="form-label">Bairro:</label>
+                                            <input type="text" class="form-control" placeholder="Bairro" name="Bairro">
+                                        </div>
+                                    </div>
+                                    <!-- Estado, Cidade -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-6">
+                                                <label for="Estado" class="form-label">* Estado:</label>
+                                                <select name="Estado" id="Estado" class="form-select" required>
+                                                    <option value="" disabled selected>Selecione</option>
+                                                    <option value="Acre">Acre</option>
+                                                    <option value="Alagoas">Alagoas</option>
+                                                    <option value="Amapá">Amapá</option>
+                                                    <option value="Amazonas">Amazonas</option>
+                                                    <option value="Bahia">Bahia</option>
+                                                    <option value="Ceará">Ceará</option>
+                                                    <option value="Distrito Federal">Distrito Federal</option>
+                                                    <option value="Espírito Santo">Espírito Santo</option>
+                                                    <option value="Goiás">Goiás</option>
+                                                    <option value="Maranhão">Maranhão</option>
+                                                    <option value="Mato Grosso">Mato Grosso</option>
+                                                    <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                                    <option value="Minas Gerais">Minas Gerais</option>
+                                                    <option value="Pará">Pará</option>
+                                                    <option value="Paraíba">Paraíba</option>
+                                                    <option value="Paraná">Paraná</option>
+                                                    <option value="Pernambuco">Pernambuco</option>
+                                                    <option value="Piauí">Piauí</option>
+                                                    <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                                    <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                                    <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                                    <option value="Rondônia">Rondônia</option>
+                                                    <option value="Rondônia">Rondônia</option>
+                                                    <option value="Santa Catarina">Santa Catarina</option>
+                                                    <option value="São Paulo">São Paulo </option>
+                                                    <option value="Sergipe">Sergipe</option>
+                                                    <option value="Tocantins">Tocantins</option>
+                                                </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="Cidade" class="form-label">* Cidade:</label>
+                                            <input type="text" class="form-control" placeholder="Cidade" name="Cidade" required>
                                         </div>
                                     </div>
                                     <!-- Sobre Você -->
@@ -412,11 +403,11 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Cargo de Interesse, Pretenção Salarial -->
                                     <div class="row">
                                         <div class="form-group col-md-6">
-                                            <label for="Cargo de Interesse" class="form-label">Cargo de Interesse:</label>
+                                            <label for="Cargo de Interesse" class="form-label">* Cargo de Interesse:</label>
                                             <input type="text" class="form-control" placeholder="Cargo de Interesse" name="CargoDeInteresse" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="PretencaoSalarial" class="form-label">Pretenção Salarial:</label>
+                                            <label for="PretencaoSalarial" class="form-label">* Pretenção Salarial:</label>
                                             <select name="PretencaoSalarial" id="PretencaoSalarial" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="A partir de R$1.000">A partir de R$1.000</option>
@@ -471,21 +462,21 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Empresa -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
-                                            <label for="Empresa" class="form-label">Empresa:</label>
+                                            <label for="Empresa" class="form-label">* Empresa:</label>
                                             <input type="text" class="form-control" placeholder="Empresa" name="Empresa" required>
                                         </div>
                                     </div>
                                     <!-- Responsabilidades -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
-                                            <label for="Responsabilidades" class="form-label">Responsabilidades:</label>
+                                            <label for="Responsabilidades" class="form-label">* Responsabilidades:</label>
                                             <textarea class="form-control" rows="5" id="Responsabilidades" name="Responsabilidades" maxlength="255" required></textarea>
                                         </div>
                                     </div>
                                     <!-- Cargo, Nível, Área -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-4">
-                                            <label for="Cargo" class="form-label">Cargo:</label>
+                                            <label for="Cargo" class="form-label">* Cargo:</label>
                                             <input type="text" class="form-control" placeholder="Cargo" name="Cargo" required>
                                         </div>
                                         <div class="form-group col-md-4">
@@ -508,7 +499,7 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="Area" class="form-label">Área:</label>
+                                            <label for="Area" class="form-label">* Área:</label>
                                             <select name="Area" id="Area" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Administração">Administração</option>
@@ -545,12 +536,12 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Inicio Emprego, Fim emprego, Cargo atual -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-4">
-                                            <label for="InicioEmprego" class="form-label">De:</label>
+                                            <label for="InicioEmprego" class="form-label">* De:</label>
                                             <input type="date" class="form-control" placeholder="Inicio Emprego" name="InicioEmprego" required>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="FimEmprego" class="form-label">Até:</label>
-                                            <input type="date" class="form-control" placeholder="Fim Emprego" id="fieldset2" name="FimEmprego" required>
+                                        <div class="form-group col-md-4" id="fieldset2">
+                                            <label for="FimEmprego" class="form-label">* Até:</label>
+                                            <input type="date" class="form-control" placeholder="Fim Emprego" name="FimEmprego" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="Atual" class="form-label">Meu cargo atual:</label>
@@ -593,11 +584,11 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Cargo de País, Estado -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6">
-                                            <label for="Pais" class="form-label">País:</label>
+                                            <label for="Pais" class="form-label">* País:</label>
                                             <input type="text" class="form-control" placeholder="País" name="Pais" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="Estado" class="form-label">Estado:</label>
+                                            <label for="Estado" class="form-label">* Estado:</label>
                                             <select name="Estado" id="Estado" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Acre">Acre</option>
@@ -632,8 +623,8 @@ if (isset($_SESSION['iduser'])) {
                                     </div>
                                     <!-- Nível, Instituição e Curso -->
                                     <div class="row mt-3">
-                                        <div class="form-group col-md-4">
-                                            <label for="Nivel" class="form-label">Nível:</label>
+                                        <div class="form-group col-md-4" id="nivel">
+                                            <label for="Nivel" class="form-label">* Nível:</label>
                                             <select name="Nivel" id="Nivel" class="form-select" required onchange="habilitar3(this)">
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Ensino Fundamental">Ensino Fundamental</option>
@@ -645,19 +636,19 @@ if (isset($_SESSION['iduser'])) {
                                                 <option value="Doutorado">Doutorado</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="Instituicao" class="form-label">Instituição:</label>
+                                        <div class="form-group col-md-4" id="instituicao">
+                                            <label for="Instituicao" class="form-label">* Instituição:</label>
                                             <input type="text" class="form-control" placeholder="Instituição" name="Instituicao" required>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="Curso" class="form-label">Curso:</label>
+                                        <div class="form-group col-md-4" id="Curso">
+                                            <label for="Curso" class="form-label">* Curso:</label>
                                             <input type="text" class="form-control" placeholder="Curso" name="Curso" id="Curso" required>
                                         </div>
                                     </div>
                                     <!-- Status, Campus -->
                                     <div class="row mt-3">
-                                        <div class="form-group col-md-6">
-                                            <label for="Status" class="form-label">Status:</label>
+                                        <div class="form-group col-md-6" id="status">
+                                            <label for="Status" class="form-label">* Status:</label>
                                             <select name="Status" id="Status" class="form-select" required  onchange="habilitar4(this)">
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Cursando">Cursando</option>
@@ -665,24 +656,24 @@ if (isset($_SESSION['iduser'])) {
                                                 <option value="Concluído">Concluído</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="Campus" class="form-label">Campus:</label>
-                                            <input type="text" class="form-control" placeholder="Campus" name="Campus" id="Campus" required>
+                                        <div class="form-group col-md-6" id="Campus">
+                                            <label for="Campus" class="form-label" id="divcampus">Campus:</label>
+                                            <input type="text" class="form-control" placeholder="Campus" name="Campus">
                                         </div>
                                     </div>
                                     <!-- Inicio Formação, Fim Formação, Turno -->
                                     <div class="row mt-3">
-                                        <div class="form-group col-md-4">
-                                            <label for="InicioFormacao" class="form-label">Início:</label>
+                                        <div class="form-group col-md-4" id="inicio">
+                                            <label for="InicioFormacao" class="form-label">* Início:</label>
                                             <input type="date" class="form-control" placeholder="Inicio Formação" name="InicioFormacao" required>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="FimFormacao" class="form-label">Previsão/Data de Conclusão:</label>
+                                        <div class="form-group col-md-4" id="fim">
+                                            <label for="FimFormacao" class="form-label">* Previsão/Data de Conclusão:</label>
                                             <input type="date" class="form-control" placeholder="Fim Formação" name="FimFormacao" required>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4" id="Turno">
                                             <label for="Turno" class="form-label">Turno:</label>
-                                            <select name="Turno" id="Turno" class="form-select" required>
+                                            <select name="Turno" class="form-select" >
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Matutino">Matutino</option>
                                                 <option value="Vespertino">Vespertino</option>
@@ -731,11 +722,11 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- País, Categoria, Organização -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-4">
-                                            <label for="Pais" class="form-label">País:</label>
+                                            <label for="Pais" class="form-label">* País:</label>
                                             <input type="text" class="form-control" placeholder="País" name="Pais" required>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="Categoria" class="form-label">Categoria:</label>
+                                            <label for="Categoria" class="form-label">* Categoria:</label>
                                             <select name="Categoria" id="Categoria" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Cursos">Cursos</option>
@@ -749,25 +740,25 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="Organizacao" class="form-label">Organização:</label>
+                                            <label for="Organizacao" class="form-label">* Organização:</label>
                                             <input type="text" class="form-control" placeholder="Organização" name="Organizacao" required>
                                         </div>
                                     </div>
                                     <!-- Início Experiência, Fim Experiência -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6">
-                                            <label for="InicioExperiencia" class="form-label">Início:</label>
+                                            <label for="InicioExperiencia" class="form-label">* Início:</label>
                                             <input type="date" class="form-control" placeholder="Inicio Experiencia" name="InicioExperiencia" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="FimExperiencia" class="form-label">Final:</label>
+                                            <label for="FimExperiencia" class="form-label">* Final:</label>
                                             <input type="date" class="form-control" placeholder="Fim Experiencia" id="fieldset2" name="FimExperiencia" required>
                                         </div>
                                     </div>
                                     <!-- Responsabilidades -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
-                                            <label for="ResponsabilidadesExperiencia" class="form-label">Responsabilidades:</label>
+                                            <label for="ResponsabilidadesExperiencia" class="form-label">* Responsabilidades:</label>
                                             <textarea class="form-control" rows="5" id="ResponsabilidadesExperiencia" name="ResponsabilidadesExperiencia" maxlength="255" required></textarea>
                                         </div>
                                     </div>
@@ -807,7 +798,7 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Idioma, Proeficiênia -->
                                     <div class="row">
                                         <div class="form-group col-md-6">
-                                            <label for="Idioma" class="form-label">Idioma:</label>
+                                            <label for="Idioma" class="form-label">* Idioma:</label>
                                             <select name="Idioma" id="Idioma" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Alemão">Alemão</option>
@@ -833,7 +824,7 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="Proficiencia" class="form-label">Proeficiência:</label>
+                                            <label for="Proficiencia" class="form-label">* Proeficiência:</label>
                                             <select name="Proficiencia" id="Proficiencia" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Básico">Básico</option>
@@ -866,9 +857,18 @@ if (isset($_SESSION['iduser'])) {
         </div>
     </div>
 
+    <footer class="p-5 fixed-botton text-center text-light" style="background-color: #2259BC;">
+        Site desenvolvido por:
+        <br>
+        Enzo Jesael Cardeal Ortiz, Felipe de Assis Vieira e Mike Will Bento do Rego
+        <br>
+        3B
+        <br>
+        &copy; 2024 Librand - Todos direitos reservados.
+    </footer>
 
 </body>
 
 </html>
 
-<script src="../js/desabilitar_input.js"></script>
+<script src="../../js/desabilitar_input.js"></script>
