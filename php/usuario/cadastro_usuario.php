@@ -1,5 +1,5 @@
 <?php
-include "conexao.php";
+include "../conexao.php";
 
 $usuario = $_POST["usuario"];
 $email = $_POST["email"];
@@ -35,7 +35,7 @@ foreach ($check as $linha) {
             ));
 
             if ($cadastro->rowCount() == 1) {
-                echo "<script>alert('Cadastro realizado com sucesso!!!');location = '../login_usuario.html'</script>";
+                echo "<script>alert('Cadastro realizado com sucesso!!!');location = '../../login_usuario.html'</script>";
             } else {
                 echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
             }     

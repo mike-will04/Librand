@@ -1,5 +1,5 @@
 <?php
-include "conexao.php";
+include "../conexao.php";
 
 session_start();
 
@@ -16,10 +16,6 @@ $check -> execute(array(
 
 foreach ($check as $linha) {
     try {
-        if ($linha['count'] >= 1) {
-            echo "<script>alert('Objetivo já cadastrado');history.go(-1);</script>";                
-        }
-        else {
             $cadastro = $conn->prepare('INSERT INTO objetivo (cargo_de_interesse, pretencao_salarial, id_usuario) VALUES 
             (:cargo_de_interesse, :pretencao_salarial, :id_usuario)');
 
@@ -34,7 +30,6 @@ foreach ($check as $linha) {
             } else {
                 echo "<script>alert('Erro ao cadastrar');history.go(-1);</script>";
             }     
-        }
     } catch (PDOException $e) {
         echo 'ERROR: ' . $e->getMessage();
     }

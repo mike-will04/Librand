@@ -1,14 +1,14 @@
 <?php
-include "conexao.php";
+include "../conexao.php";
 
 session_start();
 
 $Pais = $_POST["Pais"];
-$Estado = isset($_POST["Estado"]) ? $_POST["Estado"] : null;
-$Nivel = isset($_POST["Nivel"]) ? $_POST["Nivel"] : null;
-$Instituicao = $_POST["Instituicao"];
+$Estado = $_POST["Estado"];
+$Nivel = $_POST["Nivel"];
+$Instituicao = isset($_POST["Instituicao"]) ? $_POST["Instituicao"] : null;
 $Curso = isset($_POST["Curso"]) ? $_POST["Curso"] : null;
-$Status = isset($_POST["Status"]) ? $_POST["Status"] : null;
+$Status = $_POST["Status"];
 $Campus = isset($_POST["Campus"]) ? $_POST["Campus"] : null;
 $InicioFormacao = $_POST["InicioFormacao"];
 $FimFormacao = $_POST["FimFormacao"];
