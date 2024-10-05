@@ -24,7 +24,7 @@ foreach ($check as $linha) {
             ':id_usuario' => $id_usuario
         ));
         if ($cadastro->rowCount() == 1) {
-            echo "<script>alert('Cadastro realizado com sucesso!!!');history.go(-1)</script>";
+            echo "<script>alert('Cadastro realizado com sucesso!!!');history.go(-1);location.reload();</script>";
         } else {
             echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
         }     

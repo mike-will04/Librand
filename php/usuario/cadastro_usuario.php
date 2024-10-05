@@ -35,7 +35,7 @@ foreach ($check as $linha) {
             ));
 
             if ($cadastro->rowCount() == 1) {
-                echo "<script>alert('Cadastro realizado com sucesso!!!');location = '../../login_usuario.html'</script>";
+                echo "<script>alert('Cadastro realizado com sucesso!!!');location = '../curriculo/cadastro_curriculo.php'</script>";
             } else {
                 echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
             }     

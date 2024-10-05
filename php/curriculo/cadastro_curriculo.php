@@ -15,7 +15,6 @@ if (isset($_SESSION['iduser'])) {
     ));
 } else {
     $_SESSION['logado'] = false;
-    echo "<script>location = '../index.php' </script>";
 }
 ?>
 
@@ -71,7 +70,6 @@ if (isset($_SESSION['iduser'])) {
             border-radius: 20px;
             font-weight: bold;
             transition-duration: 0.4s;
-            margin-bottom: 2%;
         }
 
         .btn_curriculo_salvar:hover {
@@ -234,12 +232,12 @@ if (isset($_SESSION['iduser'])) {
                                             </div>
                                         </div>
                                     </div>
-                                    <fieldset id="fieldset1" hidden>
+                                    <fieldset id="deficiencialabel" hidden>
                                         <!-- Tipo Deficiência -->
                                         <div class="row mt-3">
                                             <div class="form-group col-md-3">
                                                 <label for="celular" class="form-label">* Qual Deficiência:</label>
-                                                <input type="text" class="form-control" placeholder="Deficiência" name="Deficiencia" required>
+                                                <input type="text" class="form-control" placeholder="Deficiência" name="Deficiencia" id="deficienciaCampo" required>
                                             </div>
                                         </div>
                                         <!-- Laudo Médico -->
@@ -247,7 +245,7 @@ if (isset($_SESSION['iduser'])) {
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label for="Laudo">* Anexar laudo Médico:</label>
-                                                    <input type="file" class="form-control" name="Laudo" required>
+                                                    <input type="file" class="form-control" name="Laudo" id="laudoCampo" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -255,7 +253,7 @@ if (isset($_SESSION['iduser'])) {
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label for="Caracteristica">* Digite aqui algum suporte especial que sua característica como PcD demande durante a participação no recrutamento (ex.: descrição de texto em áudios, aumento de tamanho dos textos, etc.):</label>
-                                                <textarea class="form-control" rows="5" id="caracteristica" name="Caracteristica" maxlength="255" required></textarea>
+                                                <textarea class="form-control" rows="5" name="Caracteristica" maxlength="255" id="caracteristicaCampo" required></textarea>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -539,9 +537,9 @@ if (isset($_SESSION['iduser'])) {
                                             <label for="InicioEmprego" class="form-label">* De:</label>
                                             <input type="date" class="form-control" placeholder="Inicio Emprego" name="InicioEmprego" required>
                                         </div>
-                                        <div class="form-group col-md-4" id="fieldset2">
-                                            <label for="FimEmprego" class="form-label">* Até:</label>
-                                            <input type="date" class="form-control" placeholder="Fim Emprego" name="FimEmprego" required>
+                                        <div class="form-group col-md-4" id="fieldsetlabel">
+                                            <label for="FimEmprego" class="form-label" >* Até:</label>
+                                            <input type="date" class="form-control" placeholder="Fim Emprego" name="FimEmprego" id="fieldset2" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="Atual" class="form-label">Meu cargo atual:</label>
@@ -640,7 +638,7 @@ if (isset($_SESSION['iduser'])) {
                                             <label for="Instituicao" class="form-label">* Instituição:</label>
                                             <input type="text" class="form-control" placeholder="Instituição" name="Instituicao" required>
                                         </div>
-                                        <div class="form-group col-md-4" id="Curso">
+                                        <div class="form-group col-md-4" id="Cursolabel">
                                             <label for="Curso" class="form-label">* Curso:</label>
                                             <input type="text" class="form-control" placeholder="Curso" name="Curso" id="Curso" required>
                                         </div>
@@ -656,9 +654,9 @@ if (isset($_SESSION['iduser'])) {
                                                 <option value="Concluído">Concluído</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6" id="Campus">
-                                            <label for="Campus" class="form-label" id="divcampus">Campus:</label>
-                                            <input type="text" class="form-control" placeholder="Campus" name="Campus">
+                                        <div class="form-group col-md-6" id="Campuslabel">
+                                            <label for="Campus" class="form-label">Campus:</label>
+                                            <input type="text" class="form-control" placeholder="Campus" name="Campus"id="Campus">
                                         </div>
                                     </div>
                                     <!-- Inicio Formação, Fim Formação, Turno -->
@@ -671,9 +669,9 @@ if (isset($_SESSION['iduser'])) {
                                             <label for="FimFormacao" class="form-label">* Previsão/Data de Conclusão:</label>
                                             <input type="date" class="form-control" placeholder="Fim Formação" name="FimFormacao" required>
                                         </div>
-                                        <div class="form-group col-md-4" id="Turno">
+                                        <div class="form-group col-md-4" id="Turnolabel">
                                             <label for="Turno" class="form-label">Turno:</label>
-                                            <select name="Turno" class="form-select" >
+                                            <select name="Turno" class="form-select" id="Turno">
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Matutino">Matutino</option>
                                                 <option value="Vespertino">Vespertino</option>
@@ -751,7 +749,7 @@ if (isset($_SESSION['iduser'])) {
                                             <input type="date" class="form-control" placeholder="Inicio Experiencia" name="InicioExperiencia" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="FimExperiencia" class="form-label">* Final:</label>
+                                            <label for="FimExperiencia" class="form-label">* Previsão/Data de Conclusão:</label>
                                             <input type="date" class="form-control" placeholder="Fim Experiencia" id="fieldset2" name="FimExperiencia" required>
                                         </div>
                                     </div>
@@ -824,7 +822,7 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="Proficiencia" class="form-label">* Proeficiência:</label>
+                                            <label for="Proficiencia" class="form-label">* Proficiência:</label>
                                             <select name="Proficiencia" id="Proficiencia" class="form-select" required>
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Básico">Básico</option>
@@ -848,7 +846,7 @@ if (isset($_SESSION['iduser'])) {
             </div>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center pb-4">
             <div class="col-12 d-inline-flex align-items-center justify-content-center">
                 <button class="btn_curriculo_salvar">
                     Salvar
