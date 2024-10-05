@@ -30,22 +30,21 @@ $Estado = $_POST["Estado"];
 $Cidade = $_POST["Cidade"];
 $Sobre = isset($_POST["Sobre"]) ? $_POST["Sobre"] : null;
 $Video = isset($_POST["Video"]) ? $_POST["Video"] : null;
-
+$redirectPage = $_POST['redirect'];
 $id_usuario = $_SESSION['iduser'];
 
 $check = $conn->prepare(
     'SELECT count(*) as count FROM dados_pessoais WHERE id_usuario = :id_usuario'
 );
-$check -> execute(array(
+$check->execute(array(
     ':id_usuario' => $id_usuario,
 ));
 
 foreach ($check as $linha) {
     try {
         if ($linha['count'] >= 1) {
-            echo "<script>alert('Dados já cadastrados');history.go(-1)</script>";                
-        }
-        else {
+            echo "<script>alert('Dados já cadastrados');history.go(-1)</script>";
+        } else {
             $cadastro = $conn->prepare('INSERT INTO dados_pessoais (nome, sobrenome, nome_social, pais, cpf, celular, data, raca, estado_civil, estrangeiro, possui_deficiencia, deficiencia, laudo, suporte, renda_pessoal, renda_familiar, cep, rua, numero, complemento, bairro, estado, cidade, comentario, video, id_usuario) VALUES 
             (:nome, :sobrenome, :nome_social, :pais, :cpf, :celular, :data, :raca, :estado_civil, :estrangeiro, :possui_deficiencia, :deficiencia, :laudo, :suporte, :renda_pessoal, :renda_familiar, :cep, :rua, :numero, :complemento, :bairro, :estado, :cidade, :comentario, :video, :id_usuario)');
 
@@ -79,12 +78,15 @@ foreach ($check as $linha) {
             ));
 
             if ($cadastro->rowCount() == 1) {
-                echo "<script>alert('Cadastro realizado com sucesso!!!');history.go(-1)</script>";
+                $_SESSION['message'] = 'Dados pessoais adicionado com sucesso!';
             } else {
-                echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
-            }     
+                echo "<script>alert('Erro ao adicionar dados pessoais.');history.go(-1)</script>";
+            }
         }
     } catch (PDOException $e) {
         echo 'ERROR: ' . $e->getMessage();
     }
 }
+
+header("Location: $redirectPage");
+exit();
