@@ -10,7 +10,7 @@ function perfil() {
     }
 }
 
-document.addEventListener('mouseup', function(e) {
+document.addEventListener('mouseup', function (e) {
     var container = document.getElementById('carde');
     if (!container.contains(e.target)) {
         container.style.display = 'none';

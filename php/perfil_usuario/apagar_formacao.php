@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 include "../conexao.php";
 $id = $_GET["id"];
 
@@ -7,12 +8,15 @@ try {
     $excluir->execute(array(
         ':id' => $id
     ));
-    
+
     if ($excluir->rowCount() == 0) {
-        echo "<script>alert('Dados não foram apagados');history.go(-1);</script>";
+        $_SESSION['message'] = 'Dados não foram apagados.';
     } else {
-        echo "<script>alert('Dados excluidos com sucesso!!!');history.go(-1);</script>";
+        $_SESSION['message'] = 'Dados excluídos com sucesso!';
     }
 } catch (PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
 }
+
+header("Location: perfil_usuario.php");
+exit();

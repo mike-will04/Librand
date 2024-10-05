@@ -1,71 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <?php
-        include "../conexao.php";
-        session_start();
+<?php
+include "../conexao.php";
+session_start();
 
-        if (isset($_SESSION['iduser'])) {
-            $id = $_SESSION['iduser'];
+if (isset($_SESSION['iduser'])) {
+    $id = $_SESSION['iduser'];
 
-            $check = $conn->prepare(
-            'SELECT * FROM usuario WHERE id_usuario = :id'
-            );
-            $check->execute(array(
-            ':id' => $id
-            ));
-        } else {
-            $_SESSION['logado'] = false;
-        }
+    $check = $conn->prepare(
+        'SELECT * FROM usuario WHERE id_usuario = :id'
+    );
+    $check->execute(array(
+        ':id' => $id
+    ));
+} else {
+    $_SESSION['logado'] = false;
+}
 
-        $dados = $conn->prepare(
-            'SELECT d.*, u.email FROM dados_pessoais d join usuario u on d.id_usuario = u.id_usuario WHERE d.id_usuario = :id_usuario'
-        );
-        $dados->execute(array(
-            ':id_usuario' => $id
-        ));
+$dados = $conn->prepare(
+    'SELECT d.*, u.email FROM dados_pessoais d join usuario u on d.id_usuario = u.id_usuario WHERE d.id_usuario = :id_usuario'
+);
+$dados->execute(array(
+    ':id_usuario' => $id
+));
 
-        $dados2 = $conn->prepare(
-            'SELECT * FROM dados_pessoais WHERE id_usuario = :id_usuario'
-        );
-        $dados2->execute(array(
-            ':id_usuario' => $id
-        ));
+$dados2 = $conn->prepare(
+    'SELECT * FROM dados_pessoais WHERE id_usuario = :id_usuario'
+);
+$dados2->execute(array(
+    ':id_usuario' => $id
+));
 
-        $exp_profissional = $conn->prepare(
-            'SELECT * FROM experiencia WHERE id_usuario = :id_usuario'
-        );
-        $exp_profissional->execute(array(
-            ':id_usuario' => $id
-        ));
+$exp_profissional = $conn->prepare(
+    'SELECT * FROM experiencia WHERE id_usuario = :id_usuario'
+);
+$exp_profissional->execute(array(
+    ':id_usuario' => $id
+));
 
-        $formacao = $conn->prepare(
-            'SELECT * FROM formacao WHERE id_usuario = :id_usuario'
-        );
-        $formacao->execute(array(
-            ':id_usuario' => $id
-        ));
+$formacao = $conn->prepare(
+    'SELECT * FROM formacao WHERE id_usuario = :id_usuario'
+);
+$formacao->execute(array(
+    ':id_usuario' => $id
+));
 
-        $idioma = $conn->prepare(
-            'SELECT * FROM idioma WHERE id_usuario = :id_usuario'
-        );
-        $idioma->execute(array(
-            ':id_usuario' => $id
-        ));
+$idioma = $conn->prepare(
+    'SELECT * FROM idioma WHERE id_usuario = :id_usuario'
+);
+$idioma->execute(array(
+    ':id_usuario' => $id
+));
 
-        $objetivo = $conn->prepare(
-            'SELECT * FROM objetivo WHERE id_usuario = :id_usuario'
-        );
-        $objetivo->execute(array(
-            ':id_usuario' => $id
-        ));
+$objetivo = $conn->prepare(
+    'SELECT * FROM objetivo WHERE id_usuario = :id_usuario'
+);
+$objetivo->execute(array(
+    ':id_usuario' => $id
+));
 
-        $especializacoes = $conn->prepare(
-            'SELECT * FROM especializacoes WHERE id_usuario = :id_usuario'
-        );
-        $especializacoes->execute(array(
-            ':id_usuario' => $id
-        ));
-    ?>
+$especializacoes = $conn->prepare(
+    'SELECT * FROM especializacoes WHERE id_usuario = :id_usuario'
+);
+$especializacoes->execute(array(
+    ':id_usuario' => $id
+));
+
+if (isset($_SESSION['message'])) {
+    echo "<script>alert('{$_SESSION['message']}');</script>";
+    unset($_SESSION['message']);
+}
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,112 +80,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
-    <style>
-        .card {
-            background-color: white;
-            width: 150px;
-            position: absolute;
-            border-radius: 0px 0px 10px 10px;
-            text-align: center;
-            z-index: 1;
-            top: 100%;
-            right: 0;
-        }
-
-        .card a {
-            color: black;
-            text-decoration: none;  
-        }
-
-        .card a:hover {
-            color: white;
-            background-color: rgb(192, 191, 191);
-        }
-
-        .div_perfil {
-            height: 200px;
-            margin: 0 2.1% 0 2.1%;
-        }
-
-        .texto_dados{
-            font-size: 1.1rem;
-        }
-
-        .btn_editar {
-            border: none;
-            color: white;
-            background-color: #2259BC;
-            padding: 5px 30px;
-            height: 35px;
-            width: 300px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            transition-duration: 0.4s;
-        }
-
-        .btn_editar:hover {
-            background-color: #132d5f;
-            color: white;
-        }
-
-        .btn_curriculo_salvar {
-            border: none;
-            color: white;
-            background-color: #2259BC;
-            padding: 5px 30px;
-            height: 35px;
-            width: 150px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            transition-duration: 0.4s;
-        }
-
-        .btn_curriculo_salvar:hover {
-            background-color: #132d5f;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/perfil_usuario.css">
+    <link rel="stylesheet" href="../../css/header.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-sm" style="background-color: #2259BC;">
         <div class="container-fluid">
             <a href="../index.php" class="navbar-brand d-flex">
                 <img src="../../img/Logotipo Librand.png" alt="Logo Librand" style="width: 100px;">
             </a>
-            
+
             <div class="collapse navbar-collapse" id="menuNavbar">
                 <div class="navbar-nav ms-auto align-items-center" style='text-align: center;'>
                     <?php
-                        if (isset($_SESSION['logado']) and $_SESSION['logado'] == true) {
-                            foreach ($check as $linha) {
-                                if ($linha['foto_perfil'] == null) {
-                                    echo "
+                    if (isset($_SESSION['logado']) and $_SESSION['logado'] == true) {
+                        foreach ($check as $linha) {
+                            if ($linha['foto_perfil'] == null) {
+                                echo "
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../../img/user.png' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
-                                    echo "<div class='card' id='carde' style='display: none;'>
+                                echo "<div class='card' id='carde' style='display: none;'>
                                         <a href='perfil_usuario.php' style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
-                                    "; 
-                                } else {
-                                    echo "
+                                    ";
+                            } else {
+                                echo "
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../../img/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
-                                    echo "<div class='card' id='carde' style='display: none;'>
+                                echo "<div class='card' id='carde' style='display: none;'>
                                         <a href='perfil_usuario.php  style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
-                                    "; 
-                                }
+                                    ";
                             }
-                        } else {
-                            echo "
+                        }
+                    } else {
+                        echo "
                                 <a href='../../login_usuario.html' class='nav-link'>
                                     Login
                                 </a>
@@ -189,7 +127,7 @@
                                     </button>
                                 </a>
                             ";
-                        }
+                    }
                     ?>
                 </div>
             </div>
@@ -199,26 +137,26 @@
     <div class="container-fluid">
         <div class="row justify-content-center mt-5">
             <div class="col-md-2 shadow rounded d-inline-flex div_perfil">
-                
+
             </div>
             <div class="col-md-4 shadow rounded d-inline-flex div_perfil p-4">
                 <div class="d-flex justify-content-center align-items-center texto_dados ">
                     <?php
-                        if ($dados->rowCount() > 0) {
-                            $linha = $dados->fetch();
-                            echo "<div><h5>".$linha['nome']." ".$linha['sobrenome']."</h5>";
-                            echo "<h6>Contato</h6>";
-                            echo "Email: ".$linha['email']."<br>";
-                            echo "Celular: ".$linha['celular']."<br>";
-                            echo "Cidade: ".$linha['cidade']."-".$linha['estado']."</div>";
-                        } else {
-                            echo "Nenhum dado encontrado!";
-                        }
+                    if ($dados->rowCount() > 0) {
+                        $linha = $dados->fetch();
+                        echo "<div><h5>" . $linha['nome'] . " " . $linha['sobrenome'] . "</h5>";
+                        echo "<h6>Contato</h6>";
+                        echo "Email: " . $linha['email'] . "<br>";
+                        echo "Celular: " . $linha['celular'] . "<br>";
+                        echo "Cidade: " . $linha['cidade'] . "-" . $linha['estado'] . "</div>";
+                    } else {
+                        echo "Nenhum dado encontrado!";
+                    }
                     ?>
                 </div>
             </div>
             <div class="col-md-4 shadow rounded d-inline-flex div_perfil">
-                
+
             </div>
         </div>
 
@@ -227,37 +165,37 @@
                 <h3>Dados Pessoais</h3>
                 <div class="texto_dados mt-4 d-flex justify-content-start">
                     <?php
-                        if ($dados2->rowCount() > 0) {
-                            $linha = $dados2->fetch();
-                            echo "Data de Nascimento: ".$linha['data']."<br>";
-                            echo "Nacionalidade: ".$linha['pais']."<br>";
-                            echo "CPF: ".$linha['cpf']."<br>";
-                            echo "Raça/Etnia: ".$linha['raca']."<br>";
-                            echo "Estado Civil: ".$linha['estado_civil']."<br>";
-                            echo "Renda Pessoal: ".$linha['renda_pessoal']."<br>";
-                            echo "Renda Familiar: ".$linha['renda_familiar']."<br>";
-                            echo "Estrangeiro: ".$linha['estrangeiro']."<br>";
-                            echo "CEP: ".$linha['cep']."<br>";
-                            echo "Rua: ".$linha['rua'];
-                            if ($linha['numero'] != ""){
-                                echo "-".$linha['numero'];
-                            }
-                            if ($linha['bairro'] != "") {
-                                echo "-".$linha['bairro']."<br>";
-                            }
-                            if ($linha['complemento'] != "") {
-                                echo "Complemento: ".$linha['complemento'];
-                            }
-                            echo "<br>Cidade: ".$linha['cidade']."-".$linha['estado'];
-                            if ($linha['possui_deficiencia'] == "Não"){
-                                echo "<br>Deficiência: Nenhuma";
-                            } else {
-                                echo "<br>Deficiência: ".$linha['deficiencia']."<br>";
-                                echo "Suporte: ".$linha['suporte'];
-                            }
-                        } else {
-                            echo "Nenhum dado encontrado!";
+                    if ($dados2->rowCount() > 0) {
+                        $linha = $dados2->fetch();
+                        echo "Data de Nascimento: " . $linha['data'] . "<br>";
+                        echo "Nacionalidade: " . $linha['pais'] . "<br>";
+                        echo "CPF: " . $linha['cpf'] . "<br>";
+                        echo "Raça/Etnia: " . $linha['raca'] . "<br>";
+                        echo "Estado Civil: " . $linha['estado_civil'] . "<br>";
+                        echo "Renda Pessoal: " . $linha['renda_pessoal'] . "<br>";
+                        echo "Renda Familiar: " . $linha['renda_familiar'] . "<br>";
+                        echo "Estrangeiro: " . $linha['estrangeiro'] . "<br>";
+                        echo "CEP: " . $linha['cep'] . "<br>";
+                        echo "Rua: " . $linha['rua'];
+                        if ($linha['numero'] != "") {
+                            echo "-" . $linha['numero'];
                         }
+                        if ($linha['bairro'] != "") {
+                            echo "-" . $linha['bairro'] . "<br>";
+                        }
+                        if ($linha['complemento'] != "") {
+                            echo "Complemento: " . $linha['complemento'];
+                        }
+                        echo "<br>Cidade: " . $linha['cidade'] . "-" . $linha['estado'];
+                        if ($linha['possui_deficiencia'] == "Não") {
+                            echo "<br>Deficiência: Nenhuma";
+                        } else {
+                            echo "<br>Deficiência: " . $linha['deficiencia'] . "<br>";
+                            echo "Suporte: " . $linha['suporte'];
+                        }
+                    } else {
+                        echo "Nenhum dado encontrado!";
+                    }
                     ?>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -274,12 +212,12 @@
                 <h3>Objetivo</h3>
                 <div class="texto_dados mt-4">
                     <?php
-                        if ($objetivo->rowCount() > 0) {
-                            while ($linha = $objetivo->fetch()) {
-                                echo "<div class='mb-4'>";
-                                echo "Cargo de Interesse: ".$linha['cargo_de_interesse']."<br>";
-                                echo "Pretenção Salarial: ".$linha['pretencao_salarial']."<br>";
-                                echo "
+                    if ($objetivo->rowCount() > 0) {
+                        while ($linha = $objetivo->fetch()) {
+                            echo "<div class='mb-4'>";
+                            echo "Cargo de Interesse: " . $linha['cargo_de_interesse'] . "<br>";
+                            echo "Pretenção Salarial: " . $linha['pretencao_salarial'] . "<br>";
+                            echo "
                                 <div class='btn-group mt-3'>
                                     <button type='button' class='btn btn-primary'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
@@ -292,10 +230,10 @@
                                 </div>
                                 </div>
                                 ";
-                            }
-                        } else {
-                            echo "Nenhum dado encontrado!";
                         }
+                    } else {
+                        echo "Nenhum dado encontrado!";
+                    }
                     ?>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -317,6 +255,7 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <form action="../curriculo/cadastro_objetivo.php" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="redirect" value="../perfil_usuario/perfil_usuario.php">
                                 <!-- Cargo de Interesse, Pretenção Salarial -->
                                 <div class="row">
                                     <div class="form-group col-md-6">
@@ -340,13 +279,13 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
-                            
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                        </div>
+
                         </form>
                     </div>
                 </div>
@@ -358,22 +297,22 @@
                 <h3>Exp. Profissional</h3>
                 <div class="texto_dados mt-4">
                     <?php
-                        if ($exp_profissional->rowCount() > 0) {
-                            while ($linha = $exp_profissional->fetch()) {
-                                echo "<div class='mb-4' >";
-                                echo "Empresa: ".$linha['empresa']."<br>";
-                                echo "Responsabilidades: ".$linha['responsabilidades']."<br>";
-                                echo "Cargo: ".$linha['cargo']."<br>";
-                                echo "Nível: ".$linha['nivel']."<br>";
-                                echo "Área: ".$linha['area'];
-                                if ($linha['atual'] == "1"){
-                                    echo "<br>Emprego atual: Sim"."<br>";
-                                } else {
-                                    echo "<br>De: ".$linha['inicio_emprego']."<br>";
-                                    echo "Até: ".$linha['fim_emprego']."<br>";
-                                    echo "Emprego atual: Não"."<br>";
-                                }
-                                echo "
+                    if ($exp_profissional->rowCount() > 0) {
+                        while ($linha = $exp_profissional->fetch()) {
+                            echo "<div class='mb-4' >";
+                            echo "Empresa: " . $linha['empresa'] . "<br>";
+                            echo "Responsabilidades: " . $linha['responsabilidades'] . "<br>";
+                            echo "Cargo: " . $linha['cargo'] . "<br>";
+                            echo "Nível: " . $linha['nivel'] . "<br>";
+                            echo "Área: " . $linha['area'];
+                            if ($linha['atual'] == "1") {
+                                echo "<br>Emprego atual: Sim" . "<br>";
+                            } else {
+                                echo "<br>De: " . $linha['inicio_emprego'] . "<br>";
+                                echo "Até: " . $linha['fim_emprego'] . "<br>";
+                                echo "Emprego atual: Não" . "<br>";
+                            }
+                            echo "
                                 <div class='btn-group mt-3'>
                                     <button type='button' class='btn btn-primary'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
@@ -386,10 +325,10 @@
                                 </div>
                                 </div>
                                 ";
-                            }
-                        } else {
-                            echo "Nenhum dado encontrado!";
                         }
+                    } else {
+                        echo "Nenhum dado encontrado!";
+                    }
                     ?>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -411,6 +350,7 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <form action="../curriculo/cadastro_exp_profissional.php" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="redirect" value="../perfil_usuario/perfil_usuario.php">
                                 <!-- Empresa -->
                                 <div class="row mt-3">
                                     <div class="form-group col-md-12">
@@ -492,7 +432,7 @@
                                         <input type="date" class="form-control" placeholder="Inicio Emprego" name="InicioEmprego" required>
                                     </div>
                                     <div class="form-group col-md-4" id="fieldsetlabel">
-                                        <label for="FimEmprego" class="form-label" >* Até:</label>
+                                        <label for="FimEmprego" class="form-label">* Até:</label>
                                         <input type="date" class="form-control" placeholder="Fim Emprego" name="FimEmprego" id="fieldset2" required>
                                     </div>
                                     <div class="form-group col-md-4">
@@ -500,43 +440,43 @@
                                         <input type="checkbox" class="form-check-input" placeholder="Atual" name="Atual" onclick="habilitar2(this)">
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                            </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                        </div>
                         </form>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
 
-        <div class="row justify-content-center mt-5"> 
+        <div class="row justify-content-center mt-5">
             <div class="col-md-11 shadow p-4">
                 <h3>Formação</h3>
                 <div class="texto_dados mt-4">
                     <?php
-                        if ($formacao->rowCount() > 0) {
-                            while ($linha = $formacao->fetch()) {
-                                echo "<div class='mb-4' >";
-                                echo "País: ".$linha['pais']."<br>";
-                                echo "Estado: ".$linha['estado']."<br>";
-                                echo "Nível: ".$linha['nivel']."<br>";
-                                echo "Instituição: ".$linha['instituicao']."<br>";
-                                if (($linha['nivel'] != "Ensino Fundamental") and ($linha['nivel'] != "Ensino Médio")){
-                                    echo "Curso: ".$linha['curso']."<br>";
-                                }
-                                echo "Status: ".$linha['status']."<br>";
-                                if (($linha['nivel'] != "Ensino Fundamental") and ($linha['nivel'] != "Ensino Médio")){
-                                    echo "Campus: ".$linha['campus']."<br>";
-                                }
-                                echo "Início: ".$linha['inicio']."<br>";
-                                echo "Previsão/Data de Conclusão: ".$linha['conclusao']."<br>";
-                                if ($linha['status'] == "Cursando"){
-                                    echo "Turno: ".$linha['turno']."<br>";
-                                }
-                                echo "
+                    if ($formacao->rowCount() > 0) {
+                        while ($linha = $formacao->fetch()) {
+                            echo "<div class='mb-4' >";
+                            echo "País: " . $linha['pais'] . "<br>";
+                            echo "Estado: " . $linha['estado'] . "<br>";
+                            echo "Nível: " . $linha['nivel'] . "<br>";
+                            echo "Instituição: " . $linha['instituicao'] . "<br>";
+                            if (($linha['nivel'] != "Ensino Fundamental") and ($linha['nivel'] != "Ensino Médio")) {
+                                echo "Curso: " . $linha['curso'] . "<br>";
+                            }
+                            echo "Status: " . $linha['status'] . "<br>";
+                            if (($linha['nivel'] != "Ensino Fundamental") and ($linha['nivel'] != "Ensino Médio")) {
+                                echo "Campus: " . $linha['campus'] . "<br>";
+                            }
+                            echo "Início: " . $linha['inicio'] . "<br>";
+                            echo "Previsão/Data de Conclusão: " . $linha['conclusao'] . "<br>";
+                            if ($linha['status'] == "Cursando") {
+                                echo "Turno: " . $linha['turno'] . "<br>";
+                            }
+                            echo "
                                 <div class='btn-group mt-3'>
                                     <button type='button' class='btn btn-primary'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
@@ -549,10 +489,10 @@
                                 </div>
                                 </div>
                                 ";
-                            }    
-                        } else {
-                            echo "Nenhum dado encontrado!";
                         }
+                    } else {
+                        echo "Nenhum dado encontrado!";
+                    }
                     ?>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -564,148 +504,149 @@
             </div>
             <!-- The Modal -->
             <div class="modal fade" id="modalFormacao">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Formação</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form action="../curriculo/cadastro_formacao.php" method="post" enctype="multipart/form-data">
-                                    <!-- Cargo de País, Estado -->
-                                    <div class="row mt-3">
-                                        <div class="form-group col-md-6">
-                                            <label for="Pais" class="form-label">* País:</label>
-                                            <input type="text" class="form-control" placeholder="País" name="Pais" required>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="Estado" class="form-label">* Estado:</label>
-                                            <select name="Estado" id="Estado" class="form-select" required>
-                                                <option value="" disabled selected>Selecione</option>
-                                                <option value="Acre">Acre</option>
-                                                <option value="Alagoas">Alagoas</option>
-                                                <option value="Amapá">Amapá</option>
-                                                <option value="Amazonas">Amazonas</option>
-                                                <option value="Bahia">Bahia</option>
-                                                <option value="Ceará">Ceará</option>
-                                                <option value="Distrito Federal">Distrito Federal</option>
-                                                <option value="Espírito Santo">Espírito Santo</option>
-                                                <option value="Goiás">Goiás</option>
-                                                <option value="Maranhão">Maranhão</option>
-                                                <option value="Mato Grosso">Mato Grosso</option>
-                                                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-                                                <option value="Minas Gerais">Minas Gerais</option>
-                                                <option value="Pará">Pará</option>
-                                                <option value="Paraíba">Paraíba</option>
-                                                <option value="Paraná">Paraná</option>
-                                                <option value="Pernambuco">Pernambuco</option>
-                                                <option value="Piauí">Piauí</option>
-                                                <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-                                                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-                                                <option value="Rondônia">Rondônia</option>
-                                                <option value="Rondônia">Rondônia</option>
-                                                <option value="Santa Catarina">Santa Catarina</option>
-                                                <option value="São Paulo">São Paulo </option>
-                                                <option value="Sergipe">Sergipe</option>
-                                                <option value="Tocantins">Tocantins</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- Nível, Instituição e Curso -->
-                                    <div class="row mt-3">
-                                        <div class="form-group col-md-4" id="nivel">
-                                            <label for="Nivel" class="form-label">* Nível:</label>
-                                            <select name="Nivel" id="Nivel" class="form-select" required onchange="habilitar3(this)">
-                                                <option value="" disabled selected>Selecione</option>
-                                                <option value="Ensino Fundamental">Ensino Fundamental</option>
-                                                <option value="Ensino Médio">Ensino Médio</option>
-                                                <option value="Técnico">Técnico</option>
-                                                <option value="Graduação">Graduação</option>
-                                                <option value="Especialização">Especialização</option>
-                                                <option value="Especialização">Mestrado</option>
-                                                <option value="Doutorado">Doutorado</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-4" id="instituicao">
-                                            <label for="Instituicao" class="form-label">* Instituição:</label>
-                                            <input type="text" class="form-control" placeholder="Instituição" name="Instituicao" required>
-                                        </div>
-                                        <div class="form-group col-md-4" id="Cursolabel">
-                                            <label for="Curso" class="form-label">* Curso:</label>
-                                            <input type="text" class="form-control" placeholder="Curso" name="Curso" id="Curso" required>
-                                        </div>
-                                    </div>
-                                    <!-- Status, Campus -->
-                                    <div class="row mt-3">
-                                        <div class="form-group col-md-6" id="status">
-                                            <label for="Status" class="form-label">* Status:</label>
-                                            <select name="Status" id="Status" class="form-select" required  onchange="habilitar4(this)">
-                                                <option value="" disabled selected>Selecione</option>
-                                                <option value="Cursando">Cursando</option>
-                                                <option value="Trancado">Trancado</option>
-                                                <option value="Concluído">Concluído</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6" id="Campuslabel">
-                                            <label for="Campus" class="form-label">Campus:</label>
-                                            <input type="text" class="form-control" placeholder="Campus" name="Campus"id="Campus">
-                                        </div>
-                                    </div>
-                                    <!-- Inicio Formação, Fim Formação, Turno -->
-                                    <div class="row mt-3">
-                                        <div class="form-group col-md-4" id="inicio">
-                                            <label for="InicioFormacao" class="form-label">* Início:</label>
-                                            <input type="date" class="form-control" placeholder="Inicio Formação" name="InicioFormacao" required>
-                                        </div>
-                                        <div class="form-group col-md-4" id="fim">
-                                            <label for="FimFormacao" class="form-label">* Previsão/Data de Conclusão:</label>
-                                            <input type="date" class="form-control" placeholder="Fim Formação" name="FimFormacao" required>
-                                        </div>
-                                        <div class="form-group col-md-4" id="Turnolabel">
-                                            <label for="Turno" class="form-label">Turno:</label>
-                                            <select name="Turno" class="form-select" id="Turno">
-                                                <option value="" disabled selected>Selecione</option>
-                                                <option value="Matutino">Matutino</option>
-                                                <option value="Vespertino">Vespertino</option>
-                                                <option value="Noturno">Noturno</option>
-                                                <option value="Integral">Integral</option>
-                                                <option value="EAD">EAD</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
-                                </form>
-                                
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Formação</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form action="../curriculo/cadastro_formacao.php" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="redirect" value="../perfil_usuario/perfil_usuario.php">
+                                <!-- Cargo de País, Estado -->
+                                <div class="row mt-3">
+                                    <div class="form-group col-md-6">
+                                        <label for="Pais" class="form-label">* País:</label>
+                                        <input type="text" class="form-control" placeholder="País" name="Pais" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Estado" class="form-label">* Estado:</label>
+                                        <select name="Estado" id="Estado" class="form-select" required>
+                                            <option value="" disabled selected>Selecione</option>
+                                            <option value="Acre">Acre</option>
+                                            <option value="Alagoas">Alagoas</option>
+                                            <option value="Amapá">Amapá</option>
+                                            <option value="Amazonas">Amazonas</option>
+                                            <option value="Bahia">Bahia</option>
+                                            <option value="Ceará">Ceará</option>
+                                            <option value="Distrito Federal">Distrito Federal</option>
+                                            <option value="Espírito Santo">Espírito Santo</option>
+                                            <option value="Goiás">Goiás</option>
+                                            <option value="Maranhão">Maranhão</option>
+                                            <option value="Mato Grosso">Mato Grosso</option>
+                                            <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                            <option value="Minas Gerais">Minas Gerais</option>
+                                            <option value="Pará">Pará</option>
+                                            <option value="Paraíba">Paraíba</option>
+                                            <option value="Paraná">Paraná</option>
+                                            <option value="Pernambuco">Pernambuco</option>
+                                            <option value="Piauí">Piauí</option>
+                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                            <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                            <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                            <option value="Rondônia">Rondônia</option>
+                                            <option value="Rondônia">Rondônia</option>
+                                            <option value="Santa Catarina">Santa Catarina</option>
+                                            <option value="São Paulo">São Paulo </option>
+                                            <option value="Sergipe">Sergipe</option>
+                                            <option value="Tocantins">Tocantins</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Nível, Instituição e Curso -->
+                                <div class="row mt-3">
+                                    <div class="form-group col-md-4" id="nivel">
+                                        <label for="Nivel" class="form-label">* Nível:</label>
+                                        <select name="Nivel" id="Nivel" class="form-select" required onchange="habilitar3(this)">
+                                            <option value="" disabled selected>Selecione</option>
+                                            <option value="Ensino Fundamental">Ensino Fundamental</option>
+                                            <option value="Ensino Médio">Ensino Médio</option>
+                                            <option value="Técnico">Técnico</option>
+                                            <option value="Graduação">Graduação</option>
+                                            <option value="Especialização">Especialização</option>
+                                            <option value="Especialização">Mestrado</option>
+                                            <option value="Doutorado">Doutorado</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4" id="instituicao">
+                                        <label for="Instituicao" class="form-label">* Instituição:</label>
+                                        <input type="text" class="form-control" placeholder="Instituição" name="Instituicao" required>
+                                    </div>
+                                    <div class="form-group col-md-4" id="Cursolabel">
+                                        <label for="Curso" class="form-label">* Curso:</label>
+                                        <input type="text" class="form-control" placeholder="Curso" name="Curso" id="Curso" required>
+                                    </div>
+                                </div>
+                                <!-- Status, Campus -->
+                                <div class="row mt-3">
+                                    <div class="form-group col-md-6" id="status">
+                                        <label for="Status" class="form-label">* Status:</label>
+                                        <select name="Status" id="Status" class="form-select" required onchange="habilitar4(this)">
+                                            <option value="" disabled selected>Selecione</option>
+                                            <option value="Cursando">Cursando</option>
+                                            <option value="Trancado">Trancado</option>
+                                            <option value="Concluído">Concluído</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6" id="Campuslabel">
+                                        <label for="Campus" class="form-label">Campus:</label>
+                                        <input type="text" class="form-control" placeholder="Campus" name="Campus" id="Campus">
+                                    </div>
+                                </div>
+                                <!-- Inicio Formação, Fim Formação, Turno -->
+                                <div class="row mt-3">
+                                    <div class="form-group col-md-4" id="inicio">
+                                        <label for="InicioFormacao" class="form-label">* Início:</label>
+                                        <input type="date" class="form-control" placeholder="Inicio Formação" name="InicioFormacao" required>
+                                    </div>
+                                    <div class="form-group col-md-4" id="fim">
+                                        <label for="FimFormacao" class="form-label">* Previsão/Data de Conclusão:</label>
+                                        <input type="date" class="form-control" placeholder="Fim Formação" name="FimFormacao" required>
+                                    </div>
+                                    <div class="form-group col-md-4" id="Turnolabel">
+                                        <label for="Turno" class="form-label">Turno:</label>
+                                        <select name="Turno" class="form-select" id="Turno">
+                                            <option value="" disabled selected>Selecione</option>
+                                            <option value="Matutino">Matutino</option>
+                                            <option value="Vespertino">Vespertino</option>
+                                            <option value="Noturno">Noturno</option>
+                                            <option value="Integral">Integral</option>
+                                            <option value="EAD">EAD</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                        </div>
+                        </form>
+
                     </div>
                 </div>
+            </div>
         </div>
 
         <div class="row justify-content-center mt-5">
             <div class="col-md-11 shadow p-4">
-                <h3>Especializações</h3>
+                <h3>Especialização</h3>
                 <div class="texto_dados mt-4">
                     <?php
-                        if ($especializacoes->rowCount() > 0) {
-                            while ($linha = $especializacoes->fetch()) {
-                                echo "<div class='mb-4' >";
-                                echo "País: ".$linha['pais']."<br>";
-                                echo "Categoria: ".$linha['categoria']."<br>";
-                                echo "Organização: ".$linha['organizacao']."<br>";
-                                echo "Início: ".$linha['inicio']."<br>";
-                                echo "Previsão/Data de Conclusão: ".$linha['final']."<br>";
-                                echo "Responsabilidades: ".$linha['responsabilidades']."<br>";
-                                echo "
+                    if ($especializacoes->rowCount() > 0) {
+                        while ($linha = $especializacoes->fetch()) {
+                            echo "<div class='mb-4' >";
+                            echo "País: " . $linha['pais'] . "<br>";
+                            echo "Categoria: " . $linha['categoria'] . "<br>";
+                            echo "Organização: " . $linha['organizacao'] . "<br>";
+                            echo "Início: " . $linha['inicio'] . "<br>";
+                            echo "Previsão/Data de Conclusão: " . $linha['final'] . "<br>";
+                            echo "Responsabilidades: " . $linha['responsabilidades'] . "<br>";
+                            echo "
                                 <div class='btn-group mt-3'>
                                     <button type='button' class='btn btn-primary'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
@@ -718,16 +659,16 @@
                                 </div>
                                 </div>
                                 ";
-                            }
-                        } else {
-                            echo "Nenhum dado encontrado!";
                         }
+                    } else {
+                        echo "Nenhum dado encontrado!";
+                    }
                     ?>
                 </div>
                 <div class="d-flex justify-content-end">
                     <button class="btn_editar" data-bs-toggle="modal" data-bs-target="#modalEspecializacoes">
                         <i class="bi bi-plus-lg"></i>
-                        Adicionar Especializações
+                        Adicionar Especialização
                     </button>
                 </div>
                 <!-- The Modal -->
@@ -737,13 +678,14 @@
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">Especializações</h4>
+                                <h4 class="modal-title">Especialização</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
 
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <form action="../curriculo/cadastro_especializacoes.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="redirect" value="../perfil_usuario/perfil_usuario.php">
                                     <!-- País, Categoria, Organização -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-4">
@@ -787,12 +729,12 @@
                                             <textarea class="form-control" rows="5" id="ResponsabilidadesExperiencia" name="ResponsabilidadesExperiencia" maxlength="255" required></textarea>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
                             </form>
 
                         </div>
@@ -806,12 +748,12 @@
                 <h3>Idioma</h3>
                 <div class="texto_dados mt-4">
                     <?php
-                        if ($idioma->rowCount() > 0) {
-                            while ($linha = $idioma->fetch()) {
-                                echo "<div class='mb-4' >";
-                                echo "Idioma: ".$linha['idioma']."<br>";
-                                echo "Proficiência: ".$linha['proficiencia']."<br>";
-                                echo "
+                    if ($idioma->rowCount() > 0) {
+                        while ($linha = $idioma->fetch()) {
+                            echo "<div class='mb-4' >";
+                            echo "Idioma: " . $linha['idioma'] . "<br>";
+                            echo "Proficiência: " . $linha['proficiencia'] . "<br>";
+                            echo "
                                 <div class='btn-group mt-3'>
                                     <button type='button' class='btn btn-primary'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
@@ -824,10 +766,10 @@
                                 </div>
                                 </div>
                                 ";
-                            }
-                        } else {
-                            echo "Nenhum dado encontrado!";
                         }
+                    } else {
+                        echo "Nenhum dado encontrado!";
+                    }
                     ?>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -850,6 +792,7 @@
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <form action="../curriculo/cadastro_idioma.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="redirect" value="../perfil_usuario/perfil_usuario.php">
                                     <!-- Idioma, Proeficiênia -->
                                     <div class="row">
                                         <div class="form-group col-md-6">
@@ -889,12 +832,12 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
                             </form>
 
                         </div>
@@ -915,44 +858,9 @@
     </footer>
 
 </body>
+
 </html>
 
 <script src="../../js/btnPerfil.js"></script>
 <script src="../../js/desabilitar_input.js"></script>
-
-<script>
-    function deletarIdioma(id) {
-        const confirmAction = confirm("Você tem certeza que deseja excluir este idioma?");
-        if (confirmAction) {
-            window.location.href = 'apagar_idioma.php?id=' + id;
-        }
-    }
-
-    function deletarEspecializacoes(id) {
-        const confirmAction = confirm("Você tem certeza que deseja excluir esta especialização?");
-        if (confirmAction) {
-            window.location.href = 'apagar_especializacoes.php?id=' + id;
-        }
-    }
-
-    function deletarFormacao(id) {
-        const confirmAction = confirm("Você tem certeza que deseja excluir esta formação?");
-        if (confirmAction) {
-            window.location.href = 'apagar_formacao.php?id=' + id;
-        }
-    }
-
-    function deletarExpProfissional(id) {
-        const confirmAction = confirm("Você tem certeza que deseja excluir esta exp.profissional?");
-        if (confirmAction) {
-            window.location.href = 'apagar_exp_profissional.php?id=' + id;
-        }
-    }
-
-    function deletarObjetivo(id) {
-        const confirmAction = confirm("Você tem certeza que deseja excluir este objetivo?");
-        if (confirmAction) {
-            window.location.href = 'apagar_objetivo.php?id=' + id;
-        }
-    }
-</script>
+<script src="../../js/delete_perfil_usuario.js"></script>

@@ -5,7 +5,7 @@ function habilitar(habilitar) {
     document.getElementById("deficiencialabel").hidden = !habilitar;
 }
 
- function configurarModal() {
+function configurarModal() {
     const possuiDeficienciaSim = document.querySelector('input[name="PossuiDeficiencia"][value="Sim"]').checked;
     habilitar(possuiDeficienciaSim);
 }
@@ -27,7 +27,7 @@ function habilitar3(select) {
     document.getElementById("Cursolabel").hidden = select.value === "Ensino Fundamental" || select.value === "Ensino Médio";
     document.getElementById("Campuslabel").hidden = select.value === "Ensino Fundamental" || select.value === "Ensino Médio";
 
-    isFundamentalOrMedio =  select.value === "Ensino Fundamental" || select.value === "Ensino Médio";
+    isFundamentalOrMedio = select.value === "Ensino Fundamental" || select.value === "Ensino Médio";
 
     if (isFundamentalOrMedio) {
         nivel.classList.remove('col-md-4');
@@ -52,7 +52,7 @@ function habilitar4(select) {
     document.getElementById("Turnolabel").hidden = select.value === "Trancado" || select.value === "Concluído";
     document.getElementById("Campuslabel").hidden = select.value === "Trancado" || select.value === "Concluído";
 
-    isTrancadoOrConcluido =  select.value === "Trancado" || select.value === "Concluído";
+    isTrancadoOrConcluido = select.value === "Trancado" || select.value === "Concluído";
 
     if (isTrancadoOrConcluido) {
         document.getElementById("status").classList.remove('col-md-6');

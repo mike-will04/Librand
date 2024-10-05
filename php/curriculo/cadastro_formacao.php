@@ -14,11 +14,12 @@ $InicioFormacao = $_POST["InicioFormacao"];
 $FimFormacao = $_POST["FimFormacao"];
 $Turno = isset($_POST["Turno"]) ? $_POST["Turno"] : null;
 $id_usuario = $_SESSION['iduser'];
+$redirectPage = $_POST['redirect'];
 
 $check = $conn->prepare(
     'SELECT count(*) as count FROM formacao WHERE id_usuario = :id_usuario'
 );
-$check -> execute(array(
+$check->execute(array(
     ':id_usuario' => $id_usuario,
 ));
 
@@ -40,11 +41,14 @@ foreach ($check as $linha) {
             ':id_usuario' => $id_usuario
         ));
         if ($cadastro->rowCount() == 1) {
-            echo "<script>alert('Cadastro realizado com sucesso!!!');history.go(-1)</script>";
+            $_SESSION['message'] = 'Formação adicionada com sucesso!';
         } else {
-            echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
-        }     
+            echo "<script>alert('Erro ao adicionar formação.');history.go(-1)</script>";
+        }
     } catch (PDOException $e) {
         echo 'ERROR: ' . $e->getMessage();
     }
 }
+
+header("Location: $redirectPage");
+exit();

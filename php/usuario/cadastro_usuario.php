@@ -10,19 +10,18 @@ $receber_email = isset($_POST["receber_email"]) ? 1 : 0;
 $check = $conn->prepare(
     'SELECT count(*) as count FROM usuario WHERE usuario = :usuario or email = :email'
 );
-$check -> execute(array(
+$check->execute(array(
     ':usuario' => $usuario,
     ':email' => $email
 ));
 
-$senhahash = password_hash($senha,PASSWORD_DEFAULT);
+$senhahash = password_hash($senha, PASSWORD_DEFAULT);
 
 foreach ($check as $linha) {
     try {
         if ($linha['count'] >= 1) {
-            echo "<script>alert('Nome de usuário ou email já cadastrado');history.go(-1)</script>";                
-        }
-        else {
+            echo "<script>alert('Nome de usuário ou email já cadastrado');history.go(-1)</script>";
+        } else {
             $cadastro = $conn->prepare('INSERT INTO usuario (usuario, senha, email, termos, receber_email) VALUES 
             (:usuario, :senha, :email, :termos, :receber_email)');
 
@@ -38,7 +37,7 @@ foreach ($check as $linha) {
                 echo "<script>alert('Cadastro realizado com sucesso!!!');location = '../curriculo/cadastro_curriculo.php'</script>";
             } else {
                 echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
-            }     
+            }
         }
     } catch (PDOException $e) {
         echo 'ERROR: ' . $e->getMessage();

@@ -16,6 +16,10 @@ if (isset($_SESSION['iduser'])) {
 } else {
     $_SESSION['logado'] = false;
 }
+if (isset($_SESSION['message'])) {
+    echo "<script>alert('{$_SESSION['message']}');</script>";
+    unset($_SESSION['message']);
+}
 ?>
 
 <head>
@@ -26,75 +30,7 @@ if (isset($_SESSION['iduser'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
-    <style>
-        .div_curriculo {
-            height: 125px;
-            margin: 0 2% 0 2%;
-            ;
-        }
-
-        /* .titulo_curriculo{
-            font-weight: bold;
-        } */
-
-        .btn_curriculo {
-            border: none;
-            color: white;
-            background-color: #2259BC;
-            padding: 5px 30px;
-            height: 35px;
-            width: 275px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            transition-duration: 0.4s;
-        }
-
-        .btn_curriculo:hover {
-            background-color: #132d5f;
-            color: white;
-        }
-
-        .btn_curriculo_salvar {
-            border: none;
-            color: white;
-            background-color: #2259BC;
-            padding: 5px 30px;
-            height: 35px;
-            width: 150px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            transition-duration: 0.4s;
-        }
-
-        .btn_curriculo_salvar:hover {
-            background-color: #132d5f;
-            color: white;
-        }
-
-        @media only screen and (min-width: 320px) and (max-width: 767px) {
-            .div_curriculo {
-                text-align: center;
-                display: flex;
-                flex-wrap: wrap;
-                align-content: center;
-            }
-        }
-
-        @media only screen and (min-width: 768px) and (max-width: 1024px) {
-            .div_curriculo {
-                text-align: center;
-                display: flex;
-                flex-wrap: wrap;
-                align-content: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/cadastro_curriculo.css">
 </head>
 
 <body>
@@ -136,6 +72,7 @@ if (isset($_SESSION['iduser'])) {
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <form action="cadastro_dados_pessoais.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="redirect" value="cadastro_curriculo.php">
                                     <!-- Nome, Sobrenome, Nome Social, Email -->
                                     <div class="row">
                                         <div class="form-group col-md-4">
@@ -315,37 +252,37 @@ if (isset($_SESSION['iduser'])) {
                                     <!-- Estado, Cidade -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6">
-                                                <label for="Estado" class="form-label">* Estado:</label>
-                                                <select name="Estado" id="Estado" class="form-select" required>
-                                                    <option value="" disabled selected>Selecione</option>
-                                                    <option value="Acre">Acre</option>
-                                                    <option value="Alagoas">Alagoas</option>
-                                                    <option value="Amapá">Amapá</option>
-                                                    <option value="Amazonas">Amazonas</option>
-                                                    <option value="Bahia">Bahia</option>
-                                                    <option value="Ceará">Ceará</option>
-                                                    <option value="Distrito Federal">Distrito Federal</option>
-                                                    <option value="Espírito Santo">Espírito Santo</option>
-                                                    <option value="Goiás">Goiás</option>
-                                                    <option value="Maranhão">Maranhão</option>
-                                                    <option value="Mato Grosso">Mato Grosso</option>
-                                                    <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-                                                    <option value="Minas Gerais">Minas Gerais</option>
-                                                    <option value="Pará">Pará</option>
-                                                    <option value="Paraíba">Paraíba</option>
-                                                    <option value="Paraná">Paraná</option>
-                                                    <option value="Pernambuco">Pernambuco</option>
-                                                    <option value="Piauí">Piauí</option>
-                                                    <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                                    <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-                                                    <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-                                                    <option value="Rondônia">Rondônia</option>
-                                                    <option value="Rondônia">Rondônia</option>
-                                                    <option value="Santa Catarina">Santa Catarina</option>
-                                                    <option value="São Paulo">São Paulo </option>
-                                                    <option value="Sergipe">Sergipe</option>
-                                                    <option value="Tocantins">Tocantins</option>
-                                                </select>
+                                            <label for="Estado" class="form-label">* Estado:</label>
+                                            <select name="Estado" id="Estado" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <option value="Acre">Acre</option>
+                                                <option value="Alagoas">Alagoas</option>
+                                                <option value="Amapá">Amapá</option>
+                                                <option value="Amazonas">Amazonas</option>
+                                                <option value="Bahia">Bahia</option>
+                                                <option value="Ceará">Ceará</option>
+                                                <option value="Distrito Federal">Distrito Federal</option>
+                                                <option value="Espírito Santo">Espírito Santo</option>
+                                                <option value="Goiás">Goiás</option>
+                                                <option value="Maranhão">Maranhão</option>
+                                                <option value="Mato Grosso">Mato Grosso</option>
+                                                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                                <option value="Minas Gerais">Minas Gerais</option>
+                                                <option value="Pará">Pará</option>
+                                                <option value="Paraíba">Paraíba</option>
+                                                <option value="Paraná">Paraná</option>
+                                                <option value="Pernambuco">Pernambuco</option>
+                                                <option value="Piauí">Piauí</option>
+                                                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                                <option value="Rondônia">Rondônia</option>
+                                                <option value="Rondônia">Rondônia</option>
+                                                <option value="Santa Catarina">Santa Catarina</option>
+                                                <option value="São Paulo">São Paulo </option>
+                                                <option value="Sergipe">Sergipe</option>
+                                                <option value="Tocantins">Tocantins</option>
+                                            </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="Cidade" class="form-label">* Cidade:</label>
@@ -366,12 +303,12 @@ if (isset($_SESSION['iduser'])) {
                                             <input type="text" class="form-control" placeholder="Video" name="Video">
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -397,7 +334,8 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="cadastro_objetivo.php" method="post" enctype="multipart/form-data">
+                                <form action="cadastro_objetivo.php" method="post" enctype="multipart/form-data">]
+                                    <input type="hidden" name="redirect" value="cadastro_curriculo.php">
                                     <!-- Cargo de Interesse, Pretenção Salarial -->
                                     <div class="row">
                                         <div class="form-group col-md-6">
@@ -421,13 +359,13 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
-                                
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
+
                             </form>
                         </div>
                     </div>
@@ -457,6 +395,7 @@ if (isset($_SESSION['iduser'])) {
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <form action="cadastro_exp_profissional.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="redirect" value="cadastro_curriculo.php">
                                     <!-- Empresa -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-12">
@@ -538,7 +477,7 @@ if (isset($_SESSION['iduser'])) {
                                             <input type="date" class="form-control" placeholder="Inicio Emprego" name="InicioEmprego" required>
                                         </div>
                                         <div class="form-group col-md-4" id="fieldsetlabel">
-                                            <label for="FimEmprego" class="form-label" >* Até:</label>
+                                            <label for="FimEmprego" class="form-label">* Até:</label>
                                             <input type="date" class="form-control" placeholder="Fim Emprego" name="FimEmprego" id="fieldset2" required>
                                         </div>
                                         <div class="form-group col-md-4">
@@ -546,13 +485,13 @@ if (isset($_SESSION['iduser'])) {
                                             <input type="checkbox" class="form-check-input" placeholder="Atual" name="Atual" onclick="habilitar2(this)">
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
-                                </form>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
+                            </form>
 
                         </div>
                     </div>
@@ -579,6 +518,7 @@ if (isset($_SESSION['iduser'])) {
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <form action="cadastro_formacao.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="redirect" value="cadastro_curriculo.php">
                                     <!-- Cargo de País, Estado -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6">
@@ -647,7 +587,7 @@ if (isset($_SESSION['iduser'])) {
                                     <div class="row mt-3">
                                         <div class="form-group col-md-6" id="status">
                                             <label for="Status" class="form-label">* Status:</label>
-                                            <select name="Status" id="Status" class="form-select" required  onchange="habilitar4(this)">
+                                            <select name="Status" id="Status" class="form-select" required onchange="habilitar4(this)">
                                                 <option value="" disabled selected>Selecione</option>
                                                 <option value="Cursando">Cursando</option>
                                                 <option value="Trancado">Trancado</option>
@@ -656,7 +596,7 @@ if (isset($_SESSION['iduser'])) {
                                         </div>
                                         <div class="form-group col-md-6" id="Campuslabel">
                                             <label for="Campus" class="form-label">Campus:</label>
-                                            <input type="text" class="form-control" placeholder="Campus" name="Campus"id="Campus">
+                                            <input type="text" class="form-control" placeholder="Campus" name="Campus" id="Campus">
                                         </div>
                                     </div>
                                     <!-- Inicio Formação, Fim Formação, Turno -->
@@ -681,14 +621,14 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
-                                </form>
-                                
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -698,10 +638,10 @@ if (isset($_SESSION['iduser'])) {
         <div class="row justify-content-center p-4">
             <div class="col-md-5 div_curriculo shadow rounded d-inline-flex align-items-center justify-content-center">
                 <h4 class="titulo_curriculo p-3">
-                    Especializações
+                    Especialização
                 </h4>
                 <button class="btn_curriculo" data-bs-toggle="modal" data-bs-target="#modalEspecializacoes">
-                    + Adicionar Especializações
+                    + Adicionar Especialização
                 </button>
                 <!-- The Modal -->
                 <div class="modal fade" id="modalEspecializacoes">
@@ -710,13 +650,14 @@ if (isset($_SESSION['iduser'])) {
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">Especializações</h4>
+                                <h4 class="modal-title">Especialização</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
 
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <form action="cadastro_especializacoes.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="redirect" value="cadastro_curriculo.php">
                                     <!-- País, Categoria, Organização -->
                                     <div class="row mt-3">
                                         <div class="form-group col-md-4">
@@ -760,12 +701,12 @@ if (isset($_SESSION['iduser'])) {
                                             <textarea class="form-control" rows="5" id="ResponsabilidadesExperiencia" name="ResponsabilidadesExperiencia" maxlength="255" required></textarea>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
                             </form>
 
                         </div>
@@ -793,6 +734,7 @@ if (isset($_SESSION['iduser'])) {
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <form action="cadastro_idioma.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="redirect" value="cadastro_curriculo.php">
                                     <!-- Idioma, Proeficiênia -->
                                     <div class="row">
                                         <div class="form-group col-md-6">
@@ -832,12 +774,12 @@ if (isset($_SESSION['iduser'])) {
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
-                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
                             </form>
 
                         </div>
@@ -848,9 +790,11 @@ if (isset($_SESSION['iduser'])) {
 
         <div class="row justify-content-center pb-4">
             <div class="col-12 d-inline-flex align-items-center justify-content-center">
-                <button class="btn_curriculo_salvar">
-                    Salvar
-                </button>
+                <a href="../../html/login_usuario.html">
+                    <button class="btn_curriculo_salvar">
+                        Salvar
+                    </button>
+                </a>
             </div>
         </div>
     </div>

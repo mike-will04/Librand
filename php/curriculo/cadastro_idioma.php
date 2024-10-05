@@ -6,11 +6,12 @@ session_start();
 $Idioma = isset($_POST["Idioma"]) ? $_POST["Idioma"] : null;
 $Proficiencia = isset($_POST["Proficiencia"]) ? $_POST["Proficiencia"] : null;
 $id_usuario = $_SESSION['iduser'];
+$redirectPage = $_POST['redirect'];
 
 $check = $conn->prepare(
     'SELECT count(*) as count FROM idioma WHERE id_usuario = :id_usuario'
 );
-$check -> execute(array(
+$check->execute(array(
     ':id_usuario' => $id_usuario,
 ));
 
@@ -24,11 +25,15 @@ foreach ($check as $linha) {
             ':id_usuario' => $id_usuario
         ));
         if ($cadastro->rowCount() == 1) {
-            echo "<script>alert('Cadastro realizado com sucesso!!!');history.go(-1);location.reload();</script>";
+            $_SESSION['message'] = 'Idioma adicionado com sucesso!';
         } else {
-            echo "<script>alert('Erro ao cadastrar');history.go(-1)</script>";
-        }     
+            $_SESSION['message'] = 'Erro ao adicionar idioma.';
+            echo "<script>alert('Erro ao adicionar idioma.');history.go(-1)</script>";
+        }
     } catch (PDOException $e) {
         echo 'ERROR: ' . $e->getMessage();
     }
 }
+
+header("Location: $redirectPage");
+exit();

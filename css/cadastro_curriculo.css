@@ -1,0 +1,49 @@
+.div_curriculo {
+    height: 125px;
+    margin: 0 2% 0 2%;
+}
+
+.btn_curriculo {
+    border: none;
+    color: white;
+    background-color: #2259BC;
+    padding: 5px 30px;
+    height: 35px;
+    width: 275px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    transition-duration: 0.4s;
+}
+
+.btn_curriculo:hover,
+.btn_curriculo_salvar:hover {
+    background-color: #132d5f;
+    color: white;
+}
+
+.btn_curriculo_salvar {
+    border: none;
+    color: white;
+    background-color: #2259BC;
+    padding: 5px 30px;
+    height: 35px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    transition-duration: 0.4s;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1024px) {
+    .div_curriculo {
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+    }
+}
