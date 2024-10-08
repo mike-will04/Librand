@@ -31,10 +31,31 @@ $dados2->execute(array(
     ':id_usuario' => $id
 ));
 
+$dados3 = $conn->prepare(
+    'SELECT * FROM dados_pessoais WHERE id_usuario = :id_usuario'
+);
+$dados3->execute(array(
+    ':id_usuario' => $id
+));
+
 $exp_profissional = $conn->prepare(
     'SELECT * FROM experiencia WHERE id_usuario = :id_usuario'
 );
 $exp_profissional->execute(array(
+    ':id_usuario' => $id
+));
+
+$exp_profissional = $conn->prepare(
+    'SELECT * FROM experiencia WHERE id_usuario = :id_usuario'
+);
+$exp_profissional->execute(array(
+    ':id_usuario' => $id
+));
+
+$exp_profissional2 = $conn->prepare(
+    'SELECT * FROM experiencia WHERE id_usuario = :id_usuario'
+);
+$exp_profissional2->execute(array(
     ':id_usuario' => $id
 ));
 
@@ -45,6 +66,13 @@ $formacao->execute(array(
     ':id_usuario' => $id
 ));
 
+$formacao2 = $conn->prepare(
+    'SELECT * FROM formacao WHERE id_usuario = :id_usuario'
+);
+$formacao2->execute(array(
+    ':id_usuario' => $id
+));
+
 $idioma = $conn->prepare(
     'SELECT * FROM idioma WHERE id_usuario = :id_usuario'
 );
@@ -52,17 +80,39 @@ $idioma->execute(array(
     ':id_usuario' => $id
 ));
 
+$idioma2 = $conn->prepare(
+    'SELECT * FROM idioma WHERE id_usuario = :id_usuario'
+);
+$idioma2->execute(array(
+    ':id_usuario' => $id
+));
+
+
 $objetivo = $conn->prepare(
     'SELECT * FROM objetivo WHERE id_usuario = :id_usuario'
 );
-$objetivo->execute(array(
+$objetivo ->execute(array(
+    ':id_usuario' => $id
+));
+
+$objetivo2 = $conn->prepare(
+    'SELECT * FROM objetivo WHERE id_usuario = :id_usuario'
+);
+$objetivo2 ->execute(array(
     ':id_usuario' => $id
 ));
 
 $especializacoes = $conn->prepare(
     'SELECT * FROM especializacoes WHERE id_usuario = :id_usuario'
 );
-$especializacoes->execute(array(
+$especializacoes ->execute(array(
+    ':id_usuario' => $id
+));
+
+$especializacoes2 = $conn->prepare(
+    'SELECT * FROM especializacoes WHERE id_usuario = :id_usuario'
+);
+$especializacoes2 ->execute(array(
     ':id_usuario' => $id
 ));
 
@@ -101,6 +151,7 @@ if (isset($_SESSION['message'])) {
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../../img/user.png' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
+                                        <a href='curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='perfil_usuario.php' style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
@@ -110,6 +161,7 @@ if (isset($_SESSION['message'])) {
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../../img/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
+                                        <a href='curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='perfil_usuario.php  style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
@@ -755,7 +807,7 @@ if (isset($_SESSION['message'])) {
                             echo "Proficiência: " . $linha['proficiencia'] . "<br>";
                             echo "
                                 <div class='btn-group mt-3'>
-                                    <button type='button' class='btn btn-primary'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalIdiomaAlterar' onclick='alterarIdioma(" . $linha["id_idioma"] . ")'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
                                         Editar
                                     </button>
@@ -843,6 +895,73 @@ if (isset($_SESSION['message'])) {
                         </div>
                     </div>
                 </div>
+
+                <?php
+                $idioma = ["Alemão", "Árabe", "Bengali", "Chinês (Mandarim)", "Coreano", "Espanhol", "Francês", "Gujarati", "Hindi", "Igbo", "Indonésio", "Inglês", "Italiano", "Japonês", "Javanês", "Marathi", "Persa (Farsi)", "Português", "Russo", "Tâmil"];
+                $proficiencia = ["Básico","Intermediário","Avançado","Fluente"];
+                foreach ($idioma2 as $linha) {
+                ?>
+                    <!-- The Modal -->
+                    <div class="modal fade" id="modalIdiomaAlterar">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Idioma</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form action="alterar_idioma.php" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?php echo $linha['id_idioma'] ?>">
+                                        <!-- Idioma, Proeficiênia -->
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="Idioma" class="form-label">* Idioma:</label>
+                                                <select name="Idioma" id="Idioma" class="form-select" required>
+                                                    <option value="" disabled selected>Selecione</option>
+                                                    <?php
+                                                    for ($cont = 0; $cont < 20; $cont++)
+                                                        if ($linha['idioma'] == $idioma[$cont]) {
+                                                            echo "<option value='$idioma[$cont]' selected > $idioma[$cont]</option>";
+                                                        } else {
+                                                            echo "<option value='$idioma[$cont]'> $idioma[$cont]</option>";
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="Proficiencia" class="form-label">* Proficiência:</label>
+                                                <select name="Proficiencia" id="Proficiencia" class="form-select" required>
+                                                    <option value="" disabled selected>Selecione</option>
+                                                    <?php
+                                                    for ($cont = 0; $cont < 3; $cont++)
+                                                        if ($linha['proficiencia'] == $proficiencia[$cont]) {
+                                                            echo "<option value='$proficiencia[$cont]' selected > $proficiencia[$cont]</option>";
+                                                        } else {
+                                                            echo "<option value='$proficiencia[$cont]'> $proficiencia[$cont]</option>";
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+
             </div>
         </div>
     </div>
