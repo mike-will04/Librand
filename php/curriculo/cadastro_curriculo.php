@@ -552,7 +552,7 @@ if (isset($_SESSION['message'])) {
                                                 <option value="Rio Grande do Norte">Rio Grande do Norte</option>
                                                 <option value="Rio Grande do Sul">Rio Grande do Sul</option>
                                                 <option value="Rondônia">Rondônia</option>
-                                                <option value="Rondônia">Rondônia</option>
+                                                <option value="Roraima">Roraima</option>
                                                 <option value="Santa Catarina">Santa Catarina</option>
                                                 <option value="São Paulo">São Paulo </option>
                                                 <option value="Sergipe">Sergipe</option>
@@ -571,7 +571,7 @@ if (isset($_SESSION['message'])) {
                                                 <option value="Técnico">Técnico</option>
                                                 <option value="Graduação">Graduação</option>
                                                 <option value="Especialização">Especialização</option>
-                                                <option value="Especialização">Mestrado</option>
+                                                <option value="Mestrado">Mestrado</option>
                                                 <option value="Doutorado">Doutorado</option>
                                             </select>
                                         </div>
