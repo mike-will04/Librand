@@ -31,10 +31,31 @@ $dados2->execute(array(
     ':id_usuario' => $id
 ));
 
+$dados3 = $conn->prepare(
+    'SELECT * FROM dados_pessoais WHERE id_usuario = :id_usuario'
+);
+$dados3->execute(array(
+    ':id_usuario' => $id
+));
+
 $exp_profissional = $conn->prepare(
     'SELECT * FROM experiencia WHERE id_usuario = :id_usuario'
 );
 $exp_profissional->execute(array(
+    ':id_usuario' => $id
+));
+
+$exp_profissional = $conn->prepare(
+    'SELECT * FROM experiencia WHERE id_usuario = :id_usuario'
+);
+$exp_profissional->execute(array(
+    ':id_usuario' => $id
+));
+
+$exp_profissional2 = $conn->prepare(
+    'SELECT * FROM experiencia WHERE id_usuario = :id_usuario'
+);
+$exp_profissional2->execute(array(
     ':id_usuario' => $id
 ));
 
@@ -45,12 +66,27 @@ $formacao->execute(array(
     ':id_usuario' => $id
 ));
 
+$formacao2 = $conn->prepare(
+    'SELECT * FROM formacao WHERE id_usuario = :id_usuario'
+);
+$formacao2->execute(array(
+    ':id_usuario' => $id
+));
+
 $idioma = $conn->prepare(
     'SELECT * FROM idioma WHERE id_usuario = :id_usuario'
 );
 $idioma->execute(array(
     ':id_usuario' => $id
 ));
+
+$idioma2 = $conn->prepare(
+    'SELECT * FROM idioma WHERE id_usuario = :id_usuario'
+);
+$idioma2->execute(array(
+    ':id_usuario' => $id
+));
+
 
 $objetivo = $conn->prepare(
     'SELECT * FROM objetivo WHERE id_usuario = :id_usuario'
@@ -59,10 +95,24 @@ $objetivo->execute(array(
     ':id_usuario' => $id
 ));
 
+$objetivo2 = $conn->prepare(
+    'SELECT * FROM objetivo WHERE id_usuario = :id_usuario'
+);
+$objetivo2->execute(array(
+    ':id_usuario' => $id
+));
+
 $especializacoes = $conn->prepare(
     'SELECT * FROM especializacoes WHERE id_usuario = :id_usuario'
 );
 $especializacoes->execute(array(
+    ':id_usuario' => $id
+));
+
+$especializacoes2 = $conn->prepare(
+    'SELECT * FROM especializacoes WHERE id_usuario = :id_usuario'
+);
+$especializacoes2->execute(array(
     ':id_usuario' => $id
 ));
 
@@ -101,6 +151,7 @@ if (isset($_SESSION['message'])) {
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../../img/user.png' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
+                                        <a href='../curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='perfil_usuario.php' style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
@@ -110,6 +161,7 @@ if (isset($_SESSION['message'])) {
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../../img/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
+                                        <a href='../curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='perfil_usuario.php  style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
@@ -199,12 +251,294 @@ if (isset($_SESSION['message'])) {
                     ?>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button class="btn_editar" data-bs-toggle="modal" data-bs-target="#modalDadosPessoais">
+                    <button class="btn_editar" data-bs-toggle="modal" data-bs-target="#modalDadosPessoaisAlterar">
                         <i class="bi bi-plus-lg"></i>
                         Editar
                     </button>
                 </div>
             </div>
+
+            <?php
+            $raca = ["Preta", "Parda", "Indígena", "Amarela", "Branca", "Outro", "Prefiro não responder"];
+            $estado_civil = ["Solteiro(a)", "Casado(a)", "Divorciado(a)", "Viúvo(a)"];
+            $renda_mensal = ["Nenhuma Renda", "Até 2 salários-mínimos", "De 2 a 4 sálarios-mínimos", "De 4 a 10 sálarios-mínimos", "De 10 a 20 sálarios-mínimos", "Acima de 20 sálarios-mínimos", "Prefiro não responder"];
+            $renda_familiar = ["Nenhuma Renda", "Até 2 salários-mínimos", "De 2 a 4 sálarios-mínimos", "De 4 a 10 sálarios-mínimos", "De 10 a 20 sálarios-mínimos", "Acima de 20 sálarios-mínimos", "Prefiro não responder"];
+            $estado = ["Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Rondônia", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"];
+            foreach ($dados3 as $linha) {
+            ?>
+                <!-- The Modal -->
+                <div class="modal fade" id="modalDadosPessoaisAlterar">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Dados Pessoais</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form action="alterar_dados_pessoais.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?php echo $linha['id_dados'] ?>">
+                                    <!-- Nome, Sobrenome, Nome Social, Email -->
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="nome" class="form-label">* Nome:</label>
+                                            <input type="text" class="form-control" placeholder="Nome" name="Nome" value="<?php echo $linha['nome'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="sobrenome" class="form-label">* Sobrenome:</label>
+                                            <input type="text" class="form-control" placeholder="Sobrenome" name="Sobrenome" value="<?php echo $linha['sobrenome'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="nomesocial" class="form-label">Nome Social:</label>
+                                            <input type="text" class="form-control" placeholder="Nome Social" name="NomeSocial" value="<?php echo $linha['nome_social'] ?>">
+                                        </div>
+                                    </div>
+                                    <!-- País, CPF, Celular, Data de Nascimento -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-3">
+                                            <label for="origem" class="form-label">* País de Origem:</label>
+                                            <input type="text" class="form-control" placeholder="País de Origem" name="Origem" value="<?php echo $linha['pais'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="cpf" class="form-label">* CPF:</label>
+                                            <input type="text" class="form-control" placeholder="CPF" name="CPF" value="<?php echo $linha['cpf'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="celular" class="form-label">* Celular:</label>
+                                            <input type="text" class="form-control" placeholder="Celular" name="Celular" value="<?php echo $linha['celular'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="nascimemnto" class="form-label">* Data de Nascimento:</label>
+                                            <input type="date" class="form-control" placeholder="Data de Nascimento" name="Nascimemnto" value="<?php echo $linha['data'] ?>" required>
+                                        </div>
+                                    </div>
+                                    <!-- Raç, Estado Civil -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-6">
+                                            <label for="Raca" class="form-label">* Raça/Etnia:</label>
+                                            <select name="Raca" id="Raca" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 7; $cont++)
+                                                    if ($linha['raca'] == $raca[$cont]) {
+                                                        echo "<option value='$raca[$cont]' selected> $raca[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$raca[$cont]'> $raca[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="EstadoCivil" class="form-label">* Estado Civil:</label>
+                                            <select name="EstadoCivil" id="EstadoCivil" class="form-select">
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 4; $cont++)
+                                                    if ($linha['estado_civil'] == $estado_civil[$cont]) {
+                                                        echo "<option value='$estado_civil[$cont]' selected> $estado_civil[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$estado_civil[$cont]'> $estado_civil[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Estrangeiro -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-1">
+                                            <label for="Estrangeiro">Estrangeiro?</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-check">
+                                                <?php
+                                                echo "<input type='radio' class='form-check-input' id='Estrangeiro' name='Estrangeiro' value='Sim'";
+                                                if ($linha['estrangeiro'] == 'Sim') {
+                                                    echo " checked>";
+                                                } else {
+                                                    echo ">";
+                                                }
+                                                ?>
+                                                <label class="form-check-label" for="Estrangeiro">Sim</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-check">
+                                                <?php
+                                                echo "<input type='radio' class='form-check-input' id='Estrangeiro' name='Estrangeiro' value='Não'";
+                                                if ($linha['estrangeiro'] == 'Não') {
+                                                    echo " checked>";
+                                                } else {
+                                                    echo ">";
+                                                }
+                                                ?>
+                                                <label class="form-check-label" for="Estrangeiro">Não</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Possui Deficiência -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="PossuiDeficiencia">Possui alguma deficiência?</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-check">
+                                                <?php
+                                                echo "<input type='radio' class='form-check-input' id='PossuiDeficiencia' name='PossuiDeficiencia' value='Sim' onclick='habilitaralt(true)'";
+                                                if ($linha['possui_deficiencia'] == 'Sim') {
+                                                    echo " checked>";
+                                                } else {
+                                                    echo ">";
+                                                }
+                                                ?>
+                                                <label class="form-check-label" for="Deficiencia">Sim</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-check">
+                                                <?php
+                                                echo "<input type='radio' class='form-check-input' id='PossuiDeficiencia' name='PossuiDeficiencia' value='Não' onclick='habilitaralt(false)'";
+                                                if ($linha['possui_deficiencia'] == 'Não') {
+                                                    echo " checked>";
+                                                } else {
+                                                    echo ">";
+                                                }
+                                                ?>
+                                                <label class="form-check-label" for="Deficiencia">Não</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <fieldset id="deficiencialabelAlt" hidden>
+                                        <!-- Tipo Deficiência -->
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-3">
+                                                <label for="celular" class="form-label">* Qual Deficiência:</label>
+                                                <input type="text" class="form-control" placeholder="Deficiência" name="Deficiencia" id="deficienciaCampoAlt" value="<?php echo $linha['deficiencia'] ?>" required>
+                                            </div>
+                                        </div>
+                                        <!-- Laudo Médico -->
+                                        <div class="row mt-3">
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label for="Laudo">* Anexar laudo Médico:</label>
+                                                    <input type="file" class="form-control" name="Laudo" id="laudoCampoAlt" value="<?php echo $linha['laudo'] ?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Caracterísica PcD -->
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <label for="Caracteristica">* Digite aqui algum suporte especial que sua característica como PcD demande durante a participação no recrutamento (ex.: descrição de texto em áudios, aumento de tamanho dos textos, etc.):</label>
+                                                <textarea class="form-control" rows="5" name="Caracteristica" maxlength="255" id="caracteristicaCampoAlt" required><?php echo $linha['suporte'] ?></textarea>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <!-- Renda Mensal, Renda Familiar -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-6">
+                                            <label for="RendaMensal" class="form-label">* Qual a sua renda mensal, aproximadamente?</label>
+                                            <select name="RendaMensal" id="RendaMensal" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 7; $cont++)
+                                                    if ($linha['renda_pessoal'] == $renda_mensal[$cont]) {
+                                                        echo "<option value='$renda_mensal[$cont]' selected> $renda_mensal[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$renda_mensal[$cont]'> $renda_mensal[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="RendaFamiliar" class="form-label">* Qual a sua renda familiar, aproximadamente?</label>
+                                            <select name="RendaFamiliar" id="RendaFamiliar" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 7; $cont++)
+                                                    if ($linha['renda_familiar'] == $renda_familiar[$cont]) {
+                                                        echo "<option value='$renda_familiar[$cont]' selected> $renda_familiar[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$renda_familiar[$cont]'> $renda_familiar[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- CEP, Rua -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-6">
+                                            <label for="CEP" class="form-label">* CEP:</label>
+                                            <input type="text" class="form-control" placeholder="CEP" name="CEP" value="<?php echo $linha['cep'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="Rua" class="form-label">* Rua:</label>
+                                            <input type="text" class="form-control" placeholder="Rua" name="Rua" value="<?php echo $linha['rua'] ?>" required>
+                                        </div>
+                                    </div>
+                                    <!-- Número, Complemento, Bairro -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-4">
+                                            <label for="Numero" class="form-label">Número:</label>
+                                            <input type="text" class="form-control" placeholder="Numero" name="Numero" value="<?php echo $linha['numero'] ?>">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="Complemento" class="form-label">Complemento:</label>
+                                            <input type="text" class="form-control" placeholder="Complemento" name="Complemento" value="<?php echo $linha['complemento'] ?>">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="Bairro" class="form-label">Bairro:</label>
+                                            <input type="text" class="form-control" placeholder="Bairro" name="Bairro" value="<?php echo $linha['bairro'] ?>">
+                                        </div>
+                                    </div>
+                                    <!-- Estado, Cidade -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-6">
+                                            <label for="Estado" class="form-label">* Estado:</label>
+                                            <select name="Estado" id="Estado" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 27; $cont++)
+                                                    if ($linha['estado'] == $estado[$cont]) {
+                                                        echo "<option value='$estado[$cont]' selected> $estado[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$estado[$cont]'> $estado[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="Cidade" class="form-label">* Cidade:</label>
+                                            <input type="text" class="form-control" placeholder="Cidade" name="Cidade" value="<?php echo $linha['cidade'] ?>" required>
+                                        </div>
+                                    </div>
+                                    <!-- Sobre Você -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <label for="Sobre">Tem algo mais que você considera importante contar sobre você?</label>
+                                            <textarea class="form-control" rows="5" id="Sobre" name="Sobre" maxlength="255"><?php echo $linha['comentario'] ?></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- Vídeo Currículo -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-12">
+                                            <label for="Video" class="form-label">Vídeo Currículo:</label>
+                                            <input type="text" class="form-control" placeholder="Video" name="Video" value="<?php echo $linha['video'] ?>">
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
 
         <div class="row justify-content-center mt-5">
@@ -219,7 +553,7 @@ if (isset($_SESSION['message'])) {
                             echo "Pretenção Salarial: " . $linha['pretencao_salarial'] . "<br>";
                             echo "
                                 <div class='btn-group mt-3'>
-                                    <button type='button' class='btn btn-primary'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalObjetivoAlterar'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
                                         Editar
                                     </button>
@@ -290,6 +624,60 @@ if (isset($_SESSION['message'])) {
                     </div>
                 </div>
             </div>
+
+            <?php
+            $pretencao = ["A partir de R$1.000", "A partir de R$2.000", "A partir de R$3.000", "A partir de R$4.000", "A partir de R$5.000", "A partir de R$6.000", "A partir de R$7.000", "A partir de R$8.000", "A partir de R$9.000", "A partir de R$10.000"];
+            foreach ($objetivo2 as $linha) {
+            ?>
+                <!-- The Modal -->
+                <div class="modal fade" id="modalObjetivoAlterar">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Objetivo</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form action="alterar_objetivo.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?php echo $linha['id_objetivo'] ?>">
+                                    <!-- Cargo de Interesse, Pretenção Salarial -->
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="Cargo de Interesse" class="form-label">* Cargo de Interesse:</label>
+                                            <input type="text" class="form-control" placeholder="Cargo de Interesse" name="CargoDeInteresse" value="<?php echo $linha['cargo_de_interesse'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="PretencaoSalarial" class="form-label">* Pretenção Salarial:</label>
+                                            <select name="PretencaoSalarial" id="PretencaoSalarial" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 10; $cont++)
+                                                    if ($linha['pretencao_salarial'] == $pretencao[$cont]) {
+                                                        echo "<option value='$pretencao[$cont]' selected> $pretencao[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$pretencao[$cont]'> $pretencao[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+
         </div>
 
         <div class="row justify-content-center mt-5">
@@ -303,7 +691,9 @@ if (isset($_SESSION['message'])) {
                             echo "Empresa: " . $linha['empresa'] . "<br>";
                             echo "Responsabilidades: " . $linha['responsabilidades'] . "<br>";
                             echo "Cargo: " . $linha['cargo'] . "<br>";
-                            echo "Nível: " . $linha['nivel'] . "<br>";
+                            if (isset($linha['nivel'])) {
+                                echo "Nível: " . $linha['nivel'] . "<br>";
+                            }
                             echo "Área: " . $linha['area'];
                             if ($linha['atual'] == "1") {
                                 echo "<br>Emprego atual: Sim" . "<br>";
@@ -314,7 +704,7 @@ if (isset($_SESSION['message'])) {
                             }
                             echo "
                                 <div class='btn-group mt-3'>
-                                    <button type='button' class='btn btn-primary'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalExperienciaAlterar'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
                                         Editar
                                     </button>
@@ -450,6 +840,110 @@ if (isset($_SESSION['message'])) {
                     </div>
                 </div>
             </div>
+
+            <?php
+            $nivel = ["Estagiário", "Operacional", "Auxiliar", "Assistente", "Treinee", "Analista", "Encarregado", "Supervisor", "Consultor", "Especialista", "Coordenador", "Gerente", "Diretor"];
+            $area = ["Administração", "Agricultura, Pecuária, Veterinária", "Alimentação / Gastronomia", "Arquitetura, Decoração, Design", "Artes", "Auditoria", "Ciências", "Comercial", "Comunicação", "Construção", "Contábil", "Cultura", "Educação", "Engenharia", "Industrial", "Informática", "Jurídica", "Logística", "Marketing", "Moda", "Qualidade", "Recursos Humanos", "Saúde", "Segurança", "Serviço Social e Comunitário", "Serviços Gerais", "Telemarketing", "Transportes"];
+            foreach ($exp_profissional2 as $linha) {
+            ?>
+                <!-- The Modal -->
+                <div class="modal fade" id="modalExperienciaAlterar">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Exp.Profissional</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form action="alterar_exp_profissional.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?php echo $linha['id_experiencia'] ?>">
+                                    <!-- Empresa -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-12">
+                                            <label for="Empresa" class="form-label">* Empresa:</label>
+                                            <input type="text" class="form-control" placeholder="Empresa" name="Empresa" value="<?php echo $linha['empresa'] ?>" required>
+                                        </div>
+                                    </div>
+                                    <!-- Responsabilidades -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-12">
+                                            <label for="Responsabilidades" class="form-label">* Responsabilidades:</label>
+                                            <textarea class="form-control" rows="5" id="Responsabilidades" name="Responsabilidades" maxlength="255" required><?php echo $linha['responsabilidades'] ?></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- Cargo, Nível, Área -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-4">
+                                            <label for="Cargo" class="form-label">* Cargo:</label>
+                                            <input type="text" class="form-control" placeholder="Cargo" name="Cargo" value="<?php echo $linha['cargo'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="Nivel" class="form-label">Nível:</label>
+                                            <select name="Nivel" id="Nivel" class="form-select">
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 12; $cont++)
+                                                    if ($linha['nivel'] == $nivel[$cont]) {
+                                                        echo "<option value='$nivel[$cont]' selected > $nivel[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$nivel[$cont]'> $nivel[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="Area" class="form-label">* Área:</label>
+                                            <select name="Area" id="Area" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 27; $cont++)
+                                                    if ($linha['area'] == $area[$cont]) {
+                                                        echo "<option value='$area[$cont]' selected >$area[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$area[$cont]'>$area[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Inicio Emprego, Fim emprego, Cargo atual -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-4">
+                                            <label for="InicioEmprego" class="form-label">* De:</label>
+                                            <input type="date" class="form-control" placeholder="Inicio Emprego" name="InicioEmprego" value="<?php echo $linha['inicio_emprego'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-4" id="fieldsetlabelalt">
+                                            <label for="FimEmprego" class="form-label">* Até:</label>
+                                            <input type="date" class="form-control" placeholder="Fim Emprego" name="FimEmprego" id="fieldset2alt" value="<?php echo $linha['fim_emprego'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="Atual" class="form-label">Meu cargo atual:</label>
+                                            <?php
+                                            echo "<input type='checkbox' class='form-check-input' name='Atual' onclick='habilitar2alt(this)' value='" . $linha['atual'] . "'";
+                                            if ($linha['atual'] == '1') {
+                                                echo " checked>";
+                                            } else {
+                                                echo ">";
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+
         </div>
 
         <div class="row justify-content-center mt-5">
@@ -478,7 +972,7 @@ if (isset($_SESSION['message'])) {
                             }
                             echo "
                                 <div class='btn-group mt-3'>
-                                    <button type='button' class='btn btn-primary'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalFormacaoAlterar'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
                                         Editar
                                     </button>
@@ -549,7 +1043,7 @@ if (isset($_SESSION['message'])) {
                                             <option value="Rio Grande do Norte">Rio Grande do Norte</option>
                                             <option value="Rio Grande do Sul">Rio Grande do Sul</option>
                                             <option value="Rondônia">Rondônia</option>
-                                            <option value="Rondônia">Rondônia</option>
+                                            <option value="Roraima">Roraima</option>
                                             <option value="Santa Catarina">Santa Catarina</option>
                                             <option value="São Paulo">São Paulo </option>
                                             <option value="Sergipe">Sergipe</option>
@@ -568,7 +1062,7 @@ if (isset($_SESSION['message'])) {
                                             <option value="Técnico">Técnico</option>
                                             <option value="Graduação">Graduação</option>
                                             <option value="Especialização">Especialização</option>
-                                            <option value="Especialização">Mestrado</option>
+                                            <option value="Mestrado">Mestrado</option>
                                             <option value="Doutorado">Doutorado</option>
                                         </select>
                                     </div>
@@ -630,6 +1124,136 @@ if (isset($_SESSION['message'])) {
                     </div>
                 </div>
             </div>
+
+            <?php
+            $estado = ["Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Rondônia", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"];
+            $nivel = ["Ensino Fundamental", "Ensino Médio", "Técnico", "Graduação", "Especialização", "Mestrado", "Doutorado"];
+            $status = ["Cursando", "Trancado", "Concluído"];
+            $turno = ["Matutino", "Vespertino", "Noturno", "Integral", "EAD"];
+            foreach ($formacao2 as $linha) {
+            ?>
+                <!-- The Modal -->
+                <div class="modal fade" id="modalFormacaoAlterar">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Formação</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form action="alterar_formacao.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?php echo $linha['id_formacao'] ?>">
+                                    <!-- Cargo de País, Estado -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-6">
+                                            <label for="Pais" class="form-label">* País:</label>
+                                            <input type="text" class="form-control" placeholder="País" name="Pais" value="<?php echo $linha['pais'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="Estado" class="form-label">* Estado:</label>
+                                            <select name="Estado" id="Estado" class="form-select" required>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 26; $cont++)
+                                                    if ($linha['estado'] == $estado[$cont]) {
+                                                        echo "<option value='$estado[$cont]' selected > $estado[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$estado[$cont]'> $estado[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Nível, Instituição e Curso -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-4" id="nivelAlt">
+                                            <label for="Nivel" class="form-label">* Nível:</label>
+                                            <select name="Nivel" id="Nivel" class="form-select" required onchange="habilitar3alt(this)">
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 6; $cont++)
+                                                    if ($linha['nivel'] == $nivel[$cont]) {
+                                                        echo "<option value='$nivel[$cont]' selected > $nivel[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$nivel[$cont]'> $nivel[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4" id="instituicaoAlt">
+                                            <label for="Instituicao" class="form-label">* Instituição:</label>
+                                            <input type="text" class="form-control" placeholder="Instituição" name="Instituicao" value="<?php echo $linha['instituicao'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-4" id="CursolabelAlt">
+                                            <label for="Curso" class="form-label">* Curso:</label>
+                                            <input type="text" class="form-control" placeholder="Curso" name="Curso" id="CursoAlt" value="<?php echo $linha['curso'] ?>" required>
+                                        </div>
+                                    </div>
+                                    <!-- Status, Campus -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-6" id="statusAlt">
+                                            <label for="Status" class="form-label">* Status:</label>
+                                            <select name="Status" id="StatusAlt" class="form-select" required onchange="habilitar4alt(this)">
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 3; $cont++)
+                                                    if ($linha['status'] == $status[$cont]) {
+                                                        echo "<option value='$status[$cont]' selected > $status[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$status[$cont]'> $status[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6" id="CampuslabelAlt">
+                                            <label for="Campus" class="form-label">Campus:</label>
+                                            <input type="text" class="form-control" placeholder="Campus" name="Campus" id="CampusAlt" value="<?php echo $linha['campus'] ?>">
+                                        </div>
+                                    </div>
+                                    <!-- Inicio Formação, Fim Formação, Turno -->
+                                    <div class="row mt-3">
+                                        <div class="form-group col-md-4" id="inicioAlt">
+                                            <label for="InicioFormacao" class="form-label">* Início:</label>
+                                            <input type="date" class="form-control" placeholder="Inicio Formação" name="InicioFormacao" value="<?php echo $linha['inicio'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-4" id="fimAlt">
+                                            <label for="FimFormacao" class="form-label">* Previsão/Data de Conclusão:</label>
+                                            <input type="date" class="form-control" placeholder="Fim Formação" name="FimFormacao" value="<?php echo $linha['conclusao'] ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-4" id="TurnolabelAlt">
+                                            <label for="Turno" class="form-label">Turno:</label>
+                                            <select name="Turno" class="form-select" id="TurnoAlt">
+                                                <option value="" disabled selected>Selecione</option>
+                                                <?php
+                                                for ($cont = 0; $cont < 4; $cont++)
+                                                    if ($linha['turno'] == $turno[$cont]) {
+                                                        echo "<option value='$turno[$cont]' selected > $turno[$cont]</option>";
+                                                    } else {
+                                                        echo "<option value='$turno[$cont]'> $turno[$cont]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                            </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+
         </div>
 
         <div class="row justify-content-center mt-5">
@@ -648,7 +1272,7 @@ if (isset($_SESSION['message'])) {
                             echo "Responsabilidades: " . $linha['responsabilidades'] . "<br>";
                             echo "
                                 <div class='btn-group mt-3'>
-                                    <button type='button' class='btn btn-primary'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEspecializacoesAlterar'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
                                         Editar
                                     </button>
@@ -740,6 +1364,84 @@ if (isset($_SESSION['message'])) {
                         </div>
                     </div>
                 </div>
+
+                <?php
+                $categoria = ["Cursos", "Entidade Estudantil", "Organização de Eventos", "Participação de Eventos", "Projeto ou Iniciação Acadêmica", "Voluntariado", "Outra"];
+                foreach ($especializacoes2 as $linha) {
+                ?>
+                    <!-- The Modal -->
+                    <div class="modal fade" id="modalEspecializacoesAlterar">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Especialização</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form action="alterar_especializacoes.php" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?php echo $linha['id_especializacoes'] ?>">
+                                        <!-- País, Categoria, Organização -->
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-4">
+                                                <label for="Pais" class="form-label">* País:</label>
+                                                <input type="text" class="form-control" placeholder="País" name="Pais" value="<?php echo $linha['pais'] ?>" required>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="Categoria" class="form-label">* Categoria:</label>
+                                                <select name="Categoria" id="Categoria" class="form-select" required>
+                                                    <option value="" disabled selected>Selecione</option>
+                                                    <?php
+                                                    for ($cont = 0; $cont < 7; $cont++)
+                                                        if ($linha['categoria'] == $categoria[$cont]) {
+                                                            echo "<option value='$categoria[$cont]' selected > $categoria[$cont]</option>";
+                                                        } else {
+                                                            echo "<option value='$categoria[$cont]'> $categoria[$cont]</option>";
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="Organizacao" class="form-label">* Organização:</label>
+                                                <input type="text" class="form-control" placeholder="Organização" name="Organizacao" value="<?php echo $linha['organizacao'] ?>" required>
+                                            </div>
+                                        </div>
+                                        <!-- Início Experiência, Fim Experiência -->
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-6">
+                                                <label for="InicioExperiencia" class="form-label">* Início:</label>
+                                                <input type="date" class="form-control" placeholder="Inicio Experiencia" name="InicioExperiencia" value="<?php echo $linha['inicio'] ?>" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="FimExperiencia" class="form-label">* Previsão/Data de Conclusão:</label>
+                                                <input type="date" class="form-control" placeholder="Fim Experiencia" id="fieldset2" name="FimExperiencia" value="<?php echo $linha['final'] ?>" required>
+                                            </div>
+                                        </div>
+                                        <!-- Responsabilidades -->
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-12">
+                                                <label for="ResponsabilidadesExperiencia" class="form-label">* Responsabilidades:</label>
+                                                <textarea class="form-control" rows="5" id="ResponsabilidadesExperiencia" name="ResponsabilidadesExperiencia" maxlength="255" required><?php echo $linha['responsabilidades'] ?></textarea>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+
             </div>
         </div>
 
@@ -755,7 +1457,7 @@ if (isset($_SESSION['message'])) {
                             echo "Proficiência: " . $linha['proficiencia'] . "<br>";
                             echo "
                                 <div class='btn-group mt-3'>
-                                    <button type='button' class='btn btn-primary'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalIdiomaAlterar' onclick='alterarIdioma(" . $linha["id_idioma"] . ")'>
                                         <i class='bi bi-pencil-square' style='height: 20px; width: 20px;'></i>
                                         Editar
                                     </button>
@@ -843,6 +1545,73 @@ if (isset($_SESSION['message'])) {
                         </div>
                     </div>
                 </div>
+
+                <?php
+                $idioma = ["Alemão", "Árabe", "Bengali", "Chinês (Mandarim)", "Coreano", "Espanhol", "Francês", "Gujarati", "Hindi", "Igbo", "Indonésio", "Inglês", "Italiano", "Japonês", "Javanês", "Marathi", "Persa (Farsi)", "Português", "Russo", "Tâmil"];
+                $proficiencia = ["Básico", "Intermediário", "Avançado", "Fluente"];
+                foreach ($idioma2 as $linha) {
+                ?>
+                    <!-- The Modal -->
+                    <div class="modal fade" id="modalIdiomaAlterar">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Idioma</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form action="alterar_idioma.php" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?php echo $linha['id_idioma'] ?>">
+                                        <!-- Idioma, Proeficiênia -->
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="Idioma" class="form-label">* Idioma:</label>
+                                                <select name="Idioma" id="Idioma" class="form-select" required>
+                                                    <option value="" disabled selected>Selecione</option>
+                                                    <?php
+                                                    for ($cont = 0; $cont < 20; $cont++)
+                                                        if ($linha['idioma'] == $idioma[$cont]) {
+                                                            echo "<option value='$idioma[$cont]' selected > $idioma[$cont]</option>";
+                                                        } else {
+                                                            echo "<option value='$idioma[$cont]'> $idioma[$cont]</option>";
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="Proficiencia" class="form-label">* Proficiência:</label>
+                                                <select name="Proficiencia" id="Proficiencia" class="form-select" required>
+                                                    <option value="" disabled selected>Selecione</option>
+                                                    <?php
+                                                    for ($cont = 0; $cont < 3; $cont++)
+                                                        if ($linha['proficiencia'] == $proficiencia[$cont]) {
+                                                            echo "<option value='$proficiencia[$cont]' selected > $proficiencia[$cont]</option>";
+                                                        } else {
+                                                            echo "<option value='$proficiencia[$cont]'> $proficiencia[$cont]</option>";
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn_curriculo_salvar" value="Salvar">
+                                </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+
             </div>
         </div>
     </div>

@@ -59,6 +59,7 @@ if (isset($_SESSION['iduser'])) {
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../img/user.png' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
+                                        <a href='curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='perfil_usuario/perfil_usuario.php' style='display: block;'>Perfil</a>
                                         <a href='sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
@@ -68,6 +69,7 @@ if (isset($_SESSION['iduser'])) {
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../img/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
+                                        <a href='curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='perfil_usuario/perfil_usuario.php' style='display: block;'>Perfil</a>
                                         <a href='sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>

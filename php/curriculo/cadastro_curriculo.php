@@ -15,6 +15,7 @@ if (isset($_SESSION['iduser'])) {
     ));
 } else {
     $_SESSION['logado'] = false;
+    header("location: ../../html/login_usuario.html");
 }
 if (isset($_SESSION['message'])) {
     echo "<script>alert('{$_SESSION['message']}');</script>";
@@ -334,7 +335,7 @@ if (isset($_SESSION['message'])) {
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="cadastro_objetivo.php" method="post" enctype="multipart/form-data">]
+                                <form action="cadastro_objetivo.php" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="redirect" value="cadastro_curriculo.php">
                                     <!-- Cargo de Interesse, Pretenção Salarial -->
                                     <div class="row">
@@ -551,7 +552,7 @@ if (isset($_SESSION['message'])) {
                                                 <option value="Rio Grande do Norte">Rio Grande do Norte</option>
                                                 <option value="Rio Grande do Sul">Rio Grande do Sul</option>
                                                 <option value="Rondônia">Rondônia</option>
-                                                <option value="Rondônia">Rondônia</option>
+                                                <option value="Roraima">Roraima</option>
                                                 <option value="Santa Catarina">Santa Catarina</option>
                                                 <option value="São Paulo">São Paulo </option>
                                                 <option value="Sergipe">Sergipe</option>
@@ -570,7 +571,7 @@ if (isset($_SESSION['message'])) {
                                                 <option value="Técnico">Técnico</option>
                                                 <option value="Graduação">Graduação</option>
                                                 <option value="Especialização">Especialização</option>
-                                                <option value="Especialização">Mestrado</option>
+                                                <option value="Mestrado">Mestrado</option>
                                                 <option value="Doutorado">Doutorado</option>
                                             </select>
                                         </div>
@@ -790,7 +791,7 @@ if (isset($_SESSION['message'])) {
 
         <div class="row justify-content-center pb-4">
             <div class="col-12 d-inline-flex align-items-center justify-content-center">
-                <a href="../../html/login_usuario.html">
+                <a href="../index.php">
                     <button class="btn_curriculo_salvar">
                         Salvar
                     </button>

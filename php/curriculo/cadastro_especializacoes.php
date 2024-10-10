@@ -8,7 +8,6 @@ $Categoria = isset($_POST["Categoria"]) ? $_POST["Categoria"] : null;
 $Organizacao = $_POST["Organizacao"];
 $InicioExperiencia = $_POST["InicioExperiencia"];
 $FimExperiencia = $_POST["FimExperiencia"];
-$InicioFormacao = $_POST["InicioFormacao"];
 $ResponsabilidadesExperiencia = $_POST["ResponsabilidadesExperiencia"];
 $id_usuario = $_SESSION['iduser'];
 $redirectPage = $_POST['redirect'];
