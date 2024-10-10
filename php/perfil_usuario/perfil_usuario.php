@@ -353,9 +353,9 @@ if (isset($_SESSION['message'])) {
                                         <div class="col-md-1">
                                             <div class="form-check">
                                                 <?php
-                                                echo "<input type='radio' class='form-check-input' id='Estrangeiro' name='Estrangeiro'";
+                                                echo "<input type='radio' class='form-check-input' id='Estrangeiro' name='Estrangeiro' value='Sim'";
                                                 if ($linha['estrangeiro'] == 'Sim') {
-                                                    echo "value='Sim' checked>";
+                                                    echo " checked>";
                                                 } else {
                                                     echo ">";
                                                 }
@@ -366,14 +366,13 @@ if (isset($_SESSION['message'])) {
                                         <div class="col-md-1">
                                             <div class="form-check">
                                                 <?php
-                                                echo "<input type='radio' class='form-check-input' id='Estrangeiro' name='Estrangeiro'";
+                                                echo "<input type='radio' class='form-check-input' id='Estrangeiro' name='Estrangeiro' value='Não'";
                                                 if ($linha['estrangeiro'] == 'Não') {
-                                                    echo "value='Não' checked>";
+                                                    echo " checked>";
                                                 } else {
                                                     echo ">";
                                                 }
                                                 ?>
-                                                <input type="radio" class="form-check-input" id="Estrangeiro" name="Estrangeiro" value="Não" checked>
                                                 <label class="form-check-label" for="Estrangeiro">Não</label>
                                             </div>
                                         </div>
@@ -385,23 +384,37 @@ if (isset($_SESSION['message'])) {
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="PossuiDeficiencia" name="PossuiDeficiencia" value="Sim" onclick="habilitar(true)">
+                                                <?php
+                                                echo "<input type='radio' class='form-check-input' id='PossuiDeficiencia' name='PossuiDeficiencia' value='Sim' onclick='habilitaralt(true)'";
+                                                if ($linha['possui_deficiencia'] == 'Sim') {
+                                                    echo " checked>";
+                                                } else {
+                                                    echo ">";
+                                                }
+                                                ?>
                                                 <label class="form-check-label" for="Deficiencia">Sim</label>
                                             </div>
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-check">
-                                                <input type="radio" class="form-check-input" id="PossuiDeficiencia" name="PossuiDeficiencia" value="Não" onclick="habilitar(false)" checked>
+                                                <?php
+                                                echo "<input type='radio' class='form-check-input' id='PossuiDeficiencia' name='PossuiDeficiencia' value='Não' onclick='habilitaralt(false)'";
+                                                if ($linha['possui_deficiencia'] == 'Não') {
+                                                    echo " checked>";
+                                                } else {
+                                                    echo ">";
+                                                }
+                                                ?>
                                                 <label class="form-check-label" for="Deficiencia">Não</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <fieldset id="deficiencialabel" hidden>
+                                    <fieldset id="deficiencialabelAlt" hidden>
                                         <!-- Tipo Deficiência -->
                                         <div class="row mt-3">
                                             <div class="form-group col-md-3">
                                                 <label for="celular" class="form-label">* Qual Deficiência:</label>
-                                                <input type="text" class="form-control" placeholder="Deficiência" name="Deficiencia" id="deficienciaCampo" value="<?php echo $linha['deficiencia'] ?>" required>
+                                                <input type="text" class="form-control" placeholder="Deficiência" name="Deficiencia" id="deficienciaCampoAlt" value="<?php echo $linha['deficiencia'] ?>" required>
                                             </div>
                                         </div>
                                         <!-- Laudo Médico -->
@@ -409,7 +422,7 @@ if (isset($_SESSION['message'])) {
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label for="Laudo">* Anexar laudo Médico:</label>
-                                                    <input type="file" class="form-control" name="Laudo" id="laudoCampo" value="<?php echo $linha['laudo'] ?>" required>
+                                                    <input type="file" class="form-control" name="Laudo" id="laudoCampoAlt" value="<?php echo $linha['laudo'] ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -417,7 +430,7 @@ if (isset($_SESSION['message'])) {
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label for="Caracteristica">* Digite aqui algum suporte especial que sua característica como PcD demande durante a participação no recrutamento (ex.: descrição de texto em áudios, aumento de tamanho dos textos, etc.):</label>
-                                                <textarea class="form-control" rows="5" name="Caracteristica" maxlength="255" id="caracteristicaCampo" required><?php echo $linha['suporte'] ?></textarea>
+                                                <textarea class="form-control" rows="5" name="Caracteristica" maxlength="255" id="caracteristicaCampoAlt" required><?php echo $linha['suporte'] ?></textarea>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -901,16 +914,16 @@ if (isset($_SESSION['message'])) {
                                             <label for="InicioEmprego" class="form-label">* De:</label>
                                             <input type="date" class="form-control" placeholder="Inicio Emprego" name="InicioEmprego" value="<?php echo $linha['inicio_emprego'] ?>" required>
                                         </div>
-                                        <div class="form-group col-md-4" id="fieldsetlabelAlt">
+                                        <div class="form-group col-md-4" id="fieldsetlabelalt">
                                             <label for="FimEmprego" class="form-label">* Até:</label>
-                                            <input type="date" class="form-control" placeholder="Fim Emprego" name="FimEmprego" id="fieldset2Alt" value="<?php echo $linha['fim_emprego'] ?>" required>
+                                            <input type="date" class="form-control" placeholder="Fim Emprego" name="FimEmprego" id="fieldset2alt" value="<?php echo $linha['fim_emprego'] ?>" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="Atual" class="form-label">Meu cargo atual:</label>
                                             <?php
-                                            echo "<input type='checkbox' class='form-check-input' placeholder='Atual' id='atual' name='Atual' onclick='habilitar2alt(this)' value='" . $linha['atual'] . "'";
+                                            echo "<input type='checkbox' class='form-check-input' name='Atual' onclick='habilitar2alt(this)' value='" . $linha['atual'] . "'";
                                             if ($linha['atual'] == '1') {
-                                                echo "checked>";
+                                                echo " checked>";
                                             } else {
                                                 echo ">";
                                             }

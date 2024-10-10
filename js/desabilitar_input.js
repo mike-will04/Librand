@@ -5,13 +5,6 @@ function habilitar(habilitar) {
     document.getElementById("deficiencialabel").hidden = !habilitar;
 }
 
-function habilitaralt(habilitar) {
-    document.getElementById("deficienciaCampoAlt").disabled = !habilitar;
-    document.getElementById("laudoCampoAlt").disabled = !habilitar;
-    document.getElementById("caracteristicaCampoAlt").disabled = !habilitar;
-    document.getElementById("deficiencialabelAlt").hidden = !habilitar;
-}
-
 function configurarModal() {
     const possuiDeficienciaSim = document.querySelector('input[name="PossuiDeficiencia"][value="Sim"]').checked;
     habilitar(possuiDeficienciaSim);
@@ -23,15 +16,52 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.addEventListener('show.bs.modal', configurarModal);
 });
 
+function habilitaralt(habilitar) {
+    document.getElementById("deficienciaCampoAlt").disabled = !habilitar;
+    document.getElementById("laudoCampoAlt").disabled = !habilitar;
+    document.getElementById("caracteristicaCampoAlt").disabled = !habilitar;
+    document.getElementById("deficiencialabelAlt").hidden = !habilitar;
+}
+
+function configurarModalalt() {
+    const possuiDeficienciaSim = document.querySelector('input[name="PossuiDeficiencia"][value="Sim"]').checked;
+    habilitaralt(possuiDeficienciaSim);
+}
+
+// Adiciona um listener para o evento de abertura da modal
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modalDadosPessoaisAlterar');
+    modal.addEventListener('show.bs.modal', configurarModalalt);
+});
+
 function habilitar2(checkbox) {
     document.getElementById("fieldset2").disabled = checkbox.checked;
     document.getElementById("fieldsetlabel").hidden = checkbox.checked;
 }
 
 function habilitar2alt(checkbox) {
-    document.getElementById("fieldset2Alt").disabled = checkbox.checked;
-    document.getElementById("fieldsetlabelAlt").hidden = checkbox.checked;
+    if (!checkbox.checked) {
+        document.getElementById("fieldset2alt").disabled = false; 
+        document.getElementById("fieldsetlabelalt").hidden = false; 
+    } else {
+        document.getElementById("fieldset2alt").disabled = true; 
+        document.getElementById("fieldsetlabelalt").hidden = true; 
+    }
 }
+
+function configurarModalalt2() {
+    const atual = document.querySelector('input[name="Atual"][value="1"]');
+    habilitar2alt(atual);
+}
+
+// Adiciona um listener para o evento de abertura da modal
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modalExperienciaAlterar');
+    modal.addEventListener('show.bs.modal', configurarModalalt2);
+
+    const atualCheckbox = document.querySelector('input[name="Atual"]');
+    atualCheckbox.addEventListener('change', () => habilitar2alt(atualCheckbox));
+});
 
 function habilitar3(select) {
     document.getElementById("Curso").disabled = select.value === "Ensino Fundamental" || select.value === "Ensino Médio";
