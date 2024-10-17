@@ -116,6 +116,14 @@ $especializacoes2->execute(array(
     ':id_usuario' => $id
 ));
 
+$usuario = $conn->prepare(
+    'SELECT * FROM usuario WHERE id_usuario = :id_usuario'
+);
+$usuario->execute(array(
+    ':id_usuario' => $id
+));
+
+
 if (isset($_SESSION['message'])) {
     echo "<script>alert('{$_SESSION['message']}');</script>";
     unset($_SESSION['message']);
@@ -132,6 +140,7 @@ if (isset($_SESSION['message'])) {
     <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
     <link rel="stylesheet" href="../../css/perfil_usuario.css">
     <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/upload.css">
 </head>
 
 <body>
@@ -149,7 +158,7 @@ if (isset($_SESSION['message'])) {
                             if ($linha['foto_perfil'] == null) {
                                 echo "
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
-                                    <img src='../../img/user.png' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
+                                    <img src='../../img/foto perfil/user.png' alt='Foto Perfil' id='btn-perfil' style='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px; margin-left: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
                                         <a href='../curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='perfil_usuario.php' style='display: block;'>Perfil</a>
@@ -159,7 +168,7 @@ if (isset($_SESSION['message'])) {
                             } else {
                                 echo "
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
-                                    <img src='../../img/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' id='btn-perfil' class='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
+                                    <img src='../../img/foto perfil/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' id='btn-perfil' style='width: 50px; height: 50px; border: 1px solid white; border-radius: 50%;'/><p style='color: white; margin-bottom: 0; margin-right: 5px; margin-left: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
                                         <a href='../curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='perfil_usuario.php  style='display: block;'>Perfil</a>
@@ -188,9 +197,27 @@ if (isset($_SESSION['message'])) {
 
     <div class="container-fluid">
         <div class="row justify-content-center mt-5">
-            <div class="col-md-2 shadow rounded d-inline-flex div_perfil">
-
+            <div class="col-md-2 div_perfil d-flex justify-content-center align-items-center">
+                <form action="adicionar_foto.php" method="post" enctype="multipart/form-data">
+                    <div class="upload d-flex justify-content-center align-items-center">
+                        <?php
+                            foreach ($usuario as $linha) {
+                                if ($linha['foto_perfil'] == null) {
+                                    echo "<img src='../../img/foto perfil/user2.png' width='125' height='125' id='profile' class='img' style='cursor: pointer;'>";
+                                } else {
+                                    echo "<img src='../../img/foto perfil/". $linha['foto_perfil'] ."' width='125' height='125' id='profile' class='img' style='cursor: pointer;'>";
+                                }
+                            }
+                        ?>
+                        <div class="round">
+                            <input type="file" id="flImage" name="image" class="foto" required>
+                            <i class="bi bi-pencil-square" style="color:white"></i>
+                        </div>
+                    </div>
+                    <input type="submit" value="Alterar foto" class="btn_foto">
+                </form>
             </div>
+
             <div class="col-md-4 shadow rounded d-inline-flex div_perfil p-4">
                 <div class="d-flex justify-content-center align-items-center texto_dados ">
                     <?php
@@ -207,6 +234,7 @@ if (isset($_SESSION['message'])) {
                     ?>
                 </div>
             </div>
+
             <div class="col-md-4 shadow rounded d-inline-flex div_perfil">
 
             </div>
@@ -1633,3 +1661,4 @@ if (isset($_SESSION['message'])) {
 <script src="../../js/btnPerfil.js"></script>
 <script src="../../js/desabilitar_input.js"></script>
 <script src="../../js/delete_perfil_usuario.js"></script>
+<script src="../../js/upload.js"></script>
