@@ -1,0 +1,60 @@
+.div_perfil {
+    height: 200px;
+    margin: 0 2.1% 0 2.1%;
+}
+
+.texto_dados {
+    font-size: 1.1rem;
+}
+
+.btn_editar {
+    border: none;
+    color: white;
+    background-color: #2259BC;
+    padding: 5px 30px;
+    height: 35px;
+    width: 300px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    transition-duration: 0.4s;
+}
+
+.btn_curriculo_salvar:hover,
+.btn_editar:hover,
+.btn_foto:hover {
+    background-color: #132d5f;
+    color: white;
+}
+
+.btn_curriculo_salvar {
+    border: none;
+    color: white;
+    background-color: #2259BC;
+    padding: 5px 30px;
+    height: 35px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    transition-duration: 0.4s;
+}
+
+.btn_foto {
+    border: none;
+    color: white;
+    background-color: #2259BC;
+    padding: 5px 30px;
+    height: 35px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    transition-duration: 0.4s;
+}

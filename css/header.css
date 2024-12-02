@@ -1,0 +1,53 @@
+.card {
+    background-color: white;
+    width: 150px;
+    position: absolute;
+    border-radius: 0px 0px 10px 10px;
+    text-align: center;
+    z-index: 1;
+    top: 100%;
+    right: 0;
+}
+
+.card a {
+    color: black;
+    text-decoration: none;
+}
+
+.card a:hover {
+    color: white;
+    background-color: rgb(192, 191, 191);
+}
+
+.card1:hover {
+    color: white;
+    background-color: rgb(192, 191, 191);
+    border-radius: 0px 0px 10px 10px;
+}
+
+.btn-header {
+    border: none;
+    color: #2259BC;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.btn-header:hover {
+    background-color: #132d5f;
+    color: white;
+}
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #132d5f;
+}

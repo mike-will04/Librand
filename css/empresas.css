@@ -1,0 +1,71 @@
+.btn-empresa {
+    background-color: #132d5f;
+    border: 1px solid #132d5f;
+    color: white;
+    padding: 5px 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.btn-empresa:hover {
+    background-color: white;
+    border: 1px solid gray;
+    color: #2259BC;
+}
+
+.btn-notificacao {
+    border: none;
+    background-color: #98bcff;
+    color: #ffffff;
+    padding: 5px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.btn-notificacao:hover {
+    background-color: #132d5f;
+    color: white;
+}
+
+.input-pesquisa {
+    border-radius: 10px 0 0 10px;
+    box-sizing: border-box;
+    width: 40%;
+    height: 55px;
+    border: 2px solid #2259BC;
+    outline: none;
+}
+
+.btn-pesquisa {
+    border-radius: 0 10px 10px 0;
+    border: 2px solid #2259BC;
+    background-color: #2259BC;
+    color: white;
+    height: 55px;
+    padding: 0 20px;
+}
+
+.btn-pesquisa:hover {
+    background-color: #132d5f;
+    transition-duration: 0.4s;
+    border: 2px solid #132d5f;
+}
+
+input[type=search]:focus {
+    box-shadow: 0 0 5pt 2pt #98bcff;
+    transition: 0.5s;
+}
+
+.fundo-pesquisa {
+    padding: 3%;
+}
