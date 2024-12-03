@@ -24,17 +24,20 @@ if ($tipo == "candidato") {
 
 $dados = $conn->prepare(
     'SELECT
-    se.nome_fantasia, 
-    v.* 
+        se.nome_fantasia, 
+        v.* 
     FROM 
         vaga v
     INNER JOIN 
         usuario u ON v.id_usuario = u.id_usuario
     INNER JOIN 
-        sobre_empresa se ON u.id_usuario = se.id_usuario;
-'
+        sobre_empresa se ON u.id_usuario = se.id_usuario
+    WHERE 
+        v.id_usuario = :id_usuario'
 );
-$dados->execute(array());
+$dados->execute(array(
+    ':id_usuario' => $id
+));
 
 $count = $conn->prepare(
     'SELECT count(*) as count FROM vaga where id_usuario = :id_usuario;'
@@ -42,11 +45,6 @@ $count = $conn->prepare(
 $count->execute(array(
     ':id_usuario' => $id
 ));
-
-$candidatos = $conn->prepare(
-    'SELECT u.usuario, u.id_usuario FROM candidato_vaga cv JOIN usuario u ON cv.id_usuario = u.id_usuario'
-);
-$candidatos->execute(array());
 
 if (isset($_SESSION['message'])) {
     echo "<script>alert('{$_SESSION['message']}');</script>";
@@ -178,9 +176,9 @@ if (isset($_SESSION['message'])) {
             <div class="row mb-2">
                 <div class="col-md-12">
                     <?php
-                        foreach ($count as $linha){
-                            echo "<h1>Vaga Ativas(". $linha['count'] .")</h1>";
-                        }
+                    foreach ($count as $linha) {
+                        echo "<h1>Vaga Ativas(" . $linha['count'] . ")</h1>";
+                    }
                     ?>
                 </div>
             </div>
@@ -225,7 +223,7 @@ if (isset($_SESSION['message'])) {
                                     <button class='btn-empresa' data-bs-toggle="modal" data-bs-target="#modaleditar<?php echo $linha['id_vaga']; ?>">Editar</button>
                                 </div>
                                 <div class="col-md-2 d-flex justify-content-center">
-                                    <button class='btn-empresa' data-bs-toggle="modal" data-bs-target="#modalcandidatos">Candidaturas</button>
+                                    <button class='btn-empresa' data-bs-toggle="modal" data-bs-target="#modalcandidatos" data-id-vaga="<?php echo $linha['id_vaga']; ?>">Candidaturas</button>
                                 </div>
                                 <div class="col-md-2 d-flex justify-content-center">
                                     <button class='btn-empresa' onclick="deletarVaga(<?php echo $linha['id_vaga']; ?>)">Excluir</button>
@@ -352,20 +350,55 @@ if (isset($_SESSION['message'])) {
                                                             ?>
                                                         </select>
                                                     </div>
+                                                    <!-- Período, Faixa Salarial -->
                                                     <div class="form-group col-md-6 mt-3">
                                                         <label for="Salario" class="form-label">* Faixa Salarial:</label>
-                                                        <input type="text" class="form-control" placeholder="Faixa Salarial" name="Salario" value="<?php echo $linha['salario'] ?>" required>
+                                                        <input type="text" class="form-control" id="salario_<?php echo $linha['id_vaga']; ?>"
+                                                            placeholder="Faixa Salarial"
+                                                            name="Salario"
+                                                            value="<?php echo $linha['combinar'] == 1 ? 'Salário a combinar' : $linha['salario']; ?>"
+                                                            <?php echo $linha['combinar'] == 1 ? 'disabled' : ''; ?> required>
                                                         <label for="Combinar" class="form-label">A combinar:</label>
-                                                        <?php
-                                                        echo "<input type='checkbox' class='form-check-input' id='Estrangeiro' name='Estrangeiro'";
-                                                        if ($linha['combinar'] == 1) {
-                                                            echo " checked>";
-                                                        } else {
-                                                            echo ">";
-                                                        }
-                                                        ?>
-
+                                                        <input type="checkbox" class="form-check-input" id="combinar_<?php echo $linha['id_vaga']; ?>"
+                                                            name="Combinar"
+                                                            <?php echo $linha['combinar'] == 1 ? 'checked' : ''; ?>>
                                                     </div>
+
+                                                    <script>
+                                                        // Função para verificar e ajustar os campos ao abrir o modal
+                                                        document.addEventListener('DOMContentLoaded', function() {
+                                                            const modals = document.querySelectorAll('.modal');
+
+                                                            modals.forEach((modal) => {
+                                                                modal.addEventListener('show.bs.modal', function(e) {
+                                                                    const idVaga = e.target.getAttribute('id').replace('modaleditar', ''); // Extrai o ID da vaga
+                                                                    const checkbox = document.getElementById(`combinar_${idVaga}`);
+                                                                    const inputSalario = document.getElementById(`salario_${idVaga}`);
+
+                                                                    // Atualiza o estado dos campos baseado no checkbox
+                                                                    if (checkbox.checked) {
+                                                                        inputSalario.value = 'Salário a combinar';
+                                                                        inputSalario.disabled = true;
+                                                                    } else {
+                                                                        inputSalario.disabled = false;
+                                                                        inputSalario.value = "<?php echo $linha['salario']; ?>";
+                                                                    }
+
+                                                                    // Adiciona o listener para alterações no checkbox
+                                                                    checkbox.addEventListener('change', function() {
+                                                                        if (this.checked) {
+                                                                            inputSalario.value = 'Salário a combinar';
+                                                                            inputSalario.disabled = true;
+                                                                        } else {
+                                                                            inputSalario.value = "<?php echo $linha['salario']; ?>";
+                                                                            inputSalario.disabled = false;
+                                                                        }
+                                                                    });
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
+
                                                 </div>
                                                 <!-- Escolaridade Necessária, Localização -->
                                                 <div class="row mt-1">
@@ -412,20 +445,7 @@ if (isset($_SESSION['message'])) {
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            <?php
-                                                foreach ($candidatos as $linha) {
-                                            ?>
-                                            <div class="row div_curriculo shadow rounded p-4 mb-4">
-                                                <div class="col-md-6">
-                                                    <p><?php echo $linha['usuario'];?></p>
-                                                </div>
-                                                <div class="col-md-6 d-flex justify-content-end">
-                                                    <a href="../perfil_usuario/perfil_usuario_publico.php?id=<?php echo $linha['id_usuario']; ?>"><button class="btn-empresa">Ver perfil</button></a>
-                                                </div>
-                                            </div>
-                                            <?php
-                                                }
-                                            ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -461,3 +481,36 @@ if (isset($_SESSION['message'])) {
 <script src="../../js/btnPerfil.js"></script>
 <script src="../../js/filtro_vaga.js"></script>
 <script src="../../js/delete_perfil_usuario.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modalCandidatos = document.getElementById('modalcandidatos');
+
+        modalCandidatos.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget; // Botão que disparou o modal
+            const idVaga = button.getAttribute('data-id-vaga'); // Capturar o ID da vaga
+
+            if (!idVaga) {
+                console.error("ID da vaga não encontrado.");
+                modalCandidatos.querySelector('.modal-body').innerHTML = "Erro: ID da vaga não encontrado.";
+                return;
+            }
+
+            // Realiza a requisição para o PHP
+            fetch(`get_candidatos.php?id_vaga=${idVaga}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Erro na requisição: " + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    modalCandidatos.querySelector('.modal-body').innerHTML = html; // Atualiza a modal
+                })
+                .catch(error => {
+                    console.error("Erro ao carregar candidatos:", error);
+                    modalCandidatos.querySelector('.modal-body').innerHTML = "Erro ao carregar os candidatos.";
+                });
+        });
+    });
+</script>

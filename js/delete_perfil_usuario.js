@@ -39,3 +39,10 @@ function deletarVaga(id) {
         window.location.href = '../vaga/apagar_vaga.php?id=' + id;
     }
 }
+
+function deletarCandidatura(id) {
+    const confirmAction = confirm("Você tem certeza que deseja excluir esta candidatura?");
+    if (confirmAction) {
+        window.location.href = '../perfil_usuario/apagar_candidatura.php?id=' + id;
+    }
+}

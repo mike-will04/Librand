@@ -178,10 +178,29 @@ if (isset($_SESSION['iduser'])) {
                         </div>
                         <div class="form-group col-md-6 mt-3">
                             <label for="Salario" class="form-label">* Faixa Salarial:</label>
-                            <input type="text" class="form-control" placeholder="Faixa Salarial" name="Salario" required>
+                            <input type="text" class="form-control" id="salario" placeholder="Faixa Salarial" name="Salario" required>
                             <label for="Combinar" class="form-label">A combinar:</label>
-                            <input type="checkbox" class="form-check-input" name="Combinar">
+                            <input type="checkbox" class="form-check-input" id="combinar" name="Combinar">
                         </div>
+
+                        <script>
+                            // Selecionar os elementos
+                            const salarioInput = document.getElementById('salario');
+                            const combinarCheckbox = document.getElementById('combinar');
+
+                            // Adicionar um evento ao checkbox
+                            combinarCheckbox.addEventListener('change', function() {
+                                if (this.checked) {
+                                    // Desabilitar a input de salário e alterar o valor
+                                    salarioInput.value = 'Salário a combinar';
+                                    salarioInput.disabled = true;
+                                } else {
+                                    // Habilitar a input de salário e limpar o valor
+                                    salarioInput.value = '';
+                                    salarioInput.disabled = false;
+                                }
+                            });
+                        </script>
                     </div>
                     <!-- Escolaridade Necessária, Localização -->
                     <div class="row mt-1">

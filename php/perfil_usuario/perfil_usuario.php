@@ -19,7 +19,7 @@ if (isset($_SESSION['iduser'])) {
     echo "<script>alert('Faça login para acessar o perfil');location = '../../html/login_usuario.html'</script>";
 }
 
-if ($tipo == "empresa"){
+if ($tipo == "empresa") {
     echo "<script>alert('Entre como candidato para acessar o perfil');location = '../../html/login_usuario.html'</script>";
 }
 
@@ -129,6 +129,46 @@ $usuario->execute(array(
     ':id_usuario' => $id
 ));
 
+$candidatos = $conn->prepare(
+    'SELECT 
+        se.nome_fantasia, 
+        v.*, 
+        cv.* 
+    FROM 
+        candidato_vaga cv
+    INNER JOIN 
+        vaga v ON cv.id_vaga = v.id_vaga
+    INNER JOIN 
+        usuario u ON v.id_usuario = u.id_usuario
+    INNER JOIN 
+        sobre_empresa se ON u.id_usuario = se.id_usuario
+    WHERE 
+        cv.id_usuario = :id_usuario'
+);
+$candidatos->execute(array(
+    ':id_usuario' => $id
+));
+
+$candidatos2 = $conn->prepare(
+    'SELECT 
+        se.nome_fantasia, 
+        v.*, 
+        cv.* 
+    FROM 
+        candidato_vaga cv
+    INNER JOIN 
+        vaga v ON cv.id_vaga = v.id_vaga
+    INNER JOIN 
+        usuario u ON v.id_usuario = u.id_usuario
+    INNER JOIN 
+        sobre_empresa se ON u.id_usuario = se.id_usuario
+    WHERE 
+        cv.id_usuario = :id_usuario'
+);
+$candidatos2->execute(array(
+    ':id_usuario' => $id
+));
+
 
 if (isset($_SESSION['message'])) {
     echo "<script>alert('{$_SESSION['message']}');</script>";
@@ -177,7 +217,7 @@ if (isset($_SESSION['message'])) {
                                     <img src='../../img/foto perfil/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' id='btn-perfil' style='width: 50px; height: 50px; border: 1px solid white; border-radius: 50%;'/><p style='color: white; margin-bottom: 0; margin-right: 5px; margin-left: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
                                         <a href='../curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
-                                        <a href='perfil_usuario.php  style='display: block;'>Perfil</a>
+                                        <a href='perfil_usuario.php'  style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
                                     ";
@@ -196,13 +236,13 @@ if (isset($_SESSION['message'])) {
                 <form action="adicionar_foto.php" method="post" enctype="multipart/form-data">
                     <div class="upload d-flex justify-content-center align-items-center">
                         <?php
-                            foreach ($usuario as $linha) {
-                                if ($linha['foto_perfil'] == null) {
-                                    echo "<img src='../../img/foto perfil/user2.png' width='125' height='125' id='profile' class='img' style='cursor: pointer;'>";
-                                } else {
-                                    echo "<img src='../../img/foto perfil/". $linha['foto_perfil'] ."' width='125' height='125' id='profile' class='img' style='cursor: pointer;'>";
-                                }
+                        foreach ($usuario as $linha) {
+                            if ($linha['foto_perfil'] == null) {
+                                echo "<img src='../../img/foto perfil/user2.png' width='125' height='125' id='profile' class='img' style='cursor: pointer;'>";
+                            } else {
+                                echo "<img src='../../img/foto perfil/" . $linha['foto_perfil'] . "' width='125' height='125' id='profile' class='img' style='cursor: pointer;'>";
                             }
+                        }
                         ?>
                         <div class="round">
                             <input type="file" id="flImage" name="image" class="foto" required>
@@ -230,8 +270,87 @@ if (isset($_SESSION['message'])) {
                 </div>
             </div>
 
-            <div class="col-md-4 shadow rounded d-inline-flex div_perfil">
+            <div class="col-md-4 shadow rounded div_perfil p-4">
+                <div class="row">
+                    <div class="col-6">
+                        <h4>Candidaturas</h4>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#modalcandidaturas">Ver Mais</a>
+                    </div>
+                </div>
+                <?php
+                foreach ($candidatos as $index => $linha) {
+                    if ($index < 2) {
+                        echo "
+                        <div class='row mb-3'>
+                            <div class='rounded border border-dark d-inline-flex'>
+                                <div class='col-md-6'>
+                                    <h5 class='m-0'>" . $linha['titulo'] . "</h5>
+                                    <p class='m-0'>" . $linha['nome_fantasia'] . "</p>
+                                </div>
+                                <div class='col-md-6 d-flex justify-content-end m-auto'>
+                                    <button type='button' class='btn btn-danger' onclick='deletarCandidatura(" . $linha["id_vaga"] . ")'>
+                                        <i class='bi bi-trash' style='height: 20px; width: 20px;'></i>
+                                        Apagar 
+                                    </button>
+                                </div>
+                            </div>
+                        </div>";
+                    } else {
+                        echo "
+                        <div class='row mb-3' style='display: none;'>
+                            <div class='rounded border border-dark d-inline-flex'>
+                                <div class='col-md-6'>
+                                    <h5 class='m-0'>Título da vaga</h5>
+                                    <p class='m-0'>Nome da empresa</p>
+                                </div>
+                                <div class='col-md-6 d-flex justify-content-end m-auto'>
+                                    <button type='button' class='btn btn-danger' onclick='deletarCandidatura(" . $linha["id_vaga"] . ")'>
+                                        <i class='bi bi-trash' style='height: 20px; width: 20px;'></i>
+                                        Apagar 
+                                    </button>
+                                </div>
+                            </div>
+                        </div>";
+                    }
+                }
+                ?>
+                <!-- The Modal -->
+                <div class="modal fade" id="modalcandidaturas" tabindex="-1" aria-labelledby="modalcandidaturasLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Candidaturas</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
 
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <?php
+                                foreach ($candidatos2 as $linha) {
+                                    echo "
+                                    <div class='row mb-3'>
+                                        <div class='rounded border border-dark d-inline-flex'>
+                                            <div class='col-md-6'>
+                                                <h5 class='m-0'>" . $linha['titulo'] . "</h5>
+                                                <p class='m-0'>" . $linha['nome_fantasia'] . "</p>
+                                            </div>
+                                            <div class='col-md-6 d-flex justify-content-end m-auto'>
+                                                <button type='button' class='btn btn-danger' onclick='deletarCandidatura(" . $linha["id_vaga"] . ")'> 
+                                                    <i class='bi bi-trash' style='height: 20px; width: 20px;'></i>
+                                                    Apagar 
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>";
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

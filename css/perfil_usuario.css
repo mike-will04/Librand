@@ -58,3 +58,31 @@
     font-weight: bold;
     transition-duration: 0.4s;
 }
+
+.btn-vaga {
+    background-color: #132d5f;
+    border: 1px solid #132d5f;
+    color: white;
+    padding: 2px 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-vaga:hover {
+    background-color: white;
+    border: 1px solid gray;
+    color: #2259BC;
+}
+
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+
+.modal {
+    z-index: 1050 !important;
+}

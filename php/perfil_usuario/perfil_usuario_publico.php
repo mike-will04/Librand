@@ -174,7 +174,7 @@ if (isset($_SESSION['message'])) {
                                     <img src='../../img/foto perfil/" . $linha['foto_perfil'] .  "' alt='Foto Perfil' id='btn-perfil' style='width: 50px; height: 50px; border: 1px solid white; border-radius: 50%;'/><p style='color: white; margin-bottom: 0; margin-right: 5px; margin-left: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
                                         <a href='../curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
-                                        <a href='perfil_usuario.php  style='display: block;'>Perfil</a>
+                                        <a href='perfil_usuario.php'  style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
                                     ";
