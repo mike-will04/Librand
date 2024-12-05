@@ -25,7 +25,7 @@ if (isset($_SESSION['iduser'])) {
     <title>Librand</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../bootstrap-icons/font/bootstrap-icons.min.css">
     <link id="favicon" rel="shortcut icon" type="imagex/png" href="../img/Maozinha_branca.png">
     <script src="../js/favicon_fora.js"></script>
     <link rel="stylesheet" href="../css/index.css">
