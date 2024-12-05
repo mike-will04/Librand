@@ -6,7 +6,7 @@ session_start();
 $Titulo = $_POST["Titulo_Vaga"];
 $Area = $_POST["Area"];
 $Cargo = $_POST["Cargo"];
-$Especializacao = $_POST["Especializacao"];
+$Especializacao = $_POST["Especializacao"];isset($_POST["Especializacao"]) ? $_POST["Especializacao"] : null;
 $Senioridade = $_POST["Senioridade"];
 $Quantidade_Vagas = $_POST["Quantidade_Vagas"];
 $Contrato = $_POST["Contrato"];

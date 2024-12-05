@@ -1,3 +1,12 @@
+<html>
+    <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../../css/vagas.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    </head>
+</html>
 <?php
 include "../conexao.php";
 session_start();
@@ -103,12 +112,13 @@ if ($stmt->rowCount() > 0) {
                                                         <h3>" . $linha['titulo'] . "</h3>
                                                         <h5>" . $linha['localizacao'] . "</h5>
                                                         <h5>" . $linha['salario'] . "</h5>
+                                                        <br>
                                                         <div class='d-flex justify-content-center align-items-center'>
-                                                            <button class='btn-vaga'>Candidatar-se</button>
+                                                            <a href='candidatar_vaga.php?id_vaga=" . $linha['id_vaga'] . "'><button class='btn-vaga'>Candidatar-se</button></a>
                                                         </div>
                                                     </div>
-                                                    <div class='col-md-6 d-flex justify-content-center'>
-                                                        <img src='../../img/foto perfil/" . $linha['foto_perfil'] . "' alt='Logo Empresa' height='200px'>
+                                                    <div class='col-md-6 d-flex justify-content-center m-auto'>
+                                                        <img src='../../img/foto perfil/" . $linha['foto_perfil'] . "' alt='Logo Empresa' height='50px'>
                                                     </div>
                                                     <hr class='mt-4 mb-4'>
                                                 </div>

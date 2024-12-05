@@ -44,10 +44,10 @@ if ($stmt->rowCount() > 0) {
         echo "
             <div class='col-md-12 div_curriculo shadow rounded p-4 mb-4'>
                 <div class='row'>
-                    <div class='col-md-2 d-flex justify-content-center align-items-center'>
-                        <img src='../../img/foto perfil/" . $linha['foto_perfil'] . "' alt='logo empresa' height='100px'>
+                    <div class='col-md-4 d-flex justify-content-center align-items-center'>
+                        <img src='../../img/foto perfil/" . $linha['foto_perfil'] . "' alt='logo empresa' height='50px'>
                     </div>
-                    <div class='col-md-10 align-items-center'>
+                    <div class='col-md-8 align-items-center'>
                         <h4>" . $linha['nome_fantasia'] . "</h4>
                         <p class='mt-1'>" . $linha['setor'] . "</p>
                         <p class='mt-1' style='text-align: justify;'>" . $linha['descricao'] . "</p>

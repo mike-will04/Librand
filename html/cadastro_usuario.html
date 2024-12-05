@@ -7,11 +7,22 @@
     <title>Librand</title>
     <script src="https://kit.fontawesome.com/ae38357b57.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="shortcut icon" type="imagex/png" href="../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
+    <link id="favicon" rel="shortcut icon" type="imagex/png" href="../img/Maozinha_branca.png">
+    <script src="../js/favicon_fora.js"></script>
     <link rel="stylesheet" href="../css/cadastro_e_login.css">
 </head>
 
 <body>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4 header" style="background-color: #2259BC; height: 100vh;">
@@ -48,16 +59,6 @@
                                 <span>Voltar</span>
                             </a>
                         </div>
-                        <br>
-                        <div class="form-group text-center">
-                            <button type="button" class="btn btn-md btn-light"><img src="../img/google.png"
-                                    alt="Icone google" height="20px"> Google</button>
-                            <button type="button" class="btn btn-md btn-light"><img src="../img/linkedin.png"
-                                    alt="Icone linkedin" height="20px"> Linkedin</button>
-                            <button type="button" class="btn btn-md btn-light"><img src="../img/microsoft.png"
-                                    alt="Icone microsoft" height="20px"> Microsoft</button>
-                        </div>
-
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Nome" name="usuario" required>
                         </div>

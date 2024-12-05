@@ -59,12 +59,23 @@ if (isset($_SESSION['message'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
+    <link id="favicon" rel="shortcut icon" type="imagex/png" href="../../img/Maozinha_branca.png">
+    <script src="../js/favicon_dentro.js"></script>
     <link rel="stylesheet" href="../../css/vagas_ativas.css">
     <link rel="stylesheet" href="../../css/header.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <nav class="navbar navbar-expand-sm" style="background-color: #2259BC;">
         <div class="container-fluid">
             <a href="../index.php" class="navbar-brand d-flex">
@@ -276,8 +287,8 @@ if (isset($_SESSION['message'])) {
                                                 <!-- Especialização, Senioridade -->
                                                 <div class="row mt-3">
                                                     <div class="form-group col-md-6">
-                                                        <label for="Especializacao" class="form-label">* Especialização:</label>
-                                                        <input type="text" class="form-control" placeholder="Especialização" name="Especializacao" value="<?php echo $linha['especializacao'] ?>" required>
+                                                        <label for="Especializacao" class="form-label">Especialização:</label>
+                                                        <input type="text" class="form-control" placeholder="Especialização" name="Especializacao" value="<?php echo $linha['especializacao'] ?>">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label for="Senioridade" class="form-label">* Senioridade:</label>
@@ -471,9 +482,8 @@ if (isset($_SESSION['message'])) {
         <br>
         3B
         <br>
-        &copy; 2024 Librand - Todos direitos reservados.
+        &copy; <?php echo date("Y"); ?> Librand - Todos os direitos reservados.
     </footer>
-
 </body>
 
 </html>

@@ -107,18 +107,33 @@ if (isset($_SESSION['message'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
+    <link id="favicon" rel="shortcut icon" type="imagex/png" href="../../img/Maozinha_branca.png">
+    <script src="../js/favicon_dentro.js"></script>
     <link rel="stylesheet" href="../../css/perfil_usuario.css">
     <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/upload.css">
 </head>
 
 <body>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <nav class="navbar navbar-expand-sm" style="background-color: #2259BC;">
         <div class="container-fluid">
             <a href="../index_empresa.php" class="navbar-brand d-flex">
                 <img src="../../img/Logotipo Librand.png" alt="Logo Librand" style="width: 100px;">
             </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="menuNavbar">
                 <div class="navbar-nav ms-auto align-items-center" style='text-align: center;'>
@@ -173,7 +188,7 @@ if (isset($_SESSION['message'])) {
                             <i class="bi bi-pencil-square" style="color:white"></i>
                         </div>
                     </div>
-                    <input type="submit" value="Alterar foto" class="btn_foto">
+                    <input type="submit" value="Salvar foto" class="btn_foto">
                 </form>
             </div>
 
@@ -576,7 +591,6 @@ if (isset($_SESSION['message'])) {
 
         </div>
     </div>
-
     <footer class="p-5 fixed-botton text-center text-light" style="background-color: #2259BC;">
         Site desenvolvido por:
         <br>
@@ -584,9 +598,8 @@ if (isset($_SESSION['message'])) {
         <br>
         3B
         <br>
-        &copy; 2024 Librand - Todos direitos reservados.
+        &copy; <?php echo date("Y"); ?> Librand - Todos os direitos reservados.
     </footer>
-
 </body>
 
 </html>

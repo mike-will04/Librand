@@ -1,8 +1,10 @@
 .upload {
-    width: 100px;
+    width: 115px;
     position: relative;
     margin: auto;
     margin-bottom: 10px;  
+    background-color: #132d5f;
+    border-radius: 50%;
 }
 
 .img {

@@ -30,12 +30,23 @@ $dados->execute(array());
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
+    <link id="favicon" rel="shortcut icon" type="imagex/png" href="../../img/Maozinha_branca.png">
+    <script src="../js/favicon_dentro.js"></script>
     <link rel="stylesheet" href="../../css/empresas.css">
     <link rel="stylesheet" href="../../css/header.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <nav class="navbar navbar-expand-sm" style="background-color: #2259BC;">
         <div class="container-fluid">
             <a href="../index.php" class="navbar-brand d-flex">
@@ -50,7 +61,7 @@ $dados->execute(array());
                     <?php
                     if (isset($tipo) and $tipo == "empresa") {
                         echo "
-                            <a href='' class='nav-link' >
+                            <a href='../vaga/vagas_ativas.php' class='nav-link' >
                                 Vagas Ativas
                             </a>
                             <a href='../vaga/formulario_vaga.php' class='nav-link'>
@@ -92,7 +103,7 @@ $dados->execute(array());
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../../img/foto perfil/user.png' alt='Foto Perfil' id='btn-perfil' style='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px; margin-left: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
-                                        <a href=../'curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
+                                        <a href='../curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='../perfil_usuario/perfil_usuario.php' style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
@@ -336,10 +347,10 @@ $dados->execute(array());
                             echo "
                     <div class='col-md-12 div_curriculo shadow rounded p-4 mb-4 empresa' data-nome='" . strtolower($linha['nome_fantasia']) . "'>
                         <div class='row'>
-                            <div class='col-md-2 d-flex justify-content-center align-items-center'>
-                                <img src='../../img/foto perfil/" . $linha['foto_perfil'] . "' alt='logo empresa' height='100px'>
+                            <div class='col-md-4 d-flex justify-content-center align-items-center'>
+                                <img src='../../img/foto perfil/" . $linha['foto_perfil'] . "' alt='logo empresa' height='50px'>
                             </div>
-                            <div class='col-md-10 align-items-center'>
+                            <div class='col-md-8 align-items-center'>
                                 <h4>" . $linha['nome_fantasia'] . "</h4>
                                 <p class='mt-1'>" . $linha['setor'] . "</p>
                                 <p class='mt-1' style='text-align: justify;'>" . $linha['descricao'] . "</p>
@@ -376,9 +387,8 @@ $dados->execute(array());
         <br>
         3B
         <br>
-        &copy; 2024 Librand - Todos direitos reservados.
+        &copy; <?php echo date("Y"); ?> Librand - Todos os direitos reservados.
     </footer>
-
 </body>
 
 </html>

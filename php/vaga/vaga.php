@@ -59,12 +59,23 @@ $dados = $stmt;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
+    <link id="favicon" rel="shortcut icon" type="imagex/png" href="../../img/Maozinha_branca.png">
+    <script src="../js/favicon_dentro.js"></script>
     <link rel="stylesheet" href="../../css/vagas.css">
     <link rel="stylesheet" href="../../css/header.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <nav class="navbar navbar-expand-sm" style="background-color: #2259BC;">
         <div class="container-fluid">
             <a href="../index.php" class="navbar-brand d-flex">
@@ -79,10 +90,10 @@ $dados = $stmt;
                     <?php
                     if (isset($tipo) and $tipo == "empresa") {
                         echo "
-                            <a href='vaga/vagas_ativas.php' class='nav-link' >
+                            <a href='vagas_ativas.php' class='nav-link' >
                                 Vagas Ativas
                             </a>
-                            <a href='../vaga/formulario_vaga.php' class='nav-link'>
+                            <a href='formulario_vaga.php' class='nav-link'>
                                 Anunciar Vaga
                             </a>  
                             <a href='../index_empresa.php' class='nav-link'>
@@ -106,7 +117,7 @@ $dados = $stmt;
                             <a href='../empresa/empresas.php' class='nav-link'>
                                 Empresas Cadastradas
                             </a>
-                            <a href='../vaga/formulario_vaga.php' class='nav-link'>
+                            <a href='formulario_vaga.php' class='nav-link'>
                                 Anunciar Vaga
                             </a>
                             <a href='../index_empresa.php' class='nav-link'>
@@ -121,7 +132,7 @@ $dados = $stmt;
                                     <div class='d-inline-flex align-items-center' style='margin-right: 10px; margin-left: 10px; cursor: pointer;'  onclick='perfil()'>
                                     <img src='../../img/foto perfil/user.png' alt='Foto Perfil' id='btn-perfil' style='width: 50px; height: 50px;'/><p style='color: white; margin-bottom: 0; margin-right: 5px; margin-left: 5px;'>" . $linha['usuario'] . "</p><i class='bi bi-chevron-down' style='color: white'></i></div>";
                                 echo "<div class='card' id='carde' style='display: none;'>
-                                        <a href=../'curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
+                                        <a href='../curriculo/cadastro_curriculo.php' style='display: block;'>Cadastrar currículo</a>
                                         <a href='../perfil_usuario/perfil_usuario.php' style='display: block;'>Perfil</a>
                                         <a href='../sair.php' style='display: block;' class='card1'>Sair</a>
                                     </div>
@@ -467,12 +478,13 @@ $dados = $stmt;
                                                         echo "<h5>" . $linha['localizacao'] . "</h5>";
                                                         echo "<h5>" . $linha['salario'] . "</h5>";
                                                         ?>
+                                                        <br>
                                                         <div class="d-flex justify-content-center align-items-center">
                                                             <a href="candidatar_vaga.php?id_vaga=<?php echo $linha['id_vaga']; ?>"><button class="btn-vaga">Candidatar-se</button></a>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 d-flex justify-content-center">
-                                                        <img src="../../img/foto perfil/<?php echo $linha['foto_perfil'] ?>" alt="Logo Empresa" height="200px">
+                                                    <div class="col-md-6 d-flex justify-content-center m-auto">
+                                                        <img src="../../img/foto perfil/<?php echo $linha['foto_perfil'] ?>" alt="Logo Empresa" height="50px">
                                                     </div>
                                                     <hr class="mt-4 mb-4">
                                                 </div>
@@ -520,9 +532,8 @@ $dados = $stmt;
         <br>
         3B
         <br>
-        &copy; 2024 Librand - Todos direitos reservados.
+        &copy; <?php echo date("Y"); ?> Librand - Todos os direitos reservados.
     </footer>
-
 </body>
 
 </html>

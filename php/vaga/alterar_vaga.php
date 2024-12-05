@@ -5,7 +5,7 @@ include "../conexao.php";
 $Titulo = $_POST["Titulo_Vaga"];
 $Area = $_POST["Area"];
 $Cargo = $_POST["Cargo"];
-$Especializacao = $_POST["Especializacao"];
+$Especializacao = isset($_POST["Especializacao"]) ? $_POST["Especializacao"] : null;
 $Senioridade = $_POST["Senioridade"];
 $Quantidade_Vagas = $_POST["Quantidade_Vagas"];
 $Contrato = $_POST["Contrato"];

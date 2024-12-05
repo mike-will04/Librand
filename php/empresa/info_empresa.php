@@ -26,11 +26,22 @@ if (isset($_SESSION['iduser'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="shortcut icon" type="imagex/png" href="../../img/Logotipo_Libras_Inclusão_Azul-removebg-preview.png">
+    <link id="favicon" rel="shortcut icon" type="imagex/png" href="../../img/Maozinha_branca.png">
+    <script src="../js/favicon_dentro.js"></script>
     <link rel="stylesheet" href="../../css/cadastro_curriculo.css">
 </head>
 
 <body>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <nav class="navbar navbar-expand-sm " style="background-color: #2259BC;">
         <div class="container-fluid justify-content-center">
             <a href="../index.php" class="navbar-brand d-flex">
@@ -45,6 +56,12 @@ if (isset($_SESSION['iduser'])) {
                 <h3 class="titulo_curriculo">
                     Conclua o cadastro da sua empresa
                 </h3>
+            </div>
+            <div class="voltar">
+                <a onclick="history.go(-1)">
+                    <i class="bi bi-arrow-left"></i>
+                    <span>Voltar</span>
+                </a>
             </div>
         </div>
 
@@ -237,7 +254,6 @@ if (isset($_SESSION['iduser'])) {
         </div>
     </div>
     </div>
-
     <footer class="p-5 fixed-botton text-center text-light" style="background-color: #2259BC;">
         Site desenvolvido por:
         <br>
@@ -245,9 +261,8 @@ if (isset($_SESSION['iduser'])) {
         <br>
         3B
         <br>
-        &copy; 2024 Librand - Todos direitos reservados.
+        &copy; <?php echo date("Y"); ?> Librand - Todos os direitos reservados.
     </footer>
-
 </body>
 
 </html>

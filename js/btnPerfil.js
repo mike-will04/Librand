@@ -10,9 +10,11 @@ function perfil() {
     }
 }
 
-document.addEventListener('mouseup', function (e) {
-    var container = document.getElementById('carde');
-    if (!container.contains(e.target)) {
-        container.style.display = 'none';
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('mouseup', function (e) {
+        var container = document.getElementById('carde');
+        if (container && !container.contains(e.target)) {
+            container.style.display = 'none';
+        }
+    });
 });
