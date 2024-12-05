@@ -31,7 +31,7 @@ $dados->execute(array());
     <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../bootstrap-icons/font/bootstrap-icons.min.css">
     <link id="favicon" rel="shortcut icon" type="imagex/png" href="../../img/Maozinha_branca.png">
-    <script src="../js/favicon_dentro.js"></script>
+    <script src="../../js/favicon_dentro.js"></script>
     <link rel="stylesheet" href="../../css/empresas.css">
     <link rel="stylesheet" href="../../css/header.css">
 </head>
