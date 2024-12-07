@@ -369,12 +369,15 @@ if (isset($_SESSION['message'])) {
                 </div>
                 <?php
                 foreach ($candidatos as $index => $linha) {
+                    // Defina o número máximo de caracteres para o título
+                    $titulo = (strlen($linha['titulo']) > 15) ? substr($linha['titulo'], 0, 15) . '...' : $linha['titulo'];
+                
                     if ($index < 2) {
                         echo "
                         <div class='row mb-3'>
                             <div class='rounded border border-dark d-inline-flex'>
                                 <div class='col-md-6'>
-                                    <h5 class='m-0'>" . $linha['titulo'] . "</h5>
+                                    <h5 class='m-0'>" . $titulo . "</h5>
                                     <p class='m-0'>" . $linha['nome_fantasia'] . "</p>
                                 </div>
                                 <div class='col-md-6 d-flex justify-content-end m-auto'>
@@ -390,7 +393,7 @@ if (isset($_SESSION['message'])) {
                         <div class='row mb-3' style='display: none;'>
                             <div class='rounded border border-dark d-inline-flex'>
                                 <div class='col-md-6'>
-                                    <h5 class='m-0'>Título da vaga</h5>
+                                    <h5 class='m-0'>" . $titulo . "</h5>
                                     <p class='m-0'>Nome da empresa</p>
                                 </div>
                                 <div class='col-md-6 d-flex justify-content-end m-auto'>
@@ -403,6 +406,7 @@ if (isset($_SESSION['message'])) {
                         </div>";
                     }
                 }
+                
                 ?>
                 <!-- The Modal -->
                 <div class="modal fade" id="modalcandidaturas" tabindex="-1" aria-labelledby="modalcandidaturasLabel" aria-hidden="true">
