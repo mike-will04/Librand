@@ -26,13 +26,10 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## 📖 Funcionalidades
 
-✅ Cadastro de Usuários – Permite que candidatos com deficiência auditiva criem perfis e insiram informações como formação acadêmica, experiência profissional e objetivos de carreira.
-
-✅ Cadastro de Empresas e Vagas – Empresas podem se cadastrar e publicar oportunidades de emprego acessíveis para pessoas com deficiência auditiva.
-
-✅ Filtragem de Vagas – O sistema permite que os candidatos busquem vagas compatíveis com suas habilidades e interesses.
-
-✅ Tradução para LIBRAS – Implementação de funcionalidades para tornar o site acessível a usuários que se comunicam exclusivamente por LIBRAS.
+- ✅ **Cadastro de Usuários** – Permite que candidatos com deficiência auditiva criem perfis e insiram informações como formação acadêmica, experiência profissional e objetivos de carreira.
+- ✅ **Cadastro de Empresas** e Vagas – Empresas podem se cadastrar e publicar oportunidades de emprego acessíveis para pessoas com deficiência auditiva.
+- ✅ **Filtragem de Vagas** – O sistema permite que os candidatos busquem vagas compatíveis com suas habilidades e interesses.
+- ✅ **Tradução para LIBRAS** – Implementação de funcionalidades para tornar o site acessível a usuários que se comunicam exclusivamente por LIBRAS.
 
 ## ⚙️ Instalação e Configuração
 
