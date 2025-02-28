@@ -50,7 +50,8 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados:
 2. Mova os arquivos para a pasta do servidor local.
 3. Configure o banco de dados importando o arquivo `librand.sql`.
 4. Configure as credenciais do banco no arquivo `conexao.php`.
-5. Inicie o servidor local e acesse o projeto via navegador.
+5. Inicie o servidor local e acesse o localhost via navegador.
+6. Acesse a pasta do projeto "Librand", após isso acesse a pasta "php".
 
 ## 📸 Demonstração
 
