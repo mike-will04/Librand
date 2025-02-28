@@ -10,7 +10,7 @@
 - [⚙️ Instalação e Configuração](#%EF%B8%8F-instalação-e-configuração)
 - [📸 Demonstração](#-demonstração)
 - [📑 Documentação](#-documentação)
-- [📄 Licença](#-licença)
+- [📄 Licença](#-Licença)
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -63,8 +63,8 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados:
 
 Você pode acessar a documentação completa [aqui](./TCC.pdf).
 
-## 📄 Este projeto está licenciado sob a **CC BY-NC-ND 4.0**.
+## 📄 Licença
 
-Isso significa que ele **não pode ser modificado nem usado comercialmente**.  
+Este projeto está licenciado sob a **CC BY-NC-ND 4.0**.Isso significa que ele **não pode ser modificado nem usado comercialmente**.  
 
 
