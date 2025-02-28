@@ -65,6 +65,6 @@ Você pode acessar a documentação completa [aqui](./TCC.pdf).
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a **CC BY-NC-ND 4.0**.Isso significa que ele **não pode ser modificado nem usado comercialmente**.  
+Este projeto está licenciado sob a **CC BY-NC-ND 4.0**. Isso significa que ele **não pode ser modificado nem usado comercialmente**.  
 
 
